@@ -1,0 +1,100 @@
+@font-face{
+    font-family: myfont;
+    src: url(../fonts/ff-clan-web-pro-thin.woff);
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-family:myfont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #ffb735;
+    transition: 0.7s;
+}
+
+a:hover{
+    color: #1d1d1d;
+}
+
+/*    the design for the sign up page   */
+
+.container{
+    background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/backg.jpeg);
+    background-repeat: no-repeat;
+    background-position: fixed;
+    overflow: hidden;
+
+}
+
+.left_container{
+    width: 50%;
+    float: left;
+    /* background: #fbf9f966; */
+    background-color: #fff;
+    height: 100vh;
+}
+
+.right_container p{
+    font-size: 20px;
+    margin-top: 50px;
+    color: #fff;
+}
+
+.right_container p small{
+    color: #fff;
+    font-size: 13px;
+}
+.right_container{
+    float: right;
+    width: 50%;
+    margin-top: 150px;
+    text-align: center;
+}
+.signup_box{
+    margin: 70px auto;
+    width:80%;
+    text-align: center;
+}
+.introduction p{
+    color: #1d1d1d;
+    font-size: 17px;
+}
+
+/*    ----    design for the  form  ----   */
+.form{
+    width: 300px;
+    margin: 50px auto;
+}
+.form .input-box {
+    margin: 20px 0;
+}
+.form .input-box input {
+    width: 100%;
+    font-size: 15px;
+    padding: 13px;
+    color: #1d1d1d;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    background: #fbf9f966;
+    box-sizing: border-box;
+}
+.form .input-box input:focus,
+.form .input-box input:valid {
+    border-bottom: 0.5px solid #ffb735;
+}
+.form .input-box input[type="submit"] {
+    border: none;
+    background: #ffb735;
+    border-radius:25px;
+    color: #fff;
+    font-weight: bold;
+}
+.form .input-box input[type="submit"]:hover {
+    background: #1d1d1d;
+    transition: 0.7s;
+}
