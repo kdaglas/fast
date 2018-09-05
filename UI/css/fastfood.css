@@ -13,7 +13,7 @@ html, body{
 a{
     text-decoration: none;
     color: #ffb735;
-    transition: 0.7s;
+    transition-duration: 0.5s;
 }
 
 a:hover{
@@ -27,14 +27,12 @@ a:hover{
     background-repeat: no-repeat;
     background-position: fixed;
     overflow: hidden;
-
 }
 
 .left_container{
     width: 50%;
     float: left;
     background: #fbf9f966;
-    /* background-color: #fff; */
     height: 100vh;
 }
 
@@ -48,30 +46,36 @@ a:hover{
     color: #fff;
     font-size: 13px;
 }
+
 .right_container{
     float: right;
     width: 50%;
     margin-top: 150px;
     text-align: center;
 }
+
 .signup_box{
     margin: 70px auto;
     width:80%;
     text-align: center;
 }
+
 .introduction p{
     color: #1d1d1d;
     font-size: 17px;
 }
 
 /*    ----    design for the  form  ----   */
+
 .form{
     width: 300px;
     margin: 50px auto;
 }
+
 .form .input-box {
     margin: 20px 0;
 }
+
 .form .input-box input {
     width: 100%;
     font-size: 15px;
@@ -83,10 +87,12 @@ a:hover{
     background: #fbf9f966;
     box-sizing: border-box;
 }
+
 .form .input-box input:focus,
 .form .input-box input:valid {
     border-bottom: 0.5px solid #ffb735;
 }
+
 .form .input-box input[type="submit"] {
     border: none;
     background: #ffb735;
@@ -94,7 +100,70 @@ a:hover{
     color: #fff;
     font-weight: bold;
 }
+
 .form .input-box input[type="submit"]:hover {
     background: #1d1d1d;
     transition: 0.7s;
+}
+
+/* ---- design navigationbar layout ----   */
+
+ul{
+    height: 75px;
+    float: right;
+    margin: 0;
+}
+
+ul li{
+    display: inline-table;
+    list-style-type: none;
+    margin: 0;
+}
+
+ul li a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #1d1d1d;
+    display: block;
+    padding: 30px 10px;
+    width: 110px;
+    text-align: center;
+    transition-duration: 0.5s;
+}
+
+ul li a:hover{
+    color: #fff;
+    background-color: #ffb735;
+    transition-duration: 0.5s;
+}
+
+/*    ----   design layout for home page  ----   */
+
+.head{
+    background-color:#fbf9f9b3;
+    padding: 0;
+    height: 77px;
+    width: 100%;
+    position: fixed;
+}
+
+.navigation{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.logo{
+    margin-top: 15px;
+    float: left;
+}
+
+/* ---- footer layout ----   */
+
+footer{
+    float: none;
+    clear: both;
+    text-align: center;
+    padding-top: 27px;
+    padding-bottom: 30px;
+    background: #fbf9f966;
 }
