@@ -26,11 +26,11 @@ To use git, run the code below:
 - User see a history of ordered food
 
 - As an admin for the restuarant, he or she can:
-    > Add, edit or delete the fast-food items
-    > See a list of fast-food items
-    > See a list of orders
-    > Accept and decline orders
-    > Mark orders as completed
+    - Add, edit or delete the fast-food items
+    - See a list of fast-food items
+    - See a list of orders
+    - Accept and decline orders
+    - Mark orders as completed
 
 ### Built With
 
