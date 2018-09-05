@@ -22,6 +22,7 @@ To use git, run the code below:
 - User can login to his or her account.
 - User can make an order of what meal they want.
 - User can view all the orders they have made
+- User see a history of ordered food
 
 - As an admin for the restuarant, he or she can:
     > Add, edit or delete the fast-food items
