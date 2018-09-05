@@ -13,11 +13,12 @@ html, body{
 a{
     text-decoration: none;
     color: #ffb735;
-    transition: 0.7s;
+    transition-duration: 0.5s;
 }
 
 a:hover{
     color: #1d1d1d;
+    transition-duration: 0.5s;
 }
 
 /*    the design for the sign up page   */
@@ -30,12 +31,18 @@ a:hover{
 
 }
 
-.left_container{
+.left_container, .new_container{
     width: 50%;
-    float: left;
     background: #fbf9f966;
-    /* background-color: #fff; */
     height: 100vh;
+}
+
+.left_container{
+    float: left;
+}
+
+.new_container{
+    margin: 0 auto;
 }
 
 .right_container p{
@@ -55,11 +62,15 @@ a:hover{
     text-align: center;
 }
 .signup_box{
-    margin: 70px auto;
+    margin: 0 auto;
     width:80%;
     text-align: center;
 }
-.introduction p{
+.introduction{
+    margin-top: 70px;
+}
+
+.introduction p, .introduction2 p{
     color: #1d1d1d;
     font-size: 17px;
 }
@@ -70,12 +81,12 @@ a:hover{
     margin: 50px auto;
 }
 .form .input-box {
-    margin: 20px 0;
+    margin: 17px 0;
 }
 .form .input-box input {
     width: 100%;
     font-size: 15px;
-    padding: 13px;
+    padding: 12px;
     color: #1d1d1d;
     border: none;
     border-bottom: 1px solid #ccc;
@@ -93,8 +104,15 @@ a:hover{
     border-radius:25px;
     color: #fff;
     font-weight: bold;
+    transition-duration: 0.5s;
 }
 .form .input-box input[type="submit"]:hover {
     background: #1d1d1d;
-    transition: 0.7s;
+    transition-duration: 0.5s;
+}
+
+
+
+#logo{
+    margin-top: 70px;
 }
