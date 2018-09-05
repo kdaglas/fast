@@ -1,6 +1,7 @@
 # fastFoodfast
 
-This is an app that allows customers of restuarant to make orders of the favorative meals they like.
+This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like.
+.
 
 ### Getting Started
 
