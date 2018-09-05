@@ -1,5 +1,5 @@
 @font-face{
-    font-family: myfont;
+    font-family: thefont;
     src: url(../fonts/ff-clan-web-pro-thin.woff);
 }
 
@@ -7,7 +7,7 @@ html, body{
     margin: 0;
     padding: 0;
     font-weight: bold;
-    font-family:myfont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: thefont, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a{
