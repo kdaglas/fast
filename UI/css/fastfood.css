@@ -8,6 +8,9 @@ html, body{
     padding: 0;
     font-weight: bold;
     font-family:myfont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/backg.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 a{
@@ -21,13 +24,6 @@ a:hover{
 }
 
 /*    the design for the sign up page   */
-
-.container{
-    background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/backg.jpeg);
-    background-repeat: no-repeat;
-    background-position: fixed;
-    overflow: hidden;
-}
 
 .left_container{
     width: 50%;
@@ -144,6 +140,7 @@ ul li a:hover{
     padding: 0;
     height: 77px;
     width: 100%;
+    top: 0;
     position: fixed;
 }
 
@@ -155,6 +152,17 @@ ul li a:hover{
 .logo{
     margin-top: 15px;
     float: left;
+}
+
+.container{
+    margin-top: 170px;
+    background-color: #fff;
+}
+
+.home_box{
+    margin: 70px auto;
+    width:80%;
+    text-align: center;
 }
 
 /* ---- footer layout ----   */
