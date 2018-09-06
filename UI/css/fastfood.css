@@ -8,12 +8,15 @@ html, body{
     padding: 0;
     font-weight: bold;
     font-family:myfont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/backg.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 a{
     text-decoration: none;
     color: #ffb735;
-    transition: 0.7s;
+    transition-duration: 0.5s;
 }
 
 a:hover{
@@ -22,19 +25,10 @@ a:hover{
 
 /*    the design for the sign up page   */
 
-.container{
-    background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/backg.jpeg);
-    background-repeat: no-repeat;
-    background-position: fixed;
-    overflow: hidden;
-
-}
-
 .left_container{
     width: 50%;
     float: left;
     background: #fbf9f966;
-    /* background-color: #fff; */
     height: 100vh;
 }
 
@@ -48,21 +42,26 @@ a:hover{
     color: #fff;
     font-size: 13px;
 }
+
 .right_container{
     float: right;
     width: 50%;
     margin-top: 150px;
     text-align: center;
 }
+
 .signup_box{
     margin: 70px auto;
     width:80%;
     text-align: center;
 }
+
 .introduction p{
     color: #1d1d1d;
     font-size: 17px;
 }
+
+
 
 /*    ----    design for the  form  ----   */
 .form{
