@@ -43,10 +43,8 @@
         margin: 60px 0;
     }
 
-    .introduction h1{
-        color: #1d1d1d;
-        font-size: 17px;
-        font-weight: bold;
+    #available_meals h1{
+        padding-top: 27px;
     }
 
     #introduce{
@@ -101,7 +99,7 @@
 
     .home_box{
         margin: 0 auto;
-        width: 95%;
+        width: 94%;
     }
 
     /* ---- footer layout ----   */
@@ -110,9 +108,7 @@
         float: none;
         clear: both;
         text-align: center;
-        padding-top: 27px;
-        padding-bottom: 30px;
-        padding: 10px;
+        padding: 27px 12px 30px 12px;
         background: #fbf9f966;
     }
 
