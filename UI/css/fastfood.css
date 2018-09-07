@@ -76,14 +76,14 @@ a:hover{
 }
 
 /*    ----    design for the  form  ----   */
-.form{
+.myform{
     width: 300px;
     margin: 50px auto;
 }
-.form .input-box {
+.myform .input-box {
     margin: 17px 0;
 }
-.form .input-box input {
+.myform .input-box input {
     width: 100%;
     font-size: 15px;
     padding: 12px;
@@ -94,11 +94,11 @@ a:hover{
     background: #fbf9f966;
     box-sizing: border-box;
 }
-.form .input-box input:focus,
-.form .input-box input:valid {
+.myform .input-box input:focus,
+.myform .input-box input:valid {
     border-bottom: 0.5px solid #ffb735;
 }
-.form .input-box input[type="submit"] {
+.myform .input-box input[type="submit"] {
     border: none;
     background: #ffb735;
     border-radius:25px;
@@ -106,7 +106,7 @@ a:hover{
     font-weight: bold;
     transition-duration: 0.5s;
 }
-.form .input-box input[type="submit"]:hover {
+.myform .input-box input[type="submit"]:hover {
     background: #1d1d1d;
     transition-duration: 0.5s;
 }
