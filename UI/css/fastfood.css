@@ -56,9 +56,10 @@ a:hover{
     text-align: center;
 }
 
-.introduction p{
+.introduction h1{
     color: #1d1d1d;
     font-size: 17px;
+    font-weight: bold;
 }
 
 
