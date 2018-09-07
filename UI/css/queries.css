@@ -76,6 +76,25 @@
 
     .menu_icon{
         display: block;
+        float: right;
+        margin: 15px 15px 0 0;
+    }
+
+    ul {
+        float: none;
+        margin: 10px 0;
+    }
+    
+    ul li {
+        display: block;
+        width: 100%;
+    }
+    
+    ul li a {
+        width: 100%;
+        font-size: 17px;
+        color: #fff;
+        background: #ffb735;
     }
 
     .container{

@@ -156,6 +156,10 @@ ul li a:hover{
     float: left;
 }
 
+.menu_icon{
+    display: none;
+}
+
 .container{
     margin: 20px auto;
     background: #fbf9f966;
