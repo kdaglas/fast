@@ -55,8 +55,11 @@ a:hover{
     text-align: center;
 }
 
-.introduction h1{
+#intro{
+    display: none;
+}
 
+.introduction h1{
     color: #1d1d1d;
     font-size: 17px;
     font-weight: bold;
