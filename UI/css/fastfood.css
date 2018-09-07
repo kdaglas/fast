@@ -204,6 +204,11 @@ ul li a:hover{
     box-shadow: 0 7px 50px rgba(0,0,0,.3);
 }
 
+#dish{
+    display: inline-block;
+    margin-right: 20px;
+}
+
 .dish img{
     width: 87px;
     height: 87px;
@@ -238,11 +243,40 @@ ul li a:hover{
     box-sizing: border-box;
 }
 
+/* ---- order page css ----   */
+
+.order_container {
+    font-size: 20px;
+    margin-top: 50px;
+    color: #1d1d1d;
+}
+
+.order_container h2{
+    font-size: 20px;
+    color: #fff;
+}
+
+.order_container p small{
+    color: #fff;
+    font-size: 13px;
+}
+
+.order_container{
+    width: 50%;
+    margin: 100px auto;
+    text-align: center;
+}
+
 /* ---- about us page css ----   */
 
 .about_container p{
     font-size: 20px;
     margin-top: 50px;
+    color: #fff;
+}
+
+.about_container h3, .about_container h1{
+    font-size: 20px;
     color: #fff;
 }
 
