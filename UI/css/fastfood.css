@@ -9,7 +9,6 @@ html, body{
     font-weight: bold;
     font-family:myfont, "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/backg.jpeg);
-    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
@@ -65,16 +64,16 @@ a:hover{
 
 /*    ----    design for the  form  ----   */
 
-.form{
+.myform{
     width: 300px;
     margin: 50px auto;
 }
 
-.form .input-box {
+.myform .input-box {
     margin: 20px 0;
 }
 
-.form .input-box input {
+.myform .input-box input {
     width: 100%;
     font-size: 15px;
     padding: 13px;
@@ -86,12 +85,12 @@ a:hover{
     box-sizing: border-box;
 }
 
-.form .input-box input:focus,
-.form .input-box input:valid {
+.myform .input-box input:focus,
+.myform .input-box input:valid {
     border-bottom: 0.5px solid #ffb735;
 }
 
-.form .input-box input[type="submit"] {
+.myform .input-box input[type="submit"] {
     border: none;
     background: #ffb735;
     border-radius:25px;
@@ -99,7 +98,7 @@ a:hover{
     font-weight: bold;
 }
 
-.form .input-box input[type="submit"]:hover {
+.myform .input-box input[type="submit"]:hover {
     background: #1d1d1d;
     transition: 0.7s;
 }
@@ -204,6 +203,11 @@ ul li a:hover{
     box-shadow: 0 7px 50px rgba(0,0,0,.3);
 }
 
+#dish{
+    display: inline-block;
+    margin-right: 20px;
+}
+
 .dish img{
     width: 87px;
     height: 87px;
@@ -238,11 +242,40 @@ ul li a:hover{
     box-sizing: border-box;
 }
 
+/* ---- order page css ----   */
+
+.order_container {
+    font-size: 20px;
+    margin-top: 50px;
+    color: #1d1d1d;
+}
+
+.order_container h2{
+    font-size: 20px;
+    color: #fff;
+}
+
+.order_container p small{
+    color: #fff;
+    font-size: 13px;
+}
+
+.order_container{
+    width: 50%;
+    margin: 100px auto;
+    text-align: center;
+}
+
 /* ---- about us page css ----   */
 
 .about_container p{
     font-size: 20px;
     margin-top: 50px;
+    color: #fff;
+}
+
+.about_container h3, .about_container h1{
+    font-size: 20px;
     color: #fff;
 }
 
