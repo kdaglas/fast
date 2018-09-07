@@ -242,6 +242,25 @@ ul li a:hover{
     box-sizing: border-box;
 }
 
+/* ---- about us page css ----   */
+
+.about_container p{
+    font-size: 20px;
+    margin-top: 50px;
+    color: #fff;
+}
+
+.about_container p small{
+    color: #fff;
+    font-size: 13px;
+}
+
+.about_container{
+    width: 50%;
+    margin: 100px auto;
+    text-align: center;
+}
+
 
 /* ---- footer layout ----   */
 
