@@ -56,6 +56,12 @@ a:hover{
     text-align: center;
 }
 
+.introduction h1{
+    color: #1d1d1d;
+    font-size: 17px;
+    font-weight: bold;
+}
+
 .introduction p{
     color: #1d1d1d;
     font-size: 17px;
@@ -140,8 +146,6 @@ ul li a:hover{
     padding: 0;
     height: 77px;
     width: 100%;
-    top: 0;
-    position: fixed;
 }
 
 .navigation{
@@ -155,15 +159,89 @@ ul li a:hover{
 }
 
 .container{
-    margin-top: 170px;
-    background-color: #fff;
+    margin: 20px auto;
+    background: #fbf9f966;
+    width: 80%;
+}
+
+.selection_container{
+    width: 50%;
+    float: left;
+    background: #ffffff;
+    margin-bottom: 20px;
+}
+
+.selected_container{
+    width: 50%;
+    float: right;
+    text-align: center;
+}
+
+.selected_container h1{
+    font-size: 20px;
+    margin-top: 70px;
+    color: #FFF;
+}
+
+.selected_container h3{
+    font-size: 17px;
+    color: #FFF;
 }
 
 .home_box{
-    margin: 70px auto;
-    width:80%;
+    margin: 30px auto;
+    width: 70%;
     text-align: center;
+
 }
+
+.order{
+    display: none;
+}
+
+.dish{
+    width: 310px;
+    margin: 30px 0;
+    height: 87px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 7px 50px rgba(0,0,0,.3);
+}
+
+.dish img{
+    width: 87px;
+    height: 87px;
+    float: left;
+}
+
+.dish .content{
+    width: 135px;
+    box-sizing: border-box;
+    float: left;
+    text-align: left;
+    padding: 0 20px;
+    color: #1d1d1d;
+}
+
+.content h1{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.content p{
+    font-size: 13px;
+}
+
+.dish a{
+    width: 87px;
+    height: 87px;
+    text-align: center;
+    background-image: url(../images/add.jpg);
+    float: right;
+    color: #1d1d1d;
+    box-sizing: border-box;
+}
+
 
 /* ---- footer layout ----   */
 
