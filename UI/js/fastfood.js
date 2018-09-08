@@ -40,3 +40,7 @@ function auth_for_user(){
         }
     }
 }
+
+function hideOrder() {
+    document.getElementById("meal_card").style.display = "none";
+}
