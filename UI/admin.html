@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin | fastFoodfast</title>
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/fastfood.css">
+    <link rel="stylesheet" href="css/queries.css">
+</head>
+
+<body>
+
+    <header class="head">
+        <div class="navigation">
+            <a href="index.html"><img class="logo" src="images/logo4nav.png" /></a>
+            <ul>
+                <li><a href="login.html">Log out</a></li>
+                <!-- <li><a href="home.html">HOME</a></li><li>
+                <a href="orders.html">ORDERS</a></li><li>
+                <a href="about.html">ABOUT</a></li> -->
+            </ul>
+        </div>
+    </header>
+
+    <section>
+        
+        <div class="admin_container">
+
+            <div class="introduction">
+                <h1>These are the orders <br/>made by the users..</h1>
+            </div>
+            <div id="table">
+                <div id="meal_card" class="card">
+                    <div class="meal">
+                        <p>Rice + gravy<br/>
+                        Posho + gravy<br/>
+                        Potatoes + gravy</p>
+                        <h1><b>Douglas Kato</b></h1>
+                        <p>06:08pm, 27-08-2018</p>
+                        <p></p>		
+                    </div>
+                    <a class="accept" href="#">Accept</a>
+                    <a class="decline" href="#">Decline</a>
+                    <a id="complete" onclick="hideOrder()" class="complete" href="#">Completed</a>           
+                </div>
+                <div id="meal_card" class="card">
+                    <div class="meal">
+                        <p>Spaghetti + gravy</p>
+                        <h1><b>Kanye west</b></h1>
+                        <p>07:08pm, 1-08-2018</p>
+                        <p></p>		
+                    </div>
+                    <a class="accept" href="#">Accept</a>
+                    <a class="decline" href="#">Decline</a> 
+                    <a id="complete" onclick="hideOrder()" class="complete" href="#">Completed</a>              
+                </div>
+                <div id="meal_card" class="card">
+                    <div class="meal">
+                        <p>Rice + gravy<br/>
+                        Junk + gravy</p>
+                        <h1><b>Clauy Jones</b></h1>
+                        <p>02:08pm, 7-08-2018</p>
+                        <p></p>		
+                    </div>
+                    <a class="accept" href="#">Accept</a>
+                    <a class="decline" href="#">Decline</a> 
+                    <a id="complete" onclick="hideOrder()" class="complete" href="#">Completed</a>             
+                </div>
+                <div id="meal_card" class="card">
+                    <div class="meal">
+                        <p>Rice + gravy<br/>
+                        Posho + gravy<br/>
+                        Posho + gravy<br/>
+                        Posho + gravy</p>
+                        <h1><b>Amos k</b></h1>
+                        <p>12:08pm, 29-08-2018</p>
+                        <p></p>		
+                    </div>
+                    <a class="accept" href="#">Accept</a>
+                    <a class="decline" href="#">Decline</a> 
+                    <a id="complete" onclick="hideOrder()" class="complete" href="#">Completed</a>              
+                </div>
+                <div id="meal_card" class="card">
+                    <div class="meal">
+                        <p>Rice + gravy<br/>
+                        Posho + gravy</p>
+                        <h1><b>Gracey</b></h1>
+                        <p>12:08pm, 29-08-2018</p>
+                        <p></p>		
+                    </div>
+                    <a class="accept" href="#">Accept</a>
+                    <a class="decline" href="#">Decline</a> 
+                    <a id="complete" onclick="hideOrder()" class="complete" href="#">Completed</a>            
+                </div>
+            </div>
+
+        </div>
+
+        <script src="js/fastfood.js"></script>
+
+    </section>
+
+    <footer>
+        <p>@2018 © <a href="#">fastFoodfast</a> Design by Douglas Kato.<br />Project by <a href="#">TIA</a>.</p>
+        <p><small>As a user, you agree to the <a href="#">Terms and Conditions</a> here.</small></p>
+    </footer>
+
+</body>
+
+</html>

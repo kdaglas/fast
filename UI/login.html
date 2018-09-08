@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login | fastFoodfast</title>
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/fastfood.css">
+    <link rel="stylesheet" href="css/queries.css">
+    <script src="js/fastfood.js"></script>
+</head>
+
+<body>
+
+    <section>
+
+        <div class="new_container">
+            <div class="login_box">
+                <div class="introduction2">
+                    <img id="logo" src="images/logoforfood.png">
+                    <h1>Continue making your orders, <br/>Login to your account here. <br/>If you don't have an account then <br/>
+                        <a href="index.html">Create yours</a>.</h1>
+                </div>
+                <div class="myform">
+                    <form method="post" action="">
+                        <div class="input-box">
+                            <input type="text" name="" placeholder="Username" required="">
+                        </div>
+                        <div class="input-box">
+                            <input type="password" name="" placeholder="Password" required="">
+                        </div>
+                        <input type="radio" name="user" value="customer" checked> Customer
+                        <input type="radio" name="user" value="admin"> Admin
+                        <div class="input-box">
+                            <input onclick="auth_for_user()" type="submit" name="" value="Log In">
+                        </div>
+                        <p></p>
+                        <p><small><a href="#">Forgot Password</a></small></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+</body>
+
+</html>
