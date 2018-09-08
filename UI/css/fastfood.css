@@ -332,6 +332,18 @@ label {
 
 /* ---- css for the admin page ----   */
 
+.admin_container{
+    margin: 20px auto;
+    width: 80%;
+}
+
+.admin_container .introduction h1{
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+}
+
 #table {
 	margin:0 auto;
 	text-align: center;
@@ -339,9 +351,8 @@ label {
 
 #table .card {
 	font-size: 13px;     
-	background: #fff;      
-	border: 1px solid #ddd;
-	color: #333;
+	background: #fbf9f966; 
+	color: #1d1d1d;
 	padding: 10px 5px 15px;
     float: left;
     margin: 3px;
@@ -350,11 +361,11 @@ label {
 
 #table .card .meal p{
 	font-size: 15px;
-	margin-top: 0;
 }
 
 #table .card .meal h1{
-	font-size: 17px;
+    font-size: 20px;
+    color: #ffb735; 
 }
 
 #table .card img{
@@ -365,10 +376,10 @@ label {
 }
 	
 #table .card .accept, #table .card .decline, #table .card .complete {
-	padding: 10px;
+	padding: 7px 12px;
 	color: #fff;
     text-decoration: none; 
-    border-radius: 10px   
+    border-radius: 20px   
 }
 
 .accept{
