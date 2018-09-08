@@ -7,7 +7,9 @@ html, body{
     margin: 0;
     padding: 0;
     font-weight: bold;
-    font-family: thefont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family:myfont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/backg.jpeg);
+    background-attachment: fixed;
 }
 
 a{
