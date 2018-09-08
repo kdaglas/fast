@@ -82,11 +82,15 @@
 
     ul {
         float: none;
-        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+        display: none;
+        margin: 10px -60px 200px;
     }
     
     ul li {
         display: block;
+        text-align: center;
         width: 100%;
     }
     
@@ -95,6 +99,15 @@
         font-size: 17px;
         color: #fff;
         background: #ffb735;
+    }
+
+    label {
+        display: block;
+        cursor: pointer;
+    }
+
+    #toggle:checked + .menu {
+        display: block;
     }
 
     .container{

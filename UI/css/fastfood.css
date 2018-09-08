@@ -137,6 +137,19 @@ ul li a:hover{
     transition-duration: 0.5s;
 }
 
+label {
+    margin: 0 40px 0 0;
+    font-size: 26px;
+    line-height: 70px;
+    display: none;
+    width: 26px;
+    float: right;
+}
+
+#toggle {
+    display: none;
+}
+
 /*    ----   design layout for home page  ----   */
 
 .head{
