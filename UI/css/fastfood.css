@@ -9,7 +9,6 @@ html, body{
     font-weight: bold;
     font-family:myfont, "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-image: linear-gradient(to right, #00000081, #000000c0), url(../images/backg.jpeg);
-    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
@@ -56,25 +55,52 @@ a:hover{
     text-align: center;
 }
 
-.introduction h1{
+#intro{
+    display: none;
+}
 
+.introduction h1{
     color: #1d1d1d;
     font-size: 17px;
     font-weight: bold;
 }
 
+/*    ----    login page css design  ----   */
+
+.new_container{
+    width: 50%;
+    background: #fbf9f966;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.login_box{
+    text-align: center;
+    
+}
+
+.introduction2 h1{
+    color: #1d1d1d;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#logo{
+    margin-top: 100px;
+}
+
 /*    ----    design for the  form  ----   */
 
-.form{
+.myform{
     width: 300px;
     margin: 50px auto;
 }
 
-.form .input-box {
+.myform .input-box {
     margin: 20px 0;
 }
 
-.form .input-box input {
+.myform .input-box input {
     width: 100%;
     font-size: 15px;
     padding: 13px;
@@ -86,12 +112,12 @@ a:hover{
     box-sizing: border-box;
 }
 
-.form .input-box input:focus,
-.form .input-box input:valid {
+.myform .input-box input:focus,
+.myform .input-box input:valid {
     border-bottom: 0.5px solid #ffb735;
 }
 
-.form .input-box input[type="submit"] {
+.myform .input-box input[type="submit"] {
     border: none;
     background: #ffb735;
     border-radius:25px;
@@ -99,7 +125,7 @@ a:hover{
     font-weight: bold;
 }
 
-.form .input-box input[type="submit"]:hover {
+.myform .input-box input[type="submit"]:hover {
     background: #1d1d1d;
     transition: 0.7s;
 }
@@ -135,6 +161,19 @@ ul li a:hover{
     transition-duration: 0.5s;
 }
 
+label {
+    margin: 0 40px 0 0;
+    font-size: 26px;
+    line-height: 70px;
+    display: none;
+    width: 26px;
+    float: right;
+}
+
+#toggle {
+    display: none;
+}
+
 /*    ----   design layout for home page  ----   */
 
 .head{
@@ -152,6 +191,10 @@ ul li a:hover{
 .logo{
     margin-top: 15px;
     float: left;
+}
+
+.menu_icon{
+    display: none;
 }
 
 .container{
@@ -204,6 +247,11 @@ ul li a:hover{
     box-shadow: 0 7px 50px rgba(0,0,0,.3);
 }
 
+#dish{
+    display: inline-block;
+    margin-right: 20px;
+}
+
 .dish img{
     width: 87px;
     height: 87px;
@@ -238,11 +286,36 @@ ul li a:hover{
     box-sizing: border-box;
 }
 
+/* ---- order page css ----   */
+
+.order_container {
+    font-size: 20px;
+    width: 50%;
+    margin: 50px auto;
+    text-align: center;
+    color: #1d1d1d;
+}
+
+.order_container h2{
+    font-size: 20px;
+    color: #fff;
+}
+
+.order_container p small{
+    color: #fff;
+    font-size: 13px;
+}
+
 /* ---- about us page css ----   */
 
 .about_container p{
     font-size: 20px;
     margin-top: 50px;
+    color: #fff;
+}
+
+.about_container h3, .about_container h1{
+    font-size: 20px;
     color: #fff;
 }
 
