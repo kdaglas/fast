@@ -350,7 +350,8 @@ label {
 }
 
 #table .card {
-	font-size: 13px;     
+    font-size: 13px; 
+    height: 200px;    
 	background: #fbf9f966; 
 	color: #1d1d1d;
 	padding: 10px 5px 15px;
