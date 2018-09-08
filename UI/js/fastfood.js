@@ -25,3 +25,7 @@ function showFries() {
 function showJunk() { 
     document.getElementById('junk').style.display = "block";
 }
+
+function hideOrder() {
+    document.getElementById("meal_card").style.display = "none";
+}
