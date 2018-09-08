@@ -266,7 +266,9 @@ label {
 
 .order_container {
     font-size: 20px;
-    margin-top: 50px;
+    width: 50%;
+    margin: 50px auto;
+    text-align: center;
     color: #1d1d1d;
 }
 
@@ -278,12 +280,6 @@ label {
 .order_container p small{
     color: #fff;
     font-size: 13px;
-}
-
-.order_container{
-    width: 50%;
-    margin: 100px auto;
-    text-align: center;
 }
 
 /* ---- about us page css ----   */

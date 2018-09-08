@@ -134,6 +134,13 @@
         width: 94%;
     }
 
+    /* ---- order page css ----   */
+
+    .order_container {
+        margin-top: 10px;
+        width: 100%;
+    }
+
     /* ---- about us page css ----   */
 
     .about_container{
