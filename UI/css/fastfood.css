@@ -330,6 +330,71 @@ label {
     text-align: center;
 }
 
+/* ---- css for the admin page ----   */
+
+.admin_container{
+    margin: 20px auto;
+    width: 80%;
+}
+
+.admin_container .introduction h1{
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+}
+
+#table {
+	margin:0 auto;
+	text-align: center;
+}
+
+#table .card {
+    font-size: 13px; 
+    height: 200px;    
+	background: #fbf9f966; 
+	color: #1d1d1d;
+	padding: 10px 5px 15px;
+    float: left;
+    margin: 3px;
+	display: block;	
+}
+
+#table .card .meal p{
+	font-size: 15px;
+}
+
+#table .card .meal h1{
+    font-size: 20px;
+    color: #ffb735; 
+}
+
+#table .card img{
+	width: 130px;
+	height: 130px;
+	margin: 0;
+	padding: 0;
+}
+	
+#table .card .accept, #table .card .decline, #table .card .complete {
+	padding: 7px 12px;
+	color: #fff;
+    text-decoration: none; 
+    border-radius: 20px   
+}
+
+.accept{
+	background-color: royalblue;
+}
+
+
+.decline{
+	background: red;
+}
+
+.complete{
+	background: green;
+}
 
 /* ---- footer layout ----   */
 
