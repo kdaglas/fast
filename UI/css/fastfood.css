@@ -65,6 +65,30 @@ a:hover{
     font-weight: bold;
 }
 
+/*    ----    login page css design  ----   */
+
+.new_container{
+    width: 50%;
+    background: #fbf9f966;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.login_box{
+    text-align: center;
+    
+}
+
+.introduction2 h1{
+    color: #1d1d1d;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#logo{
+    margin-top: 100px;
+}
+
 /*    ----    design for the  form  ----   */
 
 .myform{
