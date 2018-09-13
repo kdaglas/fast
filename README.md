@@ -1,10 +1,11 @@
 # fastFoodfast
 
+This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like.
+This app is hosted on https://kdaglas.github.io/fastFoodfast/UI/index.html
+
 ## fastFoodfast-api
 
-This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like.
-
-This app is hosted on https://kdaglas.github.io/fastFoodfast/UI/index.html
+This api allows the customers to register and login to the app, order for a meal, view a single order made, view all the orders made and update or modify or change a particular order they feel does not meet what they want.
 
 ### Getting Started
 
@@ -19,6 +20,7 @@ To use git, run the code below:
 - Use a web browser preferrably Chrome.
 - You need to have Python3 installed on your computer. To install it go to:
   Python [https://www.python.org/]
+Note: Python needs to be installed globally (not in the virtual environment)
 
 ### Features
 
