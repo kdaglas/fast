@@ -1,10 +1,10 @@
 from application import webapp
 from flask import request, json, jsonify
 from application.modules import Customer, Meal, Order
+from validation.validate import Validate
 from datetime import date
 
 
-all_customers = []
 all_orders = []
 all_meals = []
 
@@ -14,6 +14,8 @@ def add_meal():
     mealId = len(all_meals) + 1
     food = data.get('food')
     price = data.get('price')
+
+    # if Validate.validate_empty
 
     new_meal = Meal(mealId, food, price)
     all_meals.append(new_meal) 
@@ -27,32 +29,13 @@ def make_order(mealId):
     mealId = data.get('mealId')
     today = str(date.today())
         
-    for meal in all_meals:
-        if mealId in meal:
-            Order(Meal) = Order
-            new_order = Order(orderId, new_meal, today)
-            all_orders.append(new_order)  
+    # for meal in all_meals:
+    #     if mealId in meal:
+    #         Order = Order
+    #         new_order = Order(orderId, new_meal, today)
+    #         all_orders.append(new_order)
+
+    new_order = Order(orderId, today)
+    all_orders.append(new_order)  
     
-    return jsonify({'message': 'Order successfully made'}), 200
-
-
-    if len(meal) < 1:
-        return jsonify({'message': 'Meal is missing'}), 400
-    if len(price) < 1:
-        return jsonify({'message': 'Price is missing'}), 400
-
-    for order in all_orders:
-        if order.order == order:
-            return jsonify({'message':'Same order made'})
-        
-    
-@webapp.route('/api/v1/orders', methods=['GET'])
-def get_all_orders():
-    if len(all_orders) > 0:
-        return jsonify({'All orders are here': [
-                            theorder.__dict__ for theorder in all_orders
-                        ],
-                        'message': 'All orders successfully viewed'
-                        }), 200
-
-    return jsonify({'message': 'No order made'}), 404
+    return jsonify({'message': 'Order successfully made'}), 200    
