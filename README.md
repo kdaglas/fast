@@ -56,6 +56,15 @@ $ python run.py
 API is being hosted by heroku at:
 
 
+### Endpoints to make an order, view all orders, view a specific order and update an order status.
+
+ HTTP Method | End point | Action
+-------|-------|-------
+ POST | /api/v1/orders | Place an order
+ GET | /api/v1/orders | Get all orders
+ GET | /api/v1/orders/<orderId> | Fetch a specific order
+ PUT | /api/v1/orders/<orderId> | Update the status of an order
+
 ### Built With
 
 - HTML5 and CSS3

@@ -1,1 +1,3 @@
 envn/
+__pycache__/
+.vscode/
