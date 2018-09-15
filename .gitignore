@@ -2,3 +2,4 @@ envn/
 __pycache__/
 .vscode/
 /__pycache__
+.pytest_cache/
