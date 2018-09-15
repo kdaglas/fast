@@ -11,13 +11,15 @@ all_meals = []
 
 @webapp.route('/api/v1/meals', methods = ['POST'])
 def add_meal():
+
     data = request.get_json()
     mealId = int(str(uuid.uuid1().int)[:10])
     # mealId = len(all_meals) + 1
+    thetype = data.get('thetype')
     food = data.get('food')
     price = data.get('price')
 
-    new_meal = Meal(mealId, food, price)
+    new_meal = Meal(mealId, thetype, food, price)
     all_meals.append(new_meal) 
     return jsonify({ 
         'This is the meal':new_meal.__dict__,
@@ -26,11 +28,12 @@ def add_meal():
 
 @webapp.route('/api/v1/meals', methods=['GET'])
 def get_all_meals():
+
     if len(all_meals) > 0:
         return jsonify({'All the available meals are here': [
                             meal.__dict__ for meal in all_meals
                         ],
-                        'message': 'All orders successfully viewed'
+                        'message': 'All meals successfully viewed'
                         }), 200
 
     return jsonify({'message': 'No order made'}), 404
@@ -38,14 +41,16 @@ def get_all_meals():
 
 @webapp.route('/api/v1/orders', methods = ['POST'])
 def make_order():
+
     data = request.get_json()
     orderId = int(str(uuid.uuid1().int)[:10])
     # orderId = len(all_orders) + 1
     mealId = data.get('mealId')
+    quantity = data.get('quantity')
     today = str(date.today())
         
     for meal in all_meals:
-        new_order = Order(orderId, mealId, meal.food, meal.price, today) 
+        new_order = Order(orderId, mealId, meal.thetype, meal.food, meal.price, quantity, today) 
         return jsonify({ 
             'Your order is':new_order.__dict__,
             'message':'Order successfully made'}), 200
@@ -53,6 +58,7 @@ def make_order():
 
 @webapp.route('/api/v1/orders', methods=['GET'])
 def get_all_orders():
+
     if len(all_orders) > 0:
         return jsonify({'All the orders are here': [
                             order.__dict__ for order in all_orders
