@@ -23,6 +23,7 @@ Note: Python needs to be installed globally (not in the virtual environment)
 - Enable a customer to view all orders made
 - Enable a customer to view a history of the ordered meals
 - Enable a customer to update, modify or change an order
+- An admin page where meals are added, orders are marked as completed, declined or accepted
 
 ### Getting Started
 
