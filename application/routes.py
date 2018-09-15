@@ -19,13 +19,16 @@ def add_meal():
     food = data.get('food')
     price = data.get('price')
 
-    if Validate.validate_empty:
+    valid = Validate.validate_empty(data["thetype"], data["food"], data["price"])
+    
+    if valid == True:
         new_meal = Meal(mealId, thetype, food, price)
         all_meals.append(new_meal) 
         return jsonify({ 
             'This is the meal':new_meal.__dict__,
             'message':'Meal successfully added'}), 200 
-    return False
+    else:
+        return valid
 
 
 @webapp.route('/api/v1/meals', methods=['GET'])
