@@ -26,7 +26,7 @@ def add_meal():
         all_meals.append(new_meal) 
         return jsonify({ 
             'This is the meal':new_meal.__dict__,
-            'message':'Meal successfully added'}), 200 
+            'message':'Meal successfully added'}), 201 
     else:
         return valid
 
@@ -58,11 +58,15 @@ def make_order():
     valids = Validate.validate_input2(data["mealId"], data["quantity"])
     
     if valids == True:
-        for meal in all_meals and mealId in meal:
+        # for meal in all_meals: # and mealId in meal:
+        if mealId in meal for meal in all_meals:
             new_order = Order(orderId, mealId, meal.thetype, meal.food, meal.price, quantity, today) 
             return jsonify({ 
                 'Your order is':new_order.__dict__,
                 'message':'Order successfully made'}), 200
+        return jsonify({ 
+                'Your order is':new_order.__dict__,
+                'message':'Meal id not found please input another'}), 404
     else:
         return valids
 
