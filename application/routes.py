@@ -19,7 +19,7 @@ def add_meal():
     food = data.get('food')
     price = data.get('price')
 
-    valid = Validate.validate_empty(data["thetype"], data["food"], data["price"])
+    valid = Validate.validate_input1(data["thetype"], data["food"], data["price"])
     
     if valid == True:
         new_meal = Meal(mealId, thetype, food, price)
@@ -53,12 +53,17 @@ def make_order():
     mealId = data.get('mealId')
     quantity = data.get('quantity')
     today = str(date.today())
-        
-    for meal in all_meals and mealId in meal:
-        new_order = Order(orderId, mealId, meal.thetype, meal.food, meal.price, quantity, today) 
-        return jsonify({ 
-            'Your order is':new_order.__dict__,
-            'message':'Order successfully made'}), 200
+
+    valids = Validate.validate_input2(data["mealId"], data["quantity"])
+    
+    if valids == True:
+        for meal in all_meals and mealId in meal:
+            new_order = Order(orderId, mealId, meal.thetype, meal.food, meal.price, quantity, today) 
+            return jsonify({ 
+                'Your order is':new_order.__dict__,
+                'message':'Order successfully made'}), 200
+    else:
+        return valids
 
 
 @webapp.route('/api/v1/orders', methods=['GET'])

@@ -15,22 +15,38 @@ class Validate():
         self.quantity = quantity    
 
     @classmethod
-    def validate_empty(self, thetype, food, price,):
+    def validate_input1(cls, thetype, food, price):
 
         # method to validate my input
 
         if thetype == '':
             return jsonify({"message": "The type of food is missing"}), 400
         elif not re.search("^[a-zA-Z]", thetype):
-            return jsonify({"message": "The type of food should be characters"}), 400
+            return jsonify({"message": "The type of food should be in characters"}), 400
         elif food == '':
-            return jsonify({"message": "The food type is missing"}), 400
+            return jsonify({"message": "The food is missing"}), 400
         elif not re.search("^[a-zA-Z]", food):
-            return jsonify({"message": "The food type should be characters"}), 400
+            return jsonify({"message": "The food should be in characters"}), 400
         elif price == '':
             return jsonify({"message": "The price is missing"}), 400
         elif not re.search("^[0-9]", price):
-            return jsonify({"message": "The price should be numbers"}), 400
+            return jsonify({"message": "The price should be in numbers"}), 400
+        else:
+            return True
+
+    @classmethod
+    def validate_input2(cls, mealId, quantity):
+
+        # method to validate my input
+
+        if mealId == '':
+            return jsonify({"message": "The mealId is missing"}), 400
+        elif not re.search("^[0-9]", mealId):
+            return jsonify({"message": "The mealId should be a number"}), 400
+        elif quantity == '':
+            return jsonify({"message": "The quantity is missing"}), 400
+        elif not re.search("^[0-9]", quantity):
+            return jsonify({"message": "The quantity should be a number"}), 400
         else:
             return True
 
