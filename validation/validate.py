@@ -12,19 +12,19 @@ class Validate():
         self.food = food
         self.price = price
 
-    def validate_empty(self):
+    def validate_empty(self, food):
 
         # method to validate my input
 
-        if not self.food:
+        if food == '':
             return jsonify({"message": "The food type is missing"}), 400
         elif not re.search("^[a-zA-Z]", self.food):
             return jsonify({"message": "The food type should be characters"}), 400
 
-        if not self.price:
-            return jsonify({"message": "The price is missing"}), 400
-        elif not re.search("^[0-9]", self.price):
-            return jsonify({"message": "The price should be numbers"}), 400
+        # if not self.price:
+        #     return jsonify({"message": "The price is missing"}), 400
+        # elif not re.search("^[0-9]", self.price):
+        #     return jsonify({"message": "The price should be numbers"}), 400
 
     def validate_id(self, mealId):
 
