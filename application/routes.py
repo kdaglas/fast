@@ -19,11 +19,13 @@ def add_meal():
     food = data.get('food')
     price = data.get('price')
 
-    new_meal = Meal(mealId, thetype, food, price)
-    all_meals.append(new_meal) 
-    return jsonify({ 
-        'This is the meal':new_meal.__dict__,
-        'message':'Meal successfully added'}), 200 
+    if Validate.validate_empty:
+        new_meal = Meal(mealId, thetype, food, price)
+        all_meals.append(new_meal) 
+        return jsonify({ 
+            'This is the meal':new_meal.__dict__,
+            'message':'Meal successfully added'}), 200 
+    return False
 
 
 @webapp.route('/api/v1/meals', methods=['GET'])
@@ -49,7 +51,7 @@ def make_order():
     quantity = data.get('quantity')
     today = str(date.today())
         
-    for meal in all_meals:
+    for meal in all_meals and mealId in meal:
         new_order = Order(orderId, mealId, meal.thetype, meal.food, meal.price, quantity, today) 
         return jsonify({ 
             'Your order is':new_order.__dict__,
