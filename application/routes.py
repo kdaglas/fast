@@ -50,6 +50,7 @@ def make_order():
     data = request.get_json()
     orderId = int(str(uuid.uuid1().int)[:10])
     # orderId = len(all_orders) + 1
+    # orderId = len(all_orders) + 1
     mealId = data.get('mealId')
     quantity = data.get('quantity')
     today = str(date.today())
