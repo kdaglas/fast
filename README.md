@@ -9,7 +9,7 @@ This app is hosted at https://kdaglas.github.io/fastFoodfast/UI/index.html
 Clone the project to your computer either by downloading the zip or using git.
 To use git, run the code below:
 ```
-    git clone https://github.com/kdaglas/fast.git
+    git clone https://github.com/kdaglas/fastFoodfast.git
 ```
 
 ### Prerequisites
