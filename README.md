@@ -46,7 +46,7 @@ Go into the folder, create a virtual environment, activate it and then use a pip
     $ pip install -r requirements.txt
 ```
 
-when you are done then run the application by typing this command
+when this is done then run the application by typing this command
 ```
 $ python run.py
 ```
