@@ -4,10 +4,11 @@ from flask import jsonify
 
 class Validate():
 
-    def __init__(self, food, price):
+    def __init__(self, thetype, food, price):
 
         # valiation class for the meal inputs
 
+        self.thetype = thetype
         self.food = food
         self.price = price
 
@@ -33,4 +34,13 @@ class Validate():
            mealId = int(mealId)
         except ValueError:
             return jsonify({"message": "Id should be an interger"}), 400
+
+    def validate_quantity(self, quantity):
+
+        # valiation class for the quantity
+
+        try:
+           quantity = int(quantity)
+        except ValueError:
+            return jsonify({"message": "The quantity should be an interger"}), 400
         
