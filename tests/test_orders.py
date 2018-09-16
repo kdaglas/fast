@@ -14,54 +14,23 @@ class Test_Orders(unittest.TestCase):
         self.client = None
 
 
-    def test_input_with_empty_type(self):
+    def test_place_order(self):
 
-        # Test for empty type validation 
+        # a test for successfully placing an order 
 
-        client = webapp.test_client(self)
-        response = client.post("/api/v1/meals", data = json.dumps(
-            dict(thetype = "", food = "Milk and bread", 
-                 price = "2000")), content_type = 'application/json')
-                                           
+        response = self.client.post("/api/v1/orders", data = json.dumps(
+            dict(mealId = "9870654386", quantity = "2")), content_type = 'application/json')
+                                
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "The type of food is missing")
-        self.assertEquals(response.status_code, 400)
-
-
-    def test_input_with_empty_food(self):
-
-        # Test for empty food validation 
-
-        client = webapp.test_client(self)
-        response = client.post("/api/v1/meals", data = json.dumps(
-            dict(thetype = "Breakfast", food = "", 
-                 price = "2000")), content_type = 'application/json')
-                                            
-        reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "The food is missing")
-        self.assertEquals(response.status_code, 400)
-
-
-    def test_input_with_empty_price(self):
-
-        # Test for empty price validation 
-
-        client = webapp.test_client(self)
-        response = client.post("/api/v1/meals", data = json.dumps(
-            dict(thetype = "Breakfast", food = "Milk and bread", 
-                 price = "")), content_type = 'application/json')
-                                           
-        reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "The price is missing")
-        self.assertEquals(response.status_code, 400)
+        self.assertEquals(reply["message"], "Order successfully made")
+        self.assertEquals(response.status_code, 201)
 
 
     def test_add_meal(self):
 
-        # a test for successful adding an entry """
+        # a test for successfully adding a meal 
 
-        client = webapp.test_client(self)
-        response = client.post("/api/v1/meals", data = json.dumps(
+        response = self.client.post("/api/v1/meals", data = json.dumps(
             dict(thetype = "Breakfast", food = "Milk and bread", 
                  price = "2000")), content_type = 'application/json')
                                 
