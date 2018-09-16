@@ -35,14 +35,14 @@ class Validate():
             return True
 
     @classmethod
-    def validate_input2(cls, mealId, quantity):
+    def validate_input2(cls, food, quantity):
 
         # method to validate my input
 
-        if mealId == '':
-            return jsonify({"message": "The mealId is missing"}), 400
-        elif not re.search("^[0-9]", mealId):
-            return jsonify({"message": "The mealId should be a number"}), 400
+        if food == '':
+            return jsonify({"message": "The food is missing"}), 400
+        elif not re.search("^[a-zA-Z]", food):
+            return jsonify({"message": "The food should be in characters"}), 400
         elif quantity == '':
             return jsonify({"message": "The quantity is missing"}), 400
         elif not re.search("^[0-9]", quantity):
