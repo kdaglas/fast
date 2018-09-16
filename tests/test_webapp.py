@@ -1,6 +1,6 @@
 import unittest
 from application.routes import webapp
-from modules.models import Meal, Order
+from modules.models import Customer, Order
 
 
 class TestApp(unittest.TestCase):
