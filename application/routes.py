@@ -60,7 +60,7 @@ def make_order():
         themeal = {}
         for meal in all_meals:
             if themeal['food'] == food: 
-                new_order = Order(orderId, meal.mealId, meal.thetype, meal.food, meal.price, quantity, today) 
+                new_order = Order(orderId, meal.mealId, meal.thetype, food, meal.price, quantity, today) 
                 return jsonify({ 
                     'Your order is':new_order.__dict__,
                     'message':'Order successfully made'}), 201
