@@ -101,8 +101,10 @@ def edit_order(orderId):
 
     data = request.get_json()
     new_order = {}
-    new_order['meal'] = data.get('meal')
+    new_order['thetype'] = data.get('thetype')
+    new_order['food'] = data.get('food')
     new_order['price'] = data.get('price')
+    new_order['quantity'] = data.get('quantity')
 
     if int(orderId) > 0:
         if len(all_orders) > 0:    
