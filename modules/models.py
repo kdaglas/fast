@@ -1,16 +1,18 @@
-class Meal():
+class Customer():
 
-    def __init__(self, mealId, thetype, food, price):
-        self.mealId = mealId
+    def __init__(self, customerId, username, contact, password):
+        self.customerId = customerId
+        self.username = username
+        self.contact = contact
+        self.password = password
+
+
+class Order():
+
+    def __init__(self, orderId, thetype, food, price, quantity, today):
+        self.orderId = orderId
         self.thetype = thetype
         self.food = food
         self.price = price
-
-
-class Order(Meal):
-
-    def __init__(self, orderId, mealId, thetype, food, price, quantity, today):
-        Meal.__init__(self, mealId, thetype, food, price)
-        self.orderId = orderId
         self.quantity = quantity
         self.today = today
