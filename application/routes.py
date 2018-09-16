@@ -50,23 +50,23 @@ def make_order():
     data = request.get_json()
     orderId = int(str(uuid.uuid1().int)[:10])
     # orderId = len(all_orders) + 1
-    # orderId = len(all_orders) + 1
-    mealId = data.get('mealId')
+    food = data.get('food')
     quantity = data.get('quantity')
     today = str(date.today())
 
-    valids = Validate.validate_input2(data["mealId"], data["quantity"])
+    valids = Validate.validate_input2(data["food"], data["quantity"])
     
     if valids == True:
-        # for meal in all_meals: # and mealId in meal:
-        if mealId in meal for meal in all_meals:
-            new_order = Order(orderId, mealId, meal.thetype, meal.food, meal.price, quantity, today) 
+        themeal = {}
+        for meal in all_meals:
+            if themeal['food'] == food: 
+                new_order = Order(orderId, meal.mealId, meal.thetype, meal.food, meal.price, quantity, today) 
+                return jsonify({ 
+                    'Your order is':new_order.__dict__,
+                    'message':'Order successfully made'}), 201
             return jsonify({ 
-                'Your order is':new_order.__dict__,
-                'message':'Order successfully made'}), 200
-        return jsonify({ 
-                'Your order is':new_order.__dict__,
-                'message':'Meal id not found please input another'}), 404
+                    'Your order is':new_order.__dict__,
+                    'message':'Meal id not found please input another'}), 404
     else:
         return valids
 
