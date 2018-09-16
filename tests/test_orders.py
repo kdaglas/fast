@@ -1,6 +1,6 @@
 import unittest
 from application.routes import webapp
-from modules.models import Meal, Order
+from modules.models import Customer, Order
 import json
 
 
@@ -14,16 +14,28 @@ class Test_Orders(unittest.TestCase):
         self.client = None
 
 
-    def test_add_meal(self):
+    def test_registration(self):
 
-        # a test for successfully adding a meal 
+        #  a test for successful user registration 
 
-        response = self.client.post("/api/v1/meals", data = json.dumps(
-            dict(thetype = "Breakfast", food = "Milk and bread", 
-                 price = "2000")), content_type = 'application/json')
-                                
+        response = self.client.post("/api/v1/register", data=json.dumps(
+            dict(username="Dag", contact="256755598090", 
+                 password="Dag123")), content_type='application/json') 
+
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "Meal successfully added")
+        self.assertEquals(reply["message"], "Customer successfully registered")
+        self.assertEquals(response.status_code, 201)
+
+
+    def test_user_login_successful(self):
+
+        # Test for successful login 
+
+        response = self.client.post("/api/v1/login", data = json.dumps(
+            dict(username = "Dag", password = "Dag123")), content_type = 'application/json')
+
+        reply = json.loads(response.data)
+        self.assertEquals(reply["message"], "Successfully logged in")
         self.assertEquals(response.status_code, 201)
 
 
@@ -32,9 +44,9 @@ class Test_Orders(unittest.TestCase):
         # a test for successfully placing an order 
 
         response = self.client.post("/api/v1/orders", data = json.dumps(
-            dict(thetype = "Breakfast", food = "Milk and bread", 
-                 price = "2000", quantity = "2")), content_type = 'application/json')
+            dict(orderId = "4536784291", thetype = "Breakfast", food = "Milk and bread", 
+                 price = "2000", quantity = "2", today = "2018-09-16")), content_type = 'application/json')
                                 
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "Order successfully made")
+        self.assertEquals(reply["message"], "Order successfully placed")
         self.assertEquals(response.status_code, 201)
