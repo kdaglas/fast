@@ -1,6 +1,6 @@
-from application import webapp
+from application import app
 
 
 if __name__== "__main__":
-    webapp.run(debug=True)
+    app.run(debug=True)
     

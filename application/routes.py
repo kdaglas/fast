@@ -1,7 +1,7 @@
-from application import webapp
+from application import app
 from flask import request, json, jsonify
-from .models import Customer, Order
-from .validate import Validate
+from application.models import Customer, Order
+from application.validate import Validate
 from datetime import date
 import uuid
 
@@ -10,7 +10,7 @@ all_customers = []
 all_orders = []
 
 
-@webapp.route("/api/v1/register", methods=['POST'])
+@app.route("/api/v1/register", methods=['POST'])
 def register():
     data = request.get_json()
     customerId = int(str(uuid.uuid1().int)[:10])
@@ -28,7 +28,7 @@ def register():
         return valid
 
 
-@webapp.route("/api/v1/login", methods=['POST'])
+@app.route("/api/v1/login", methods=['POST'])
 def login():
     data = request.get_json()
     username = data.get('username')
@@ -43,7 +43,7 @@ def login():
         return valid
 
 
-@webapp.route('/api/v1/orders', methods = ['POST'])
+@app.route('/api/v1/orders', methods = ['POST'])
 def place_order():
 
     data = request.get_json()
@@ -66,7 +66,7 @@ def place_order():
         return valid
 
 
-@webapp.route('/api/v1/orders', methods=['GET'])
+@app.route('/api/v1/orders', methods=['GET'])
 def get_all_orders():
 
     if len(all_orders) > 0:
@@ -79,7 +79,7 @@ def get_all_orders():
     return jsonify({'message': 'No order made'}), 404
 
 
-@webapp.route('/api/v1/orders/<orderId>', methods=['GET'])
+@app.route('/api/v1/orders/<orderId>', methods=['GET'])
 def get_single_order(orderId):
 
     if int(orderId) > 0:
@@ -96,7 +96,7 @@ def get_single_order(orderId):
     return jsonify({'message': 'Please type in an id greater than 0'}), 404
 
 
-@webapp.route('/api/v1/orders/<orderId>', methods=['PUT'])
+@app.route('/api/v1/orders/<orderId>', methods=['PUT'])
 def edit_order(orderId):
 
     data = request.get_json()
