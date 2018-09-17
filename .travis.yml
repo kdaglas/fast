@@ -1,16 +1,17 @@
 language: python
 python:
-  - "3.6"
+  - "3.7"
 
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
+  - pip install -r requirements.txt 
+  - pip install coveralls
+  - pip install coverage 
+  - pip install nose
 
 # command to run tests 
 script: 
-  - py.test --cov-config .coveragerc --cov=app   tests/
-  - coverage report
+  - nosetests --with-coverage --cover-package=webapp
 
 after_success: 
   - coveralls
-  - pytest
