@@ -1,59 +1,74 @@
 from application import webapp
 from flask import request, json, jsonify
-from modules.models import Meal, Order
+from modules.models import Customer, Order
 from validation.validate import Validate
 from datetime import date
 import uuid
 
 
+all_customers = []
 all_orders = []
-all_meals = []
 
-@webapp.route('/api/v1/meals', methods = ['POST'])
-def add_meal():
+
+@webapp.route("/api/v1/register", methods=['POST'])
+def register():
     data = request.get_json()
-    mealId = int(str(uuid.uuid1().int)[:10])
-    # mealId = len(all_meals) + 1
-    food = data.get('food')
-    price = data.get('price')
+    customerId = int(str(uuid.uuid1().int)[:10])
+    username = data.get('username')
+    contact = data.get('contact')
+    password = data.get('password')
 
-    new_meal = Meal(mealId, food, price)
-    all_meals.append(new_meal) 
-    return jsonify({ 
-        'This is the meal':new_meal.__dict__,
-        'message':'Meal successfully added'}), 200 
+    valid = Validate.validate_registration_inputs(data["username"], data["contact"], data["password"])
+    
+    if valid == True:
+        new_customer = Customer(customerId, username, contact, password)
+        all_customers.append(new_customer)
+        return jsonify({'message': 'Customer successfully registered'}), 201 
+    else:
+        return valid
 
 
-@webapp.route('/api/v1/meals', methods=['GET'])
-def get_all_meals():
-    if len(all_meals) > 0:
-        return jsonify({'All the available meals are here': [
-                            meal.__dict__ for meal in all_meals
-                        ],
-                        'message': 'All orders successfully viewed'
-                        }), 200
+@webapp.route("/api/v1/login", methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
 
-    return jsonify({'message': 'No order made'}), 404
+    valid = Validate.validate_login_input(data["username"], data["password"])
+    
+    if valid == True:
+        # if username in all_customers and password in all_customers: 
+        return jsonify({'message': 'Successfully logged in'}), 201 
+    else:
+        return valid
 
 
 @webapp.route('/api/v1/orders', methods = ['POST'])
-def make_order():
+def place_order():
+
     data = request.get_json()
     orderId = int(str(uuid.uuid1().int)[:10])
-    # orderId = len(all_orders) + 1
-    mealId = data.get('mealId')
+    thetype = data.get('thetype')
+    food = data.get('food')
+    price = data.get('price')
+    quantity = data.get('quantity')
     today = str(date.today())
-        
-    for meal in all_meals:
-        new_order = Order(orderId, mealId, meal.food, meal.price, today)
-        all_orders.append(new_order)  
+
+    valid = Validate.validate_order_input(data["thetype"], data["food"], data["price"], data["quantity"])
+    
+    if valid == True:
+        new_order = Order(orderId, thetype, food, price, quantity, today)
+        all_orders.append(new_order) 
         return jsonify({ 
-            'Your order is':new_order.__dict__,
-            'message':'Order successfully made'}), 200
+            'This is your order':new_order.__dict__,
+            'message':'Order successfully placed'}), 201 
+    else:
+        return valid
 
 
 @webapp.route('/api/v1/orders', methods=['GET'])
 def get_all_orders():
+
     if len(all_orders) > 0:
         return jsonify({'All the orders are here': [
                             order.__dict__ for order in all_orders
@@ -86,8 +101,10 @@ def edit_order(orderId):
 
     data = request.get_json()
     new_order = {}
-    new_order['meal'] = data.get('meal')
+    new_order['thetype'] = data.get('thetype')
+    new_order['food'] = data.get('food')
     new_order['price'] = data.get('price')
+    new_order['quantity'] = data.get('quantity')
 
     if int(orderId) > 0:
         if len(all_orders) > 0:    

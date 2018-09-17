@@ -1,7 +1,11 @@
 # fastFoodfast
 
+[![Build Status](https://travis-ci.org/kdaglas/fastFoodfast.svg?branch=fastFoodfast-api)](https://travis-ci.org/kdaglas/fastFoodfast)
+[![Coverage Status](https://coveralls.io/repos/github/kdaglas/fastFoodfast/badge.svg?branch=master)](https://coveralls.io/github/kdaglas/fastFoodfast?branch=master)
+
 This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like.
-This app is hosted on https://kdaglas.github.io/fastFoodfast/UI/index.html
+This app is hosted on 
+https://kdaglas.github.io/fastFoodfast/UI/index.html
 
 ## fastFoodfast-api
 
@@ -46,7 +50,7 @@ Go into the folder, create a virtual environment, activate it and then use a pip
     $ pip install -r requirements.txt
 ```
 
-when you are done then run the application by typing this command
+when this is done then run the application by typing this command
 ```
 $ python run.py
 ```
