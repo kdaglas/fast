@@ -1,6 +1,7 @@
 import unittest
-from application.routes import webapp
-from run import webapp
+# from application.routes import webapp
+from run import app
+from application import routes
 from application.models import Customer, Order
 import json
 
@@ -8,7 +9,7 @@ import json
 class Test_Orders(unittest.TestCase):
     
     def setUp(self):
-        self.client = webapp.test_client()
+        self.client = app.test_client()
 
     
     def tearDown(self):
