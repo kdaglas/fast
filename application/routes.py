@@ -1,7 +1,7 @@
 from application import webapp
 from flask import request, json, jsonify
-from modules.models import Customer, Order
-from validation.validate import Validate
+from models import Customer, Order
+from validate import Validate
 from datetime import date
 import uuid
 
