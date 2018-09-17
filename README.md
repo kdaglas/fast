@@ -57,7 +57,7 @@ $ python run.py
 
 ### Final result:
 
-API is being hosted by heroku at:
+API is being hosted by heroku here:
 
 
 ### Endpoints to make an order, view all orders, view a specific order and update an order status.
