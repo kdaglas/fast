@@ -45,7 +45,8 @@ def make_order():
     today = str(date.today())
         
     for meal in all_meals:
-        new_order = Order(orderId, mealId, meal.food, meal.price, today) 
+        new_order = Order(orderId, mealId, meal.food, meal.price, today)
+        all_orders.append(new_order)  
         return jsonify({ 
             'Your order is':new_order.__dict__,
             'message':'Order successfully made'}), 200
