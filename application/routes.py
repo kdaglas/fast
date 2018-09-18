@@ -51,7 +51,7 @@ def place_order():
         if valid == True:
             new_order = Order(customerId, orderId, thetype, food, price, quantity, today)
             placed_order = Order.place_order(new_order)
-            return jsonify({'This is your order': placed_order,
+            return jsonify({'You have placed this order': placed_order,
                             'message': 'Your order has been successfully placed'}), 200
         else:
             return valid
