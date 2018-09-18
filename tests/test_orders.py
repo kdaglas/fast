@@ -57,5 +57,5 @@ class Test_Orders(unittest.TestCase):
         response = self.client.get("/api/v1/orders/4536784291", content_type = 'application/json')
                                 
         reply = json.loads(response.data)
-        self.assertEqual(reply["message"], "Your one order successfully viewed")
+        self.assertEqual(reply["message"], "Your one order successfully updated")
         self.assertEqual(response.status_code, 200)
