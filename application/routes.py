@@ -66,7 +66,7 @@ def place_order():
 def get_all_orders():
 
     all_orders = Order.get_all_orders()
-    return jsonify({'All your orders are': all_orders}), 200
+    return jsonify({'All your orders are here': all_orders}), 200
 
 
 @webapp.route('/api/v1/orders/<orderId>', methods=['GET'])
