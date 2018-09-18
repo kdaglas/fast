@@ -28,7 +28,7 @@ def register():
             return valid
 
     except:
-        response = jsonify({"message": "The key fields are invalid or are missing"})
+        response = jsonify({"message": "The key or value fields are invalid or are missing"})
         response.status_code = 400
         return response
 
@@ -57,7 +57,7 @@ def place_order():
             return valid
 
     except:
-        response = jsonify({"message": "The key fields are invalid or missing"})
+        response = jsonify({"message": "The key or value fields are invalid or missing"})
         response.status_code = 400
         return response
 
