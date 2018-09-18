@@ -56,7 +56,7 @@ class Validate():
 
 
     @classmethod
-    def validate_order_input(cls, thetype, food, price, quantity, customerId):
+    def validate_order_input(cls, customerId, thetype, food, price, quantity):
 
         # method to validate my input
 
