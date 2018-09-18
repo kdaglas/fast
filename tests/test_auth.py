@@ -26,15 +26,3 @@ class Test_Authentication(unittest.TestCase):
         result = json.loads(response.data)
         self.assertEqual(result["message"], "Customer successfully registered")
         self.assertEqual(response.status_code, 201)
-
-
-    # def test_user_login_successful(self):
-
-    #     # Test for successful login 
-
-    #     response = self.client.post("/api/v1/login", data = json.dumps(
-    #         dict(username = "Dag", password = "Dag123")), content_type = 'application/json')
-
-    #     reply = json.loads(response.data)
-    #     self.assertEqual(reply["message"], "Successfully logged in")
-    #     self.assertEqual(response.status_code, 201)
