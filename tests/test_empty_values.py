@@ -23,8 +23,8 @@ class Test_For_Empty_Values(unittest.TestCase):
         # Test for empty username validation 
 
         response = self.client.post("/api/v1/register", data = json.dumps(
-            dict(username = "", contact = "256755598090", 
-                 password = "Dag123")), content_type = 'application/json')
+            dict(username = "", contact = "+256-755-598090", 
+                 password = "Dag1234")), content_type = 'application/json')
                                            
         reply = json.loads(response.data)
         self.assertEqual(reply["message"], "Your username is missing")
@@ -37,7 +37,7 @@ class Test_For_Empty_Values(unittest.TestCase):
 
         response = self.client.post("/api/v1/register", data = json.dumps(
             dict(username = "Dag", contact = "", 
-                 password = "Dag123")), content_type = 'application/json')
+                 password = "Dag1234")), content_type = 'application/json')
                                            
         reply = json.loads(response.data)
         self.assertEqual(reply["message"], "Your contact is missing")
@@ -49,7 +49,7 @@ class Test_For_Empty_Values(unittest.TestCase):
         # Test for empty password validation 
 
         response = self.client.post("/api/v1/register", data = json.dumps(
-            dict(username = "Dag", contact = "256755598090", 
+            dict(username = "Dag", contact = "+256-755-598090", 
                  password = "")), content_type = 'application/json')
                                            
         reply = json.loads(response.data)
@@ -85,12 +85,25 @@ class Test_For_Empty_Values(unittest.TestCase):
 
     # These are the tests for validating order inputs
 
+    def test_input_with_empty_customerId(self):
+
+        # Test for empty type validation 
+
+        response = self.client.post("/api/v1/orders", data = json.dumps(
+            dict(customerId = "", orderId = "0987654321", thetype = "breakfast", food = "milk and bread", 
+                 price = "2000", quantity = "2", today = "2018-09-16")), content_type = 'application/json')
+                                           
+        reply = json.loads(response.data)
+        self.assertEqual(reply["message"], "The customer's id is missing")
+        self.assertEqual(response.status_code, 400)
+    
+    
     def test_input_with_empty_type(self):
 
         # Test for empty type validation 
 
         response = self.client.post("/api/v1/orders", data = json.dumps(
-            dict(customerId = "2456478937", orderId = "4536784291", thetype = "", food = "Milk and bread", 
+            dict(customerId = "1234567890", orderId = "0987654321", thetype = "", food = "milk and bread", 
                  price = "2000", quantity = "2", today = "2018-09-16")), content_type = 'application/json')
                                            
         reply = json.loads(response.data)
@@ -103,7 +116,7 @@ class Test_For_Empty_Values(unittest.TestCase):
         # Test for empty food validation 
 
         response = self.client.post("/api/v1/orders", data = json.dumps(
-            dict(orderId = "4536784291", thetype = "Breakfast", food = "", 
+            dict(customerId = "1234567890",orderId = "0987654321", thetype = "breakfast", food = "", 
                  price = "2000", quantity = "2", today = "2018-09-16")), content_type = 'application/json')
                                             
         reply = json.loads(response.data)
@@ -116,7 +129,7 @@ class Test_For_Empty_Values(unittest.TestCase):
         # Test for empty price validation 
 
         response = self.client.post("/api/v1/orders", data = json.dumps(
-            dict(orderId = "4536784291", thetype = "Breakfast", food = "Milk and bread", 
+            dict(customerId = "1234567890", orderId = "0987654321", thetype = "breakfast", food = "milk and bread", 
                  price = "", quantity = "2", today = "2018-09-16")), content_type = 'application/json')
                                            
         reply = json.loads(response.data)
@@ -129,7 +142,7 @@ class Test_For_Empty_Values(unittest.TestCase):
         # Test for empty quantity validation 
 
         response = self.client.post("/api/v1/orders", data = json.dumps(
-            dict(orderId = "4536784291", thetype = "Breakfast", food = "Milk and bread", 
+            dict(customerId = "1234567890", orderId = "0987654321", thetype = "breakfast", food = "milk and bread", 
                  price = "2000", quantity = "", today = "2018-09-16")), content_type = 'application/json')
                                            
         reply = json.loads(response.data)

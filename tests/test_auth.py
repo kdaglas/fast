@@ -20,11 +20,11 @@ class Test_Authentication(unittest.TestCase):
         #  a test for successful user registration 
 
         response = self.client.post("/api/v1/register", data=json.dumps(
-            dict(username="Dag", contact="256755598090", 
-                 password="Dag123")), content_type='application/json') 
+            dict(username="Dag", contact="+256-755-598090", 
+                 password="Dag1234")), content_type='application/json') 
 
-        reply = json.loads(response.data)
-        self.assertEqual(reply["message"], "Customer successfully registered")
+        result = json.loads(response.data)
+        self.assertEqual(result["message"], "Customer successfully registered")
         self.assertEqual(response.status_code, 201)
 
 

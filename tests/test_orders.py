@@ -24,6 +24,5 @@ class Test_Orders(unittest.TestCase):
                  price = "2000", quantity = "2", today = "2018-09-16")), content_type = 'application/json')
                                 
         reply = json.loads(response.data)
-        # if valida
         self.assertEqual(reply["message"], "Your order has been successfully placed")
         self.assertEqual(response.status_code, 200)
