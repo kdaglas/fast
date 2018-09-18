@@ -28,7 +28,7 @@ def register():
             return valid
 
     except:
-        response = jsonify({"message": "The key fields are invalid or missing"})
+        response = jsonify({"message": "The key fields are invalid or are missing"})
         response.status_code = 400
         return response
 
@@ -78,17 +78,17 @@ def get_single_order(orderId):
     return jsonify({"This is your order": order}), 200
 
 
-@webapp.route('/api/v1/orders/<orderId>', methods=['PUT'])
-def edit_order(orderId):
+# @webapp.route('/api/v1/orders/<orderId>', methods=['PUT'])
+# def edit_order(orderId):
 
-    data = request.get_json()
-    new_order = {}
-    new_order['customerId'] = data.get('customerId')
-    new_order['thetype'] = data.get('thetype')
-    new_order['food'] = data.get('food')
-    new_order['price'] = data.get('price')
-    new_order['quantity'] = data.get('quantity')
+#     data = request.get_json()
+#     new_order = {}
+#     new_order['customerId'] = data.get('customerId')
+#     new_order['thetype'] = data.get('thetype')
+#     new_order['food'] = data.get('food')
+#     new_order['price'] = data.get('price')
+#     new_order['quantity'] = data.get('quantity')
 
-    edited_order = Order.update_order(orderId, thetype, food, price, quantity, today)
-    return jsonify({"Your edited order is": edited_order}), 200
+#     edited_order = Order.update_order(orderId, customerId, thetype, food, price, quantity, today)
+#     return jsonify({"Your edited order is": edited_order}), 200
 
