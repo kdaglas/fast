@@ -87,7 +87,7 @@ class Test_For_Empty_Values(unittest.TestCase):
 
     def test_input_with_empty_customerId(self):
 
-        # Test for empty type validation 
+        # Test for empty customer validation 
 
         response = self.client.post("/api/v1/orders", data = json.dumps(
             dict(customerId = "", orderId = "0987654321", thetype = "breakfast", food = "milk and bread", 
