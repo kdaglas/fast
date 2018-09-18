@@ -92,5 +92,6 @@ def edit_order(orderId):
     new_order['quantity'] = data.get('quantity')
 
     edited_order = Order.update_order(orderId, customerId, thetype, food, price, quantity, today)
-    return jsonify({"Your edited order is": edited_order}), 200
-
+    return jsonify({"Your edited order is": edited_order,
+                    'message': 'Your one order successfully updated'}), 200
+                    
