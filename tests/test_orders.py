@@ -52,7 +52,7 @@ class Test_Orders(unittest.TestCase):
 
     # def test_update_an_order(self):
 
-    #     # a test for updating an order 
+    #     # a test for updating or modifying or changing an order 
 
     #     response = self.client.post("/api/v1/orders", data = json.dumps(
     #         dict(customerId = "1234567890", orderId = "0987654321", thetype = "breakfast", food = "milk and bread", 
