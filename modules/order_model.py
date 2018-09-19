@@ -1,3 +1,6 @@
+from flask import jsonify
+
+
 all_orders =[]
 
 class Order():
@@ -51,7 +54,7 @@ class Order():
             return {'There is an error': 'No order Found'}
 
     @classmethod
-    def update_order(cls, orderId, thetype, food, price, quantity, today):
+    def update_order(orderId, thetype, food, price, quantity, today):
 
         # method to return the edited orders
 
