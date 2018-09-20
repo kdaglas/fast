@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/kdaglas/fastFoodfast.svg?branch=fastFoodfast-api)](https://travis-ci.org/kdaglas/fastFoodfast)
 [![Coverage Status](https://coveralls.io/repos/github/kdaglas/fastFoodfast/badge.svg)](https://coveralls.io/github/kdaglas/fastFoodfast)
+[![Maintainability](https://api.codeclimate.com/v1/badges/fb24e124bc0e05e50948/maintainability)](https://codeclimate.com/github/kdaglas/fastFoodfast/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/fb24e124bc0e05e50948/test_coverage)](https://codeclimate.com/github/kdaglas/fastFoodfast/test_coverage)
 
 This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like.
 This app is hosted on 
@@ -64,7 +66,7 @@ To run tests, make sure that pytest or nose is installed. you can run that comma
 Then run these commands to begin testing the API
 ```
     $ nosetests
-    
+
     <!-- or -->
     $ pytest
 ```
