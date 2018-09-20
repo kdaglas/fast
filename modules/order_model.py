@@ -1,11 +1,8 @@
-from flask import jsonify
-
-
-all_orders =[]
+all_orders = []
 
 class Order():
 
-    def __init__(self, customerId, orderId, thetype, food, price, quantity, today):
+    def __init__(self, customerId, orderId, thetype, food, price, quantity, status, today):
 
         # initialising the order class
 
@@ -15,6 +12,7 @@ class Order():
         self.food = food
         self.price = price
         self.quantity = quantity
+        self.status = status
         self.today = today
 
     def place_order(self):
@@ -28,6 +26,7 @@ class Order():
             'food' : self.food,
             'price' : self.price,
             'quantity' : self.quantity,
+            'status' : 'Not covered',
             'today' : self.today
         }
 
@@ -51,19 +50,17 @@ class Order():
         for order in all_orders:
             if order.get('orderId') == orderId:
                 return order
-            return {'Ther is an error': 'No order Found'}
+        return {"ride": "Requested ride is not found"}
+
+        
 
     @classmethod
-    def update_order(orderId, thetype, food, price, quantity, today):
+    def update_order(cls, orderId, status):
 
-        # method to return the edited orders
+        # method to return the edited order
 
         for order in all_orders:
             if order.get('orderId') == orderId:
-                order['thetype'] = thetype
-                order['food'] = food
-                order['price'] = price
-                order["quantity"] = quantity
-                order["today"] = today
+                order['status'] = status
                 return order
         return {'There is an error': 'No order Found'}
