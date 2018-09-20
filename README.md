@@ -6,12 +6,12 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fb24e124bc0e05e50948/test_coverage)](https://codeclimate.com/github/kdaglas/fastFoodfast/test_coverage)
 
 This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like.
-This app is hosted on 
-https://kdaglas.github.io/fastFoodfast/UI/index.html
+This app is hosted on: https://kdaglas.github.io/fastFoodfast/UI/index.html
 
 ## fastFoodfast-api
 
 This api allows the customers to register and login to the app, order for a meal, view a single order made, view all the orders made and update or modify or change a particular order they feel does not meet what they want.
+API is being hosted by heroku at: https://douglas-fastfoodfast.herokuapp.com/api/v1/orders
 
 ### Prerequisites
 
@@ -70,11 +70,6 @@ Then run these commands to begin testing the API
     <!-- or -->
     $ pytest
 ```
-
-### Final result:
-
-API is being hosted by heroku at:
-
 
 ### Endpoints to make an order, view all orders, view a specific order and update an order status.
 
