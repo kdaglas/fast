@@ -55,6 +55,20 @@ when this is done then run the application by typing this command
 $ python run.py
 ```
 
+### Tests
+
+To run tests, make sure that pytest or nose is installed. you can run that command to install them
+```
+    $ pip install -r requirements.txt
+```
+Then run these commands to begin testing the API
+```
+    $ nosetests
+    
+    <!-- or -->
+    $ pytest
+```
+
 ### Final result:
 
 API is being hosted by heroku at:
