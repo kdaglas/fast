@@ -1,5 +1,6 @@
 import re
 from flask import jsonify
+from modules.order_model import Order
 
 
 class Validate():
@@ -35,25 +36,7 @@ class Validate():
         elif not re.search(r"^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7}$", password):
             return jsonify({"message": "Your password must have 7 characters with atleast a lowercase and uppercase letter and 1 number"}), 400
         else:
-            return True 
-
-
-    # @classmethod
-    # def validate_login_input(cls, username, password):
-
-    #     # method to validate the customer input
-
-    #     if username == '':
-    #         return jsonify({"message": "Your username is missing"}), 400
-    #     # elif not re.search("^[a-zA-Z]", username):
-    #     elif type(username) != str:
-    #         return jsonify({"message": "Your username should be in characters"}), 400
-    #     elif password == '':
-    #         return jsonify({"message": "Your password is missing"}), 400
-    #     elif not re.search(r"^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{7}$", password):
-    #         return jsonify({"message": "Your password must have 7 characters with atleast a lowercase and uppercase letter and 1 number"}), 400
-    #     else:
-    #         return True 
+            return True
 
 
     @classmethod
@@ -89,4 +72,28 @@ class Validate():
             return jsonify({"message": "The quantity should be a number"}), 400
         else:
             return True
+
+
+    @classmethod
+    def validate_id(cls, orderId):
+        
+        # method to validate the ids input by the customer
+
+        if type(orderId) != int:
+            return jsonify({"message": "Your order id should be a number"}), 400
+        elif not orderId:
+            return jsonify({"message": "Your order id is missing"}), 400
+        else:
+            return True
+
+
+    @classmethod
+    def validate_duplicate(cls, customerId, all_orders):
+        
+        # method to validate the ids input by the customer
+
+        for order in all_orders:
+            if order['customerId'] == customerId:
+                return True
+
         
