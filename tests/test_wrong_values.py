@@ -1,8 +1,8 @@
 import unittest
-from application.routes import webapp
+from apis.application.routes import webapp
 from run import webapp
-from modules.customer_model import Customer
-from modules.order_model import Order
+from apis.modules.customer_model import Customer
+from apis.modules.order_model import Order
 import json
 
 
