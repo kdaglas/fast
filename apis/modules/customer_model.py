@@ -1,3 +1,5 @@
+#  Object classes for the Customer model 
+
 all_customers = []
 
 class Customer():
