@@ -1,4 +1,4 @@
-from application import webapp
+from apis.application import webapp
 
 
 if __name__== "__main__":
