@@ -23,13 +23,13 @@ def register():
             new_customer = Customer(customerId, username, contact, password)
             registered_customer = Customer.register_customer(new_customer)
             return jsonify({'New customer':registered_customer,
-                            'message': 'Customer successfully registered'}), 201 
+                            'message': 'Customer successfully registered'}), 200 
         else:
             return valid
 
     except:
         response = jsonify({"message": "The key or value fields are invalid or are missing"})
-        response.status_code = 400
+        response.status_code = 403
         return response
 
 
@@ -44,21 +44,22 @@ def place_order():
         food = data.get('food')
         price = data.get('price')
         quantity = data.get('quantity')
+        status = 'Null'
         today = str(date.today())
 
         valid = Validate.validate_order_input(data['customerId'], data['thetype'], data['food'], data['price'], data['quantity'])
         
         if valid == True:
-            new_order = Order(customerId, orderId, thetype, food, price, quantity, today)
+            new_order = Order(customerId, orderId, thetype, food, price, quantity, status, today)
             placed_order = Order.place_order(new_order)
             return jsonify({'You have placed this order': placed_order,
-                            'message': 'Your order has been successfully placed'}), 200
+                            'message': 'Your order has been successfully placed'}), 201
         else:
             return valid
 
     except:
         response = jsonify({"message": "The key or value fields are invalid or missing"})
-        response.status_code = 400
+        response.status_code = 403
         return response
 
 
@@ -67,30 +68,24 @@ def get_all_orders():
 
     all_orders = Order.get_all_orders()
     return jsonify({'All your orders are here': all_orders,
-                    'message': 'All your orders successfully viewed'}), 200
+                    'message': 'All your orders successfully viewed'}), 201
 
 
-@webapp.route('/api/v1/orders/<orderId>', methods=['GET'])
+@webapp.route('/api/v1/orders/<int:orderId>', methods=['GET'])
 def get_single_order(orderId):
 
     order = Order.get_one_order(orderId)
-    if type(order) == str:
-        return order, 400
     return jsonify({"This is your order": order,
-                    'message': 'Your one order successfully viewed'}), 200
+                    'message': 'Your one order successfully viewed'}), 201
+    
 
 
-# @webapp.route('/api/v1/orders/<orderId>', methods=['PUT'])
-# def edit_order(orderId):
+@webapp.route('/api/v1/orders/<int:orderId>', methods=['PUT'])
+def update_status(orderId):
 
-#     data = request.get_json()
-#     new_order = {}
-#     # new_order['customerId'] = data.get('customerId')
-#     new_order['thetype'] = data.get('thetype')
-#     new_order['food'] = data.get('food')
-#     new_order['price'] = data.get('price')
-#     new_order['quantity'] = data.get('quantity')
+    data = request.get_json()
+    status = data.get('status')
 
-#     edited_order = Order.update_order(orderId, thetype, food, price, quantity, today)
-#     return jsonify({"Your edited order is": edited_order,
-#                     'message': 'Your one order successfully updated'}), 200
+    updated_order = Order.update_order(orderId, status)
+    return jsonify({"This is your updated order": updated_order,
+                'message': 'Your one order successfully updated'}), 201
