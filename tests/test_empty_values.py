@@ -22,13 +22,15 @@ class Test_For_Empty_Values(unittest.TestCase):
 
         # Test for empty username validation 
 
+        
         response = self.client.post("/api/v1/register", data = json.dumps(
             dict(username = "", contact = "+256-755-598090", 
-                 password = "Dag1234")), content_type = 'application/json')
-                                           
+                password = "Dag1234")), content_type = 'application/json')
+                                        
         reply = json.loads(response.data)
         self.assertEqual(reply["message"], "Your username is missing")
         self.assertEqual(response.status_code, 400)
+        
 
 
     def test_input_with_empty_contact(self):
@@ -55,32 +57,6 @@ class Test_For_Empty_Values(unittest.TestCase):
         reply = json.loads(response.data)
         self.assertEqual(reply["message"], "Your password is missing")
         self.assertEqual(response.status_code, 400)
-
-
-    # # These are the tests for validating a customer's login
-
-    # def test_login_with_wrong_or_no_username(self):
-
-    #     # Test for login with wrong or no username   
-
-    #     response = self.client.post("/api/v1/login", data = json.dumps(
-    #         dict(username = "", password = "Dag123")), content_type = 'application/json')
-
-    #     reply = json.loads(response.data)
-    #     self.assertEqual(reply["message"], "Your username is missing")
-    #     self.assertEqual(response.status_code, 400)
-
-
-    # def test_login_with_wrong_or_no_password(self):
-
-    #     # Test for login with wrong or no password 
-
-    #     response = self.client.post("/api/v1/login", data = json.dumps(
-    #         dict(username = "Dag", password = "")), content_type = 'application/json')
-
-    #     reply = json.loads(response.data)
-    #     self.assertEqual(reply["message"], "Your password is missing")
-    #     self.assertEqual(response.status_code, 400)
 
 
     # These are the tests for validating order inputs
