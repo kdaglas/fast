@@ -1,0 +1,11 @@
+[report]
+omit = 
+    */envn/*
+    */__pycache__/*
+    */.pytest_cache/*
+    */apis/__pycache__/*
+    */apis/application/__pycache__/*
+    */apis/modules/__pycache__/*
+    */apis/validation/__pycache__/*
+    */tests/__pycache__/*
+    */.vscode/*
