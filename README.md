@@ -1,9 +1,8 @@
 # fastFoodfast
 
 [![Build Status](https://travis-ci.org/kdaglas/fastFoodfast.svg?branch=fastFoodfast-api)](https://travis-ci.org/kdaglas/fastFoodfast)
-[![Coverage Status](https://coveralls.io/repos/github/kdaglas/fastFoodfast/badge.svg)](https://coveralls.io/github/kdaglas/fastFoodfast)
+[![Coverage Status](https://coveralls.io/repos/github/kdaglas/fastFoodfast/badge.svg?branch=fastFoodfast-api)](https://coveralls.io/github/kdaglas/fastFoodfast?branch=fastFoodfast-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fb24e124bc0e05e50948/maintainability)](https://codeclimate.com/github/kdaglas/fastFoodfast/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/fb24e124bc0e05e50948/test_coverage)](https://codeclimate.com/github/kdaglas/fastFoodfast/test_coverage)
 
 This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like.
 This app is hosted on: https://kdaglas.github.io/fastFoodfast/UI/index.html
