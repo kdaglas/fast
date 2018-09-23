@@ -51,33 +51,35 @@ Go into the folder, create a virtual environment, activate it and then use a pip
     $ pip install -r requirements.txt
 ```
 
-when this is done then run the application by typing this command
+When this is done then run the application by typing this command
 ```
 $ python run.py
 ```
 
-Then you can use Postman to test the api endpoints, you can download here:
+You can use Postman to checkout the functionality of the api endpoints, you can download here:
 - [Postman](https://www.getpostman.com/apps) - An API testing tool for developers
-Use this data as dummy data for you to check for the functionality of the APIs you:
 
- For placing an order | For updating the staus of an order 
--------|-------
- ```{
+Use this data as dummy data for you to check for the functionality of the APIs you:
+ ```
+ For placing an order
+    {
         'customerId' : "12345",
         'thetype' : "breakfast",
         'food' : "milk and bread",
         'price' : "2000",
         'quantity' : "2"
-    }``` | ```{
-            'customerId' : "12345",
-            'thetype' : "breakfast",
-            'food' : "milk and bread",
-            'price' : "2000",
-            'quantity' : "2",
-            'status' : "completed"
-         }``` 
+    }
 
-
+For updating the staus of an order 
+    {
+        'customerId' : "12345",
+        'thetype' : "breakfast",
+        'food' : "milk and bread",
+        'price' : "2000",
+        'quantity' : "2",
+        'status' : "completed"
+    }
+```
 
 ### Tests
 
