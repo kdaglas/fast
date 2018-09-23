@@ -4,13 +4,13 @@
 [![Coverage Status](https://coveralls.io/repos/github/kdaglas/fastFoodfast/badge.svg?branch=fastFoodfast-api)](https://coveralls.io/github/kdaglas/fastFoodfast?branch=fastFoodfast-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fb24e124bc0e05e50948/maintainability)](https://codeclimate.com/github/kdaglas/fastFoodfast/maintainability)
 
-This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like.
-This app is hosted on: https://kdaglas.github.io/fastFoodfast/UI/index.html
+This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like. This app is hosted on: 
+- [www.fastFoodfast.com](https://kdaglas.github.io/fastFoodfast/UI/index.html)
 
 ## fastFoodfast-api
 
-This api allows the customers to register and login to the app, order for a meal, view a single order made, view all the orders made and update or modify or change a particular order they feel does not meet what they want.
-API is being hosted by heroku at: https://douglas-fastfoodfast.herokuapp.com/api/v1/orders
+This api allows the customers to register and login to the app, order for a meal, view a single order made, view all the orders made and update or modify or change a particular order they feel does not meet what they want. API is being hosted by heroku at: 
+- [www.fastFoodfast-api.com](https://douglas-fastfoodfast.herokuapp.com/api/v1/orders)
 
 ### Prerequisites
 
@@ -55,6 +55,29 @@ when this is done then run the application by typing this command
 ```
 $ python run.py
 ```
+
+Then you can use Postman to test the api endpoints, you can download here:
+- [Postman](https://www.getpostman.com/apps) - An API testing tool for developers
+Use this data as dummy data for you to check for the functionality of the APIs you:
+
+ For placing an order | For updating the staus of an order 
+-------|-------
+ ```{
+        'customerId' : "12345",
+        'thetype' : "breakfast",
+        'food' : "milk and bread",
+        'price' : "2000",
+        'quantity' : "2"
+    }``` | ```{
+            'customerId' : "12345",
+            'thetype' : "breakfast",
+            'food' : "milk and bread",
+            'price' : "2000",
+            'quantity' : "2",
+            'status' : "completed"
+         }``` 
+
+
 
 ### Tests
 
