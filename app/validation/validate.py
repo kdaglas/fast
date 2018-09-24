@@ -80,21 +80,21 @@ class Validate():
             return True
 
     # method to validate the ids input by the customer
-    @classmethod
-    def validate_id(cls, orderId):
+    # @classmethod
+    # def validate_id(cls, orderId):
 
-        if type(orderId) != int:
-            return jsonify({"message": "Your order id should be a number"}), 400
-        elif not orderId:
-            return jsonify({"message": "Your order id is missing"}), 400
-        else:
-            return True
+    #     if type(orderId) != int:
+    #         return jsonify({"message": "Your order id should be a number"}), 400
+    #     elif not orderId:
+    #         return jsonify({"message": "Your order id is missing"}), 400
+    #     else:
+    #         return True
 
     # method to validate the ids input by the customer
-    @classmethod
-    def validate_duplicate(cls, customerId, all_orders):
+    # @classmethod
+    # def validate_duplicate(cls, customerId, all_orders):
         
-        for order in all_orders:
-            if order['customerId'] == customerId:
-                return True
+    #     for order in all_orders:
+    #         if order['customerId'] == customerId:
+    #             return True
         
