@@ -39,7 +39,7 @@ class Order():
 
         if len(all_orders) > 0:
             return [order for order in all_orders]
-        return {'There is an error': 'No customers Found'}
+        return {'There is an error': 'No orders found'}
 
     # method to return the one order
     @classmethod
