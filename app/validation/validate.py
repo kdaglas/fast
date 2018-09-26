@@ -1,6 +1,5 @@
 import re
 from flask import jsonify
-# from app.modules.order_model import Order
 from app.modules.customer_model import Customer
 
 
@@ -8,7 +7,7 @@ all_customers = []
 
 class Validate():
 
-    # method to validate customer input
+    ''' method to validate customer input '''
     @classmethod
     def validate_registration_inputs(cls, username, emailaddress, contact, password):
         
@@ -33,7 +32,7 @@ class Validate():
         else:
             return True
 
-    # method to validate customer input
+    ''' method to validate customer input '''
     @classmethod
     def validate_login_inputs(cls, username, password):
 
@@ -46,7 +45,7 @@ class Validate():
         else:
             return True
 
-    # method to validate my input
+    ''' method to validate my input '''
     @classmethod
     def validate_order_input(cls, customerId, thetype, food, price, quantity):
 
