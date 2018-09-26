@@ -53,7 +53,7 @@ class Order():
 
                 return {"message": "order doesnot exist"}
             return {"message": "No order has been registered yet"}
-        return {"message": "Single order id has to bigger than zero"}
+        return {"message": "Order id has to bigger than zero"}
         
     # method to return the edited order
     @classmethod
