@@ -7,7 +7,7 @@ class Test_Edit_Entry(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
-    # Test to modify single diary
+    ''' Test to modify single diary '''
     def test_edit_order(self):
 
         order = {

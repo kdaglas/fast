@@ -8,7 +8,7 @@ class Test_auth(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
-    # Testing for user registration
+    ''' Testing for user registration '''
     def test_registration(self):
 
         customer = {
@@ -24,7 +24,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "Customer has been registered")
         self.assertEqual(response.status_code, 201)
 
-    # Testing for user registration
+    ''' Testing for user registration '''
     def test_registration_with_wrong_keys(self):
 
         customer = {
@@ -40,7 +40,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "The key or value fields are invalid or missing")
         self.assertEqual(response.status_code, 403)
 
-    # Test for empty username validation
+    ''' Test for empty username validation '''
     def test_registration_with_empty_username(self):
         
         customer = {
@@ -56,7 +56,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "Username is missing")
         self.assertEqual(response.status_code, 400)
       
-    # Testing for empty emailaddress validation
+    ''' Testing for empty emailaddress validation '''
     def test_registration_with_empty_emailaddress(self):
 
         customer = {
@@ -72,7 +72,7 @@ class Test_auth(unittest.TestCase):
         self.assertEquals(reply["message"], "Email address is missing")
         self.assertEquals(response.status_code, 400)
     
-    # Test for empty password validation """
+    ''' Test for empty password validation '''
     def test_registration_with_empty_password(self):
 
         customer = {
@@ -88,7 +88,7 @@ class Test_auth(unittest.TestCase):
         self.assertEquals(reply["message"], "Password is missing")
         self.assertEquals(response.status_code, 400)
 
-    # Test for empty password validation
+    ''' Test for empty password validation '''
     def test_registration_with_empty_contact(self):
 
         customer = {
@@ -104,7 +104,7 @@ class Test_auth(unittest.TestCase):
         self.assertEquals(reply["message"], "Contact is missing")
         self.assertEquals(response.status_code, 400)
 
-    # Test for wrong username validation 
+    ''' Test for wrong username validation '''
     def test_input_with_wrong_username(self):
 
         customer = {
@@ -120,7 +120,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "Username should be in characters")
         self.assertEqual(response.status_code, 400)
 
-    # Test for spaces in username validation
+    ''' Test for spaces in username validation '''
     def test_input_with_spaces_in_username(self):
 
         customer = {
@@ -136,7 +136,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "Username should have no spaces")
         self.assertEqual(response.status_code, 400)
 
-    # Test for wrong emailaddress validation
+    ''' Test for wrong emailaddress validation '''
     def test_input_with_wrong_emailaddress(self):
 
         customer = {
@@ -152,7 +152,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "Email address should be like this format 'daglach7@gmail.com'")
         self.assertEqual(response.status_code, 400)
 
-    # Test for wrong contact validation
+    ''' Test for wrong contact validation '''
     def test_input_with_wrong_contact(self):
 
         customer = {
@@ -168,7 +168,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "Contact should be like this format '+256-755-598090'")
         self.assertEqual(response.status_code, 400)
 
-    # Test for empty password validation
+    ''' Test for empty password validation '''
     def test_input_with_wrong_password(self):
 
         customer = {
@@ -184,7 +184,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "Password must have 7 characters with atleast a lowercase, uppercase letter and a number")
         self.assertEqual(response.status_code, 400)
 
-    # Test for successful login
+    ''' Test for successful login '''
     def test_user_login_successful(self):
 
         customer = {
@@ -198,7 +198,7 @@ class Test_auth(unittest.TestCase):
         self.assertEquals(reply["message"], "Customer has been logged in")
         self.assertEquals(response.status_code, 200)
 
-    # Testing for user login
+    ''' Testing for user login '''
     def test_login_with_wrong_keys(self):
 
         customer = {
@@ -212,7 +212,7 @@ class Test_auth(unittest.TestCase):
         self.assertEqual(reply["message"], "The key or value fields are invalid or missing")
         self.assertEqual(response.status_code, 403)
 
-    # Test for login with wrong or no username
+    ''' Test for login with wrong or no username '''
     def test_user_login_with_no_username(self):
          
         customer = {
@@ -226,7 +226,7 @@ class Test_auth(unittest.TestCase):
         self.assertEquals(reply["message"], "Username is missing")
         self.assertEquals(response.status_code, 400)
 
-    # Test for login with wrong or no password
+    ''' Test for login with wrong or no password '''
     def test_user_login_with_no_password(self):
         
         customer = {
