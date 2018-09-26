@@ -8,7 +8,7 @@ class Test_Orders(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
-    # Test for placing an order
+    ''' Test for placing an order '''
     def test_add_order(self):
 
         order = {
@@ -25,7 +25,7 @@ class Test_Orders(unittest.TestCase):
         self.assertEquals(reply["message"], "Your order has been placed")
         self.assertEquals(response.status_code, 201)
 
-    # a test for successfully placing an order
+    ''' a test for successfully placing an order '''
     def test_place_order_with_invalid_keys(self):
 
         order = {
@@ -42,7 +42,7 @@ class Test_Orders(unittest.TestCase):
         self.assertEqual(reply["message"], "The key or value fields are invalid or missing")
         self.assertEqual(response.status_code, 403)
 
-    # Test for empty customerId validation
+    ''' Test for empty customerId validation '''
     def test_with_empty_customerId(self):
 
         order = {
@@ -59,7 +59,7 @@ class Test_Orders(unittest.TestCase):
         self.assertEquals(reply["message"], "CustomerId is missing")
         self.assertEquals(response.status_code, 400)
       
-    # Test for empty food validation
+    ''' Test for empty food validation '''
     def test_with_empty_food(self):
 
         order = {
@@ -76,7 +76,7 @@ class Test_Orders(unittest.TestCase):
         self.assertEquals(reply['message'], 'Food is missing')
         self.assertEquals(response.status_code, 400)
 
-    # Test for empty quantity validation
+    ''' Test for empty quantity validation '''
     def test_with_empty_quantity(self):
 
         order = {
@@ -93,7 +93,7 @@ class Test_Orders(unittest.TestCase):
         self.assertEquals(reply['message'], 'Quantity is missing')
         self.assertEquals(response.status_code, 400)
 
-    # Test for empty price validation
+    ''' Test for empty price validation '''
     def test_with_empty_price(self):
 
         order = {
@@ -110,7 +110,7 @@ class Test_Orders(unittest.TestCase):
         self.assertEquals(reply['message'], 'Price is missing')
         self.assertEquals(response.status_code, 400)
 
-    # Test for empty type validation
+    ''' Test for empty type validation '''
     def test_with_empty_type(self):
 
         order = {
