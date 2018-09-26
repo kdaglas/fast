@@ -1,10 +1,10 @@
-#  Object classes for the order model
+'''  Object classes for the order model '''
 
 all_orders = []
 
 class Order():
 
-    # initialising the order class
+    ''' Initialising the order class '''
     def __init__(self, customerId, orderId, thetype, food, price, quantity, status, today):
 
         self.customerId = customerId
@@ -16,7 +16,7 @@ class Order():
         self.status = status
         self.today = today
     
-    # method that gets the order class and makes it a dictionary
+    ''' this method returns a dictionary format of the order class '''
     def place_order(self):
 
         order = {
@@ -33,7 +33,7 @@ class Order():
         all_orders.append(order)
         return order
 
-    # method to return the placed orders
+    ''' this method returns the placed orders '''
     @classmethod
     def get_all_orders(cls):
 
@@ -41,7 +41,7 @@ class Order():
             return [order for order in all_orders]
         return {'There is an error': 'No orders found'}
 
-    # method to return the one order
+    ''' This method returns the one order '''
     @classmethod
     def get_one_order(cls, orderId):
 
@@ -55,7 +55,7 @@ class Order():
             return {"message": "No order has been registered yet"}
         return {"message": "Order id has to bigger than zero"}
         
-    # method to return the edited order
+    ''' this method return the edited order '''
     @classmethod
     def update_order(cls, orderId, status):
 
