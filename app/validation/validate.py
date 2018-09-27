@@ -1,6 +1,5 @@
 import re
 from flask import jsonify
-# from app.modules.order_model import Order
 from app.modules.customer_model import Customer
 
 
@@ -8,10 +7,9 @@ all_customers = []
 
 class Validate():
 
-    # method to validate customer input
     @classmethod
     def validate_registration_inputs(cls, username, emailaddress, contact, password):
-        
+        '''method to validate customer input'''
         if username == '':
             return jsonify({"message": "Username is missing"}), 400
         elif ' ' in username:
@@ -33,10 +31,10 @@ class Validate():
         else:
             return True
 
-    # method to validate customer input
+    
     @classmethod
     def validate_login_inputs(cls, username, password):
-
+        '''method to validate customer input'''
         if username == '':
             return jsonify({"message": "Username is missing"}), 400
         elif ' ' in username:
@@ -46,10 +44,10 @@ class Validate():
         else:
             return True
 
-    # method to validate my input
+    
     @classmethod
     def validate_order_input(cls, customerId, thetype, food, price, quantity):
-
+        '''method to validate my input'''
         if customerId == '':
             return jsonify({"message": "CustomerId is missing"}), 400
         elif not re.search(r"\b[0-9]+\b", customerId):
@@ -78,23 +76,4 @@ class Validate():
             return jsonify({"message": "The quantity should be a number"}), 400
         else:
             return True
-
-    # method to validate the ids input by the customer
-    # @classmethod
-    # def validate_id(cls, orderId):
-
-    #     if type(orderId) != int:
-    #         return jsonify({"message": "Your order id should be a number"}), 400
-    #     elif not orderId:
-    #         return jsonify({"message": "Your order id is missing"}), 400
-    #     else:
-    #         return True
-
-    # method to validate the ids input by the customer
-    # @classmethod
-    # def validate_duplicate(cls, customerId, all_orders):
-        
-    #     for order in all_orders:
-    #         if order['customerId'] == customerId:
-    #             return True
         
