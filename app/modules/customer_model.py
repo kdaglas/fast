@@ -37,6 +37,5 @@ class Customer():
         '''method that logs in the customer who is registered'''
         for customer in all_customers:
             if customer.get('username') == username:
-                if customer.get('password') == password:
-                    return customer
+                return customer
         return {'There is an error': 'No customers Found'}
