@@ -65,8 +65,8 @@ class Test_auth(unittest.TestCase):
         response = self.client.post("/api/v1/register", data = json.dumps(customer), 
                                     content_type = 'application/json')
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "Email address is missing")
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(reply["message"], "Email address is missing")
+        self.assertEqual(response.status_code, 400)
     
 
     def test_registration_with_empty_password(self):
@@ -80,8 +80,8 @@ class Test_auth(unittest.TestCase):
         response = self.client.post("/api/v1/register", data = json.dumps(customer), 
                                     content_type = 'application/json') 
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "Password is missing")
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(reply["message"], "Password is missing")
+        self.assertEqual(response.status_code, 400)
     
 
     def test_registration_with_empty_contact(self):
@@ -95,8 +95,8 @@ class Test_auth(unittest.TestCase):
         response = self.client.post("/api/v1/register", data = json.dumps(customer), 
                                     content_type = 'application/json')
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "Contact is missing")
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(reply["message"], "Contact is missing")
+        self.assertEqual(response.status_code, 400)
 
     
     def test_input_with_wrong_username(self):
@@ -183,8 +183,8 @@ class Test_auth(unittest.TestCase):
         response = self.client.post("/api/v1/login", data = json.dumps(customer), 
                                     content_type = 'application/json') 
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "Customer has been logged in")
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(reply["message"], "Customer has been logged in")
+        self.assertEqual(response.status_code, 200)
 
     
     def test_login_with_wrong_keys(self):
@@ -209,8 +209,8 @@ class Test_auth(unittest.TestCase):
         response = self.client.post("/api/v1/login", data = json.dumps(customer), 
                                     content_type = 'application/json')            
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "Username is missing")
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(reply["message"], "Username is missing")
+        self.assertEqual(response.status_code, 400)
 
     
     def test_user_login_with_no_password(self):
@@ -222,5 +222,5 @@ class Test_auth(unittest.TestCase):
         response = self.client.post("/api/v1/login", data = json.dumps(customer), 
                                     content_type = 'application/json')            
         reply = json.loads(response.data)
-        self.assertEquals(reply["message"], "Password is missing")
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(reply["message"], "Password is missing")
+        self.assertEqual(response.status_code, 400)
