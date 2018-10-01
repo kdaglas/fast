@@ -12,6 +12,8 @@ install:
   - pip install coverage 
   - pip install nose
 
+# command to tell travis to install postgre db 
+# and create a database fastFoodfast'''
 before_script:
   - psql -c 'create database fastFoodfast;' -U postgres
 
@@ -19,7 +21,6 @@ before_script:
 script: 
   - nosetests --with-coverage --cover-package=app
   # - coverage run -m nose
-  # - coverage report -m
 
 after_success: 
   - coveralls
