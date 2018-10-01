@@ -9,7 +9,7 @@ This is a food delivery service app for a restaurant that allows customers to ma
 
 ## fastFoodfast-api
 
-This api allows the customers to register and login to the app, order for a meal, view a single order made, view all the orders made and update or modify or change a particular order they feel does not meet what they want. API is being hosted by heroku at: 
+The api allows the customers to post and get data from the app through API end points that are creating a connection of the client with the database. An customer can register and login to the app, order for a meal, view a single order made, view all the orders made, view their order history, update or modify or change a particular order they feel does not meet what they want and also view the menu with all the available meals. Whereas an administrator can login to the app, get the menu of the meals and add a food option to the menu.API is being hosted by heroku at: 
 - [www.fastFoodfast-api.com](https://douglas-fastfoodfast.herokuapp.com/api/v1/orders)
 
 ### Prerequisites
@@ -29,17 +29,31 @@ Note: Python needs to be installed globally (not in the virtual environment)
 - Enable a customer to view a history of the ordered meals
 - Enable a customer to update, modify or change an order
 
+- Login an admin who is the super user
+- Enable an admin to get and view the menu of the meals
+- Enable an admin to a food option to the menu
+
 ### Getting Started
 
 Clone the project to your computer either by downloading the zip or using git.
 To use git, run the code below:
 ```
-    git clone https://github.com/kdaglas/fast.git
+    git clone https://github.com/kdaglas/fastFoodfast.git
+```
+
+Install postgreSQL on your machine, you can get it from here: [Postgres download](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+After downloading it, install it and lauch the Postgres shell where you can create a database by typing this in the shell
+```
+    '''this is for your actual database'''
+    CREATE DATABASE fastfoodfast;
+
+    '''this is for your tests database'''
+    CREATE DATABASE testdb;
 ```
 
 Go into the folder, create a virtual environment, activate it and then use a pip command to install the requirements necessary for the app to function. Below are the steps to take:
 ```
-    $ cd fastFoodfast-api
+    $ cd fastFoodfast-db
     $ virtualenv envn <or any name of your choice>
 
     <!-- for ubuntu use this command-->
@@ -99,10 +113,15 @@ Then run these commands to begin testing the API
 
  HTTP Method | End point | Action
 -------|-------|-------
- POST | /api/v1/orders | Place an order
- GET | /api/v1/orders | Get all orders
- GET | /api/v1/orders/<orderId> | Fetch a specific order
- PUT | /api/v1/orders/<orderId> | Update the status of an order
+ POST | /api/v2/register | Register a customer
+ POST | /api/v2/login | Login a customer
+ POST | /api/v2/meals | Add a food option to the menu
+ GET | /api/v2/meals | Get the menu for all the meals
+ POST | /api/v2/orders | Place an order
+ GET | /api/v2/orders | Get all orders
+ GET | /api/v2/orders | View order history for a particular customer
+ GET | /api/v2/orders/<orderId> | Fetch a specific order
+ PUT | /api/v2/orders/<orderId> | Update the status of an order
 
 ### Built With
 
