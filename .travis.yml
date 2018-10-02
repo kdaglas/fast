@@ -15,12 +15,14 @@ install:
 # command to tell travis to install postgre db 
 # and create a database fastFoodfast'''
 before_script:
-  - psql -c 'create database fastFoodfast;' -U postgres
+  - psql -c 'create database fastFoodfastdb;' -U postgres
+  - psql -c 'create database testdb;' -U postgres
 
 # command to run tests 
 script: 
   - nosetests --with-coverage --cover-package=app
   # - coverage run -m nose
+  # - pytest --cov=app
 
 after_success: 
   - coveralls
