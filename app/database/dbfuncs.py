@@ -32,7 +32,7 @@ class DatabaseFunctions():
 
 
     @staticmethod
-    def get_user_by_username(username):
+    def get_customer_by_username(username):
         query = (
             """SELECT * from customers where username = '{}'""".
             format(username))

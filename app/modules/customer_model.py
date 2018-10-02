@@ -5,16 +5,21 @@ all_customers = []
 
 class Customer():
 
-    def __init__(self, customerId, username, contact, password):
+    def __init__(self, username, contact, password):
         '''Initialise all params'''
         self.username = username
         self.contact = contact
         self.password = password
 
-    
-    def register_customer(self, username, contact, password):
+    @staticmethod
+    def register_customer(username, contact, password):
         '''method that returns the customer class as a dictionary'''
-        DatabaseFunctions.add_new_customer(username, contact, password)
+        # DatabaseFunctions.add_new_customer(username, contact, password)
+        DatabaseFunctions.add_new_customer(
+            username = username,
+            contact = contact,
+            password = password
+        )
     
 
     def get_all_customers(self):

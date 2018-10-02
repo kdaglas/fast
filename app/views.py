@@ -1,11 +1,11 @@
 ''' These are the imports for the required packages '''
 from app import app
-from flask import request, json, jsonify
+import json
+from flask import request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from app.modules.customer_model import Customer
 from app.modules.order_model import Order
 from datetime import date
-import uuid
 from app.database.dbfuncs import DatabaseFunctions
 
 
@@ -13,31 +13,50 @@ from app.database.dbfuncs import DatabaseFunctions
 def register():
 
     ''' This function registers a customer through POST method by taking in
-        the input from the user and posting it to the server '''
-    
-    data = request.get_json()
-    username = data.get('username')
-    contact = data.get('contact')
-    password = data.get('password')
+        the input from the user and storing it in the database '''
+    try:
+        reg_info = request.get_json()
+        username = reg_info.get("username")
+        contact = reg_info.get("contact")
+        password = reg_info.get("password")
 
-    customer = DatabaseFunctions.add_new_customer(username, contact, password)
-    return jsonify({'Customer': customer,
-                    'message': 'Customer has been registered'}), 200
+        ''' a function that adds new user to the database'''
+        Customer.register_customer(username, contact, password)
+        new_customer = Customer(
+            username = username,
+            contact = contact,
+            password = password
+        )
+        return jsonify({'Customer': new_customer.__dict__,
+                        'message': 'Customer has been registered'}), 200
+    except:
+        response = jsonify({"message": "The key or value fields are invalid or missing"}), 403
+        return response
 
 
 @app.route("/api/v2/login", methods=['POST'])
 def login():
 
-    ''' This fuction through the POST method, logins in auser and returns that user and if
+    ''' This fuction through the POST method, logins in a user and returns that user and if
         the user is not found or doesnot exist then it returns 404 '''
     try:
-        data = request.get_json()
-        username = data.get('username')
-        password = data.get('password')
-        
-        customer = Customer.login(username, password)
-        return jsonify({'Customer': customer,
-                        'message': 'Customer has been logged in'}), 200
+        request_data = request.get_json()
+        username = request_data.get('username')
+        password = request_data.get('password')
+
+        customer = DatabaseFunctions.get_customer_by_username(username)
+
+        if customer:
+            # if password:
+            print(customer)
+            customer_token = {}
+            access_token = create_access_token(identity=username)
+            customer_token["token"] = access_token
+            return jsonify({'message': 'Customer has been login in',
+                            'Token': customer_token}), 200
+        else:
+            response = jsonify({"message": "These credentials are invalid or missing"}), 403
+            return response
     except:
         response = jsonify({"message": "The key or value fields are invalid or missing"})
         response.status_code = 403
