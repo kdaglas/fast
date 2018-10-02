@@ -10,17 +10,15 @@ auth_blueprint = Blueprint("auth_blueprint", __name__)
 
 
 class RegisterUser(MethodView):
-    """ class to register a diary user"""
-
+    '''class to register a diary user'''
     def post(self):
-        """Create a new user"""
+        '''Create a new user'''
         reg_info = request.get_json()
-
         username = reg_info.get("username")
-        emailaddress = reg_info.get("emailaddress")
+        contact = reg_info.get("contact")
         password = reg_info.get("password")
 
-        response = validate.user_validation(username, emailaddress, password)
+        response = validate.user_validation(username, contact, password)
 
         if response:
             return response
@@ -28,7 +26,7 @@ class RegisterUser(MethodView):
         # a function that adds new user to the database
         add_new_user(
             username=username,
-            emailaddress=emailaddress,
+            emailaddress=contact,
             password=password
         )
 

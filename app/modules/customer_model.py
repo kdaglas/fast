@@ -1,28 +1,20 @@
+from app.database.dbfuncs import DatabaseFunctions
+
 '''Object classes for the customer model'''
 all_customers = []
 
 class Customer():
 
-    def __init__(self, customerId, username, emailaddress, contact, password):
+    def __init__(self, customerId, username, contact, password):
         '''Initialise all params'''
-        self.customerId = customerId
         self.username = username
-        self.emailaddress = emailaddress
         self.contact = contact
         self.password = password
 
     
-    def register_customer(self):
+    def register_customer(self, username, contact, password):
         '''method that returns the customer class as a dictionary'''
-        customer = {
-            'customerId' : self.customerId,
-            'username' : self.username,
-            'emailaddress' : self.emailaddress,
-            'contact' : self.contact,
-            'password' : self.password
-        }
-        all_customers.append(customer)
-        return customer
+        DatabaseFunctions.add_new_customer(username, contact, password)
     
 
     def get_all_customers(self):

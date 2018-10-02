@@ -1,5 +1,6 @@
 import psycopg2
 from app import app
+import psycopg2.extras as naome
 
 
 class DatabaseConnection:
@@ -14,12 +15,12 @@ class DatabaseConnection:
                                         )
         else:
             print("Development")
-            self.con = psycopg2.connect(database="fastFoodfastdb", user="postgres",
+            self.con = psycopg2.connect(database="postgres", user="postgres",
                                         password="admin", host="localhost",
                                         port="5432"
                                         )
         self.con.autocommit = True
-        self.cursor = self.con.cursor()
+        self.cursor = self.con.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
 
     def get_connection(self):
@@ -34,7 +35,6 @@ class DatabaseConnection:
             CREATE TABLE IF NOT EXISTS customers (
                 customerId SERIAL PRIMARY KEY,
                 username VARCHAR(25) NOT NULL UNIQUE,
-                emailaddress VARCHAR(50) NOT NULL UNIQUE,
                 contact VARCHAR(50) NOT NULL UNIQUE,
                 password VARCHAR(25) NOT NULL
             );
@@ -43,9 +43,9 @@ class DatabaseConnection:
             """
             CREATE TABLE IF NOT EXISTS meals (
                 mealId SERIAL PRIMARY KEY,
-                thetype VARCHAR(50) NOT NULL,
-                food VARCHAR(50) NOT NULL UNIQUE,
-                price VARCHAR(100) NOT NULL,
+                thetype VARCHAR NOT NULL,
+                food VARCHAR NOT NULL UNIQUE,
+                price INTEGER NOT NULL,
                 description VARCHAR(100) NOT NULL
             )
             """,
@@ -53,10 +53,13 @@ class DatabaseConnection:
             """
             CREATE TABLE IF NOT EXISTS orders (
                 orderId SERIAL PRIMARY KEY,
-                customerId SERIAL PRIMARY KEY,
-                quantity VARCHAR(50) NOT NULL,
+                customerId INTEGER,
+                mealId INTEGER,
+                quantity INTEGER NOT NULL,
                 status VARCHAR(50) NOT NULL UNIQUE,
-                today VARCHAR(100) NOT NULL
+                today VARCHAR(100) NOT NULL,
+                FOREIGN KEY (customerId) REFERENCES customers(customerId) ON UPDATE CASCADE ON DELETE CASCADE,
+                FOREIGN KEY (mealId) REFERENCES meals(mealId) ON UPDATE CASCADE ON DELETE CASCADE
             )
             """
         )
