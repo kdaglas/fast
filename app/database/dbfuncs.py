@@ -56,7 +56,8 @@ class DatabaseFunctions():
     @staticmethod
     def get_meal_by_id(mealId):
         query = (
-            """SELECT * from meals where mealId = '{}'""".
+            # """SELECT * from meals where mealId = '{}'""".
+            "SELECT row_to_json(row) FROM  (SELECT * from meals where mealId = '{}') row".
             format(mealId))
         cursor.execute(query)
         rows = cursor.fetchone()
@@ -64,8 +65,22 @@ class DatabaseFunctions():
 
 
     @staticmethod
+    def get_meal_by_food(food):
+        query = (
+            "SELECT * from meals where food = '{}'".
+            # "SELECT row_to_json(row) FROM  (SELECT * from meals where food = '{}') row".
+            format(food))
+        cursor.execute(query)
+        food = cursor.fetchone()
+        return food
+
+
+    @staticmethod
     def get_all_meals():
-        cursor.execute("SELECT row_to_json(row) FROM  (select * from meals) row") # SELECT row_to_json(row) FROM  (select * from users) row;
+        query = (
+            "SELECT row_to_json(row) FROM  (select * from meals) row"
+        )
+        cursor.execute(query) # SELECT row_to_json(row) FROM  (select * from users) row;
         all_meals = cursor.fetchall()
         return all_meals
 
@@ -105,12 +120,33 @@ class DatabaseFunctions():
 
 
     @staticmethod
-    def place_new_order(thetype, food, price, description):
+    def place_new_order(customerId, mealId, quantity, status, today):
         query = (
-            """INSERT INTO orders (mealId, thetype, food, price, description) 
-            VALUES (DEFAULT, '{}', '{}', '{}', '{}')
-            RETURNING mealId, thetype, food, price, description""".
-            format(thetype, food, price, description))
+            """INSERT INTO orders (orderId, customerId, mealId, quantity, status, today) 
+            VALUES (DEFAULT, '{}', '{}', '{}', '{}', '{}')
+            RETURNING orderId, customerId, mealId, quantity, status, today""".
+            format(customerId, mealId, quantity, status, today))
+        cursor.execute(query)
+        rows = cursor.fetchone()
+        return rows
+
+
+    @staticmethod
+    def get_all_orders():
+        query = (
+            "SELECT row_to_json(row) FROM  (select * from orders) row"
+        )
+        cursor.execute(query) # SELECT row_to_json(row) FROM  (select * from users) row;
+        all_orders = cursor.fetchall()
+        return all_orders
+
+
+    @staticmethod
+    def get_order_by_id(orderId):
+        query = (
+            # """SELECT * from meals where mealId = '{}'""".
+            "SELECT row_to_json(row) FROM  (SELECT * from orders where orderId = '{}') row".
+            format(orderId))
         cursor.execute(query)
         rows = cursor.fetchone()
         return rows

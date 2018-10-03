@@ -10,6 +10,8 @@ from datetime import date
 from app.database.dbfuncs import DatabaseFunctions
 
 
+# now = datetime.datetime.now()
+
 @app.route("/api/v2/register", methods=['POST'])
 def register():
 
@@ -91,44 +93,66 @@ def add_meal():
 def get_all_meals():
     
     ''' This function routes to /api/v2/meals and uses the GET method to return all the added meals '''
-    meals = Meal.get_all_meals()
+    meals = Meal.get_all_the_meals()
     return jsonify({'All meals': meals,
                     'message': 'All meals have been viewed'}), 201
 
 
-# @app.route("/api/v1/orders", methods=['POST'])
-# def place_order():
-
-#     ''' This function helps the customer to create or place an order through the POST method
-#         it takes in input data from the customer preferably the order to be made and
-#         posts the data returning the order made by the customer '''
-#     try:
-#         data = request.get_json()
-#         customerId = data.get('customerId')
-#         today = str(date.today())
-#         food = data.get('food')
-#         thetype = data.get('thetype')
-#         price = data.get('price')
-#         quantity = data.get('quantity')
-#         status = 'not completed'
-  
-#         new_order = Order(customerId, orderId, thetype, food, price, quantity, status, today)
-#         placed_order = Order.place_order(new_order)
-#         return jsonify({'Placed order': placed_order,
-#                         'message': 'Your order placed'}), 201
-#     except:
-#         response = jsonify({"message": "The key or value fields are invalid or missing"})
-#         response.status_code = 403
-#         return response
-
-
-# @app.route("/api/v1/orders", methods=['GET'])
-# def get_all_orders():
+@app.route("/api/v2/meals/<mealId>", methods=['GET'])
+def get_one_meal(mealId):
     
-#     ''' This function routes to /api/v1/orders and uses the GET method to return all the orders made '''
-#     all_orders = Order.get_all_orders()
-#     return jsonify({'All your orders': all_orders,
-#                     'message': 'All orders have been viewed'}), 302
+    ''' This function routes to /api/v2/meals/<mealId> and uses the GET method to return a single meal '''
+    meal = Meal.get_one_meal(mealId)
+    return jsonify({'All meals': meal,
+                    'message': 'Meal has been viewed'}), 201
+
+
+@app.route("/api/v2/orders", methods=['POST'])
+def place_order():
+
+    ''' This function helps the customer to create or place an order through the POST method
+        it takes in input data from the customer preferably the order to be made and
+        posts the data returning the order made by the customer '''
+    # try:
+    data = request.get_json()
+    today = str(date.today())
+    mealId = data.get('mealId')
+    customerId = data.get('customerId')
+    quantity = data.get('quantity')
+    status = 'Not complete'
+
+    Order.placing_order(customerId, mealId, quantity, status, today)
+    placed_order = Order(
+        customerId = customerId,
+        mealId = mealId,
+        quantity = quantity,
+        status = status,
+        today = today
+    )
+    return jsonify({'Your order': placed_order.__dict__,
+                    'message': 'Order has been placed'}), 200
+    # except:
+    #     response = jsonify({"message": "The key or value fields are invalid or missing"})
+    #     response.status_code = 403
+    #     return response
+
+
+@app.route("/api/v2/orders", methods=['GET'])
+def get_all_orders():
+    
+    ''' This function routes to /api/v1/orders and uses the GET method to return all the orders made '''
+    orders = Order.getting_all_orders()
+    return jsonify({'All meals': orders,
+                    'message': 'All orders have been viewed'}), 201
+
+
+@app.route("/api/v2/orders/<orderId>", methods=['GET'])
+def get_one_order(orderId):
+    
+    ''' This function routes to /api/v2/orders/<orderId> and uses the GET method to return a single order '''
+    order = Order.get_one_order(orderId)
+    return jsonify({'All meals': order,
+                    'message': 'All meals have been viewed'}), 201
 
 
 # @app.route("/api/v1/orders/<orderId>", methods=["GET"])

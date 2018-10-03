@@ -25,7 +25,7 @@ class Meal():
 
     
     @classmethod
-    def get_all_meals(cls):
+    def get_all_the_meals(cls):
         '''this method returns the added meals'''
         return DatabaseFunctions.get_all_meals()
 
@@ -33,21 +33,24 @@ class Meal():
     @classmethod
     def get_one_meal(cls, mealId):
         '''This method returns the one meal'''
-        if int(mealId) > 0:
-            if len(all_meals) > 0:
-                for meal in all_meals:
-                    if meal.get('mealId') == int(mealId):
-                        return meal
-                return {"message": "meal doesnot exist"}
-            return {"message": "No meal has been registered yet"}
-        return {"message": "Meal id has to bigger than zero"}
+        # if int(mealId) > 0:
+        #     if len(all_meals) > 0:
+        #         for meal in all_meals:
+        #             if meal.get('mealId') == int(mealId):
+        #                 return meal
+        #         return {"message": "meal doesnot exist"}
+        #     return {"message": "No meal has been registered yet"}
+        # return {"message": "Meal id has to bigger than zero"}
+        return DatabaseFunctions.get_meal_by_id(mealId)
+
+
         
     
-    @classmethod
-    def update_order(cls, mealId, price):
-        '''this method return the edited order'''
-        for meal in all_meals:
-            if meal.get('mealId') == int(mealId):
-                meal['price'] = price
-                return meal
-        return {'There is an error': 'No meal Found'}
+    # @classmethod
+    # def update_order(cls, mealId, price):
+    #     '''this method return the edited order'''
+    #     for meal in all_meals:
+    #         if meal.get('mealId') == int(mealId):
+    #             meal['price'] = price
+    #             return meal
+    #     return {'There is an error': 'No meal Found'}

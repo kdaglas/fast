@@ -1,5 +1,5 @@
 import psycopg2
-from app import app
+# from app import app
 import psycopg2.extras as naome
 
 
@@ -7,18 +7,23 @@ class DatabaseConnection:
 
     def __init__(self):
         '''This constructor creates a connection to the database'''
-        if app.config['TESTING']:
-            print("Testing")
-            self.con = psycopg2.connect(database="testdb", user="postgres",
-                                        password="admin", host="localhost",
-                                        port="5432"
-                                        )
-        else:
-            print("Development")
-            self.con = psycopg2.connect(database="postgres", user="postgres",
-                                        password="admin", host="localhost",
-                                        port="5432"
-                                        )
+        # if app.config['TESTING']:
+        #     print("Testing")
+        #     self.con = psycopg2.connect(database="testdb", user="postgres",
+        #                                 password="admin", host="localhost",
+        #                                 port="5432"
+        #                                 )
+        # else:
+        #     print("Development")
+        #     self.con = psycopg2.connect(database="postgres", user="postgres",
+        #                                 password="admin", host="localhost",
+        #                                 port="5432"
+        #                                 )
+        
+        self.con = psycopg2.connect(database="postgres", user="postgres",
+                                    password="admin", host="localhost",
+                                    port="5432"
+                                    )
         self.con.autocommit = True
         self.cursor = self.con.cursor()
 
@@ -55,8 +60,8 @@ class DatabaseConnection:
                 orderId SERIAL PRIMARY KEY,
                 customerId INTEGER,
                 mealId INTEGER,
-                quantity INTEGERNOT NULL,
-                status VARCHAR(50) NOT NULL UNIQUE,
+                quantity INTEGER NOT NULL,
+                status VARCHAR(50),
                 today VARCHAR(100) NOT NULL,
                 FOREIGN KEY (customerId) REFERENCES customers(customerId) ON UPDATE CASCADE ON DELETE CASCADE,
                 FOREIGN KEY (mealId) REFERENCES meals(mealId) ON UPDATE CASCADE ON DELETE CASCADE
@@ -84,3 +89,7 @@ class DatabaseConnection:
         )
         for query in delete_queries:
             self.cursor.execute(query)
+
+
+# DB = DatabaseConnection()
+# DB.create_tables()
