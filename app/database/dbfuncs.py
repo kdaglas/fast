@@ -44,10 +44,13 @@ class DatabaseFunctions():
     @staticmethod
     def add_new_meal(thetype, food, price, description):
         query = (
-            """INSERT INTO meals (mealId, thetype, food, price, description) VALUES (DEFAULT,
-                '{}', '{}', '{}', '{}')""".
+            """INSERT INTO meals (mealId, thetype, food, price, description) 
+            VALUES (DEFAULT, '{}', '{}', '{}', '{}')
+            RETURNING mealId, thetype, food, price, description""".
             format(thetype, food, price, description))
         cursor.execute(query)
+        rows = cursor.fetchone()
+        return rows
 
 
     @staticmethod
@@ -62,7 +65,7 @@ class DatabaseFunctions():
 
     @staticmethod
     def get_all_meals():
-        cursor.execute("SELECT * FROM meals")
+        cursor.execute("SELECT row_to_json(row) FROM  (select * from meals) row") # SELECT row_to_json(row) FROM  (select * from users) row;
         all_meals = cursor.fetchall()
         return all_meals
 
@@ -99,6 +102,18 @@ class DatabaseFunctions():
             return jsonify({"message": "Meal has been deleted"})           
         else:
             return jsonify({"message": "Meal not found"})
+
+
+    @staticmethod
+    def place_new_order(thetype, food, price, description):
+        query = (
+            """INSERT INTO orders (mealId, thetype, food, price, description) 
+            VALUES (DEFAULT, '{}', '{}', '{}', '{}')
+            RETURNING mealId, thetype, food, price, description""".
+            format(thetype, food, price, description))
+        cursor.execute(query)
+        rows = cursor.fetchone()
+        return rows
 
 
     # def update_single_entry(entry_id, title, content):

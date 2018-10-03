@@ -20,7 +20,7 @@ class DatabaseConnection:
                                         port="5432"
                                         )
         self.con.autocommit = True
-        self.cursor = self.con.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        self.cursor = self.con.cursor()
 
 
     def get_connection(self):
@@ -55,7 +55,7 @@ class DatabaseConnection:
                 orderId SERIAL PRIMARY KEY,
                 customerId INTEGER,
                 mealId INTEGER,
-                quantity INTEGER NOT NULL,
+                quantity INTEGERNOT NULL,
                 status VARCHAR(50) NOT NULL UNIQUE,
                 today VARCHAR(100) NOT NULL,
                 FOREIGN KEY (customerId) REFERENCES customers(customerId) ON UPDATE CASCADE ON DELETE CASCADE,

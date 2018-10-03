@@ -4,6 +4,7 @@ import json
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from app.modules.customer_model import Customer
+from app.modules.meal_model import Meal
 from app.modules.order_model import Order
 from datetime import date
 from app.database.dbfuncs import DatabaseFunctions
@@ -44,11 +45,9 @@ def login():
         username = request_data.get('username')
         password = request_data.get('password')
 
+        ''' an imported function that returns the username from the database'''
         customer = DatabaseFunctions.get_customer_by_username(username)
-
         if customer:
-            # if password:
-            print(customer)
             customer_token = {}
             access_token = create_access_token(identity=username)
             customer_token["token"] = access_token
@@ -63,6 +62,40 @@ def login():
         return response
 
 
+@app.route("/api/v2/meals", methods=['POST'])
+def add_meal():
+
+    ''' This function helps the administrator to add a meal through the POST method
+        it takes in input data from the admin and
+        posts the data into the database returning the meal added '''
+    # try:
+    data = request.get_json()
+    food = data.get('food')
+    thetype = data.get('thetype')
+    price = data.get('price')
+    description = data.get('description')
+
+    ''' this function adds a meal to the menu and then to the database'''
+    Meal.adding_meal(thetype, food, price, description)
+    added_meal = Meal(
+        thetype = thetype,
+        food = food,
+        price = price,
+        description = description
+    )
+    return jsonify({'Meal': added_meal.__dict__,
+                    'message': 'Meal has been added'}), 200
+
+
+@app.route("/api/v2/meals", methods=['GET'])
+def get_all_meals():
+    
+    ''' This function routes to /api/v2/meals and uses the GET method to return all the added meals '''
+    meals = Meal.get_all_meals()
+    return jsonify({'All meals': meals,
+                    'message': 'All meals have been viewed'}), 201
+
+
 # @app.route("/api/v1/orders", methods=['POST'])
 # def place_order():
 
@@ -71,7 +104,6 @@ def login():
 #         posts the data returning the order made by the customer '''
 #     try:
 #         data = request.get_json()
-#         orderId = int(str(uuid.uuid1().int)[:5])
 #         customerId = data.get('customerId')
 #         today = str(date.today())
 #         food = data.get('food')

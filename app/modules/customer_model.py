@@ -14,7 +14,6 @@ class Customer():
     @staticmethod
     def register_customer(username, contact, password):
         '''method that returns the customer class as a dictionary'''
-        # DatabaseFunctions.add_new_customer(username, contact, password)
         DatabaseFunctions.add_new_customer(
             username = username,
             contact = contact,
