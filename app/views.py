@@ -115,7 +115,7 @@ def get_all_meals():
 #         new_order = Order(customerId, orderId, thetype, food, price, quantity, status, today)
 #         placed_order = Order.place_order(new_order)
 #         return jsonify({'Placed order': placed_order,
-#                         'message': 'Your order has been placed'}), 201
+#                         'message': 'Your order placed'}), 201
 #     except:
 #         response = jsonify({"message": "The key or value fields are invalid or missing"})
 #         response.status_code = 403
