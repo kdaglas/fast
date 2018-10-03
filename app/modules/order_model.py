@@ -10,7 +10,7 @@ class Order():
         self.customerId = customerId
         self.mealId = mealId
         self.quantity = quantity
-        self.status = 'Pending'
+        self.status = status
         self.today = today
     
 
@@ -21,7 +21,7 @@ class Order():
             customerId = customerId,
             mealId = mealId,
             quantity = quantity,
-            status = status,
+            status = 'Pending',
             today = today
         )
     
