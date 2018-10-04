@@ -9,16 +9,16 @@ cursor = connect.get_connection().cursor()
 
 class DatabaseFunctions():
     '''Creating an interaction with the database'''
-    @staticmethod
-    def add_new_customer(username, contact, password):
-        query = (
-            """INSERT INTO customers (customerId, username, contact, password)
-            VALUES (DEFAULT, '{}', '{}', '{}')
-            RETURNING customerId, username, contact, password""".
-            format(username, contact, password))
-        cursor.execute(query)
-        rows = cursor.fetchone()
-        return rows
+    # @staticmethod
+    # def add_new_customer(username, contact, password):
+    #     query = (
+    #         """INSERT INTO customers (customerId, username, contact, password)
+    #         VALUES (DEFAULT, '{}', '{}', '{}')
+    #         RETURNING customerId, username, contact, password""".
+    #         format(username, contact, password))
+    #     cursor.execute(query)
+    #     rows = cursor.fetchone()
+    #     return rows
 
 
     @staticmethod

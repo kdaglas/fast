@@ -1,31 +1,26 @@
 import psycopg2
-# from app import app
-import psycopg2.extras as naome
+from app import app
+import psycopg2.extras as dictionary
 
 
 class DatabaseConnection:
 
     def __init__(self):
-        '''This constructor creates a connection to the database'''
-        # if app.config['TESTING']:
-        #     print("Testing")
-        #     self.con = psycopg2.connect(database="testdb", user="postgres",
-        #                                 password="admin", host="localhost",
-        #                                 port="5432"
-        #                                 )
-        # else:
-        #     print("Development")
-        #     self.con = psycopg2.connect(database="postgres", user="postgres",
-        #                                 password="admin", host="localhost",
-        #                                 port="5432"
-        #                                 )
-        
-        self.con = psycopg2.connect(database="postgres", user="postgres",
-                                    password="admin", host="localhost",
-                                    port="5432"
-                                    )
+        '''This constructor creates a connection to the database depending on the configuration
+            meaning if its a test data, then a test database is used where as if its a development
+            data then a development database is created'''
+        if not app.config['TESTING']:
+            self.con = psycopg2.connect(database="postgres", user="postgres",
+                                        password="admin", host="localhost",
+                                        port="5432"
+                                        )
+        else:
+            self.con = psycopg2.connect(database="testdb", user="postgres",
+                                        password="admin", host="localhost",
+                                        port="5432"
+                                        )
         self.con.autocommit = True
-        self.cursor = self.con.cursor()
+        self.cursor = self.con.cursor(cursor_factory = dictionary.RealDictCursor)
 
 
     def get_connection(self):
@@ -38,33 +33,31 @@ class DatabaseConnection:
         queries = (
             """
             CREATE TABLE IF NOT EXISTS customers (
-                customerId SERIAL PRIMARY KEY,
-                username VARCHAR(25) NOT NULL UNIQUE,
-                contact VARCHAR(50) NOT NULL UNIQUE,
-                password VARCHAR(25) NOT NULL
+                customerId SERIAL PRIMARY KEY NOT NULL,
+                username VARCHAR NOT NULL,
+                contact VARCHAR NOT NULL,
+                password VARCHAR NOT NULL
             );
             """,
-
             """
             CREATE TABLE IF NOT EXISTS meals (
-                mealId SERIAL PRIMARY KEY,
+                mealId SERIAL PRIMARY KEY NOT NULL,
                 thetype VARCHAR NOT NULL,
-                food VARCHAR NOT NULL UNIQUE,
+                food VARCHAR NOT NULL,
                 price INTEGER NOT NULL,
-                description VARCHAR(100) NOT NULL
+                description VARCHAR NOT NULL
             )
             """,
-
             """
             CREATE TABLE IF NOT EXISTS orders (
-                orderId SERIAL PRIMARY KEY,
-                customerId INTEGER,
-                mealId INTEGER,
+                orderId SERIAL PRIMARY KEY NOT NULL,
+                customerId INTEGER NOT NULL,
+                mealId INTEGER NOT NULL,
                 quantity INTEGER NOT NULL,
-                status VARCHAR(50),
-                today VARCHAR(100) NOT NULL,
-                FOREIGN KEY (customerId) REFERENCES customers(customerId) ON UPDATE CASCADE ON DELETE CASCADE,
-                FOREIGN KEY (mealId) REFERENCES meals(mealId) ON UPDATE CASCADE ON DELETE CASCADE
+                status VARCHAR NOT NULL,
+                today VARCHAR NOT NULL,
+                FOREIGN KEY (customerId) REFERENCES customers(customerId) ON DELETE CASCADE ON UPDATE CASCADE,
+                FOREIGN KEY (mealId) REFERENCES meals(mealId) ON DELETE CASCADE ON UPDATE CASCADE
             )
             """
         )
@@ -88,8 +81,11 @@ class DatabaseConnection:
             """
         )
         for query in delete_queries:
-            self.cursor.execute(query)
+            self.cursor.execute(query)        
 
 
-# DB = DatabaseConnection()
-# DB.create_tables()
+    def closedb(self):
+        """method to close db connection"""
+        self.con.close()
+
+db = DatabaseConnection()

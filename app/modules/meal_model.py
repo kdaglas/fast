@@ -1,27 +1,43 @@
-from app.database.dbfuncs import DatabaseFunctions
+from app.database.dbmanager import DatabaseConnection
+import psycopg2
+from flask import jsonify
+from app import app
 
-'''Object classes for the meal model'''
-all_meals = []
-
-class Meal():
+class Meal(DatabaseConnection):
     
     def __init__(self, thetype, food, price, description):
         '''Initialising the order class'''
+        DatabaseConnection.__init__(self)
         self.thetype = thetype
         self.food = food
         self.price = price
         self.description = description
     
     
-    @staticmethod
-    def adding_meal(thetype, food, price, description):
+    def adding_meal(self, thetype, food, price, description):
         '''this method returns a dictionary format of the meal class'''
-        DatabaseFunctions.add_new_meal(
-            thetype = thetype,
-            food = food,
-            price = price,
-            description = description
-        )
+        cursor = self.con.cursor()
+        cursor.execute("""INSERT INTO meals(thetype, food, price, description) VALUES (%s, %s, %s, %s)""",
+                    (self.thetype, self.food, self.price, self.description))
+        self.con.commit()
+        response = jsonify({"message": "Meal has been added"})
+        response.status_code = 201
+        return response
+
+        # DatabaseFunctions.add_new_meal(
+        #     thetype = thetype,
+        #     food = food,
+        #     price = price,
+        #     description = description
+        # )
+
+
+    def check_for_same_meal(self):
+        '''method that if a food already exists in the database'''
+        cursor = self.con.cursor()
+        cursor.execute("""SELECT food FROM meals WHERE food = %s""",(self.food,))
+        rows = cursor.fetchone()
+        return rows
 
     
     @classmethod
