@@ -8,11 +8,11 @@ class Meal(DatabaseConnection):
     def __init__(self, thetype, food, price, description):
         '''Initialising the order class'''
         DatabaseConnection.__init__(self)
-       ''' self.thetype = thetype
+        self.thetype = thetype
         self.food = food
         self.price = price
         self.description = description
-    '''
+    
     
     def adding_meal(self, thetype, food, price, description):
         '''this method returns a dictionary format of the meal class'''

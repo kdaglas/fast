@@ -32,7 +32,7 @@ class Testing(unittest.TestCase):
         customers = ("""DROP TABLE IF EXISTS customers CASCADE;""")
         meals = ("""DROP TABLE IF EXISTS meals CASCADE;""")
         orders = ("""DROP TABLE IF EXISTS orders CASCADE;""")
-        con = DatabaseConnection.delete_tables()
+        con = DatabaseConnection.delete_tables(self)
         cursor = con.cursor()
         cursor.execute(customers)
         con.commit()

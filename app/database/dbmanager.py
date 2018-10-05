@@ -10,7 +10,7 @@ class DatabaseConnection:
             meaning if its a test data, then a test database is used where as if its a development
             data then a development database is created'''
         if not app.config['TESTING']:
-            self.con = psycopg2.connect(database="postgres", user="postgres",
+            self.con = psycopg2.connect(database="fastfoodfastdb", user="postgres",
                                         password="admin", host="localhost",
                                         port="5432"
                                         )
@@ -88,4 +88,9 @@ class DatabaseConnection:
         """method to close db connection"""
         self.con.close()
 
-db = DatabaseConnection()
+
+    def get_all_meals(self):
+        query = "SELECT row_to_json(row) FROM (SELECT * FROM meals) row;"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+

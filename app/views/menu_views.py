@@ -1,4 +1,5 @@
 import psycopg2.extras
+from app.database.dbmanager import DatabaseConnection
 from app import app
 from app.validate import Validator
 import json
@@ -6,6 +7,7 @@ from flask import request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from app.modules.meal_model import Meal
 
+db = DatabaseConnection()
 
 @app.route("/api/v2/menu", methods=['POST'])
 def add_meal():
@@ -43,12 +45,13 @@ def add_meal():
 def get_all_meals():
     
     ''' This function routes to /api/v2/meals and uses the GET method to return all the added meals '''
-    meals = Meal.get_all_the_meals()
-    return jsonify({'All meals': meals,
-                    'message': 'All meals have been viewed'}), 201
+    # meals = Meal.get_all_the_meals()
+    # return jsonify({'All meals': meals,
+    #                 'message': 'All meals have been viewed'}), 201
+    return jsonify({'message':db.get_all_meals()}),200
 
 
-@app.route("/api/v2/meals/<mealId>", methods=['GET'])
+@app.route("/api/v2/menu/<mealId>", methods=['GET'])
 def get_one_meal(mealId):
     
     ''' This function routes to /api/v2/meals/<mealId> and uses the GET method to return a single meal '''
