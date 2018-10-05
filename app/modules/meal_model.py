@@ -8,11 +8,11 @@ class Meal(DatabaseConnection):
     def __init__(self, thetype, food, price, description):
         '''Initialising the order class'''
         DatabaseConnection.__init__(self)
-        self.thetype = thetype
+       ''' self.thetype = thetype
         self.food = food
         self.price = price
         self.description = description
-    
+    '''
     
     def adding_meal(self, thetype, food, price, description):
         '''this method returns a dictionary format of the meal class'''
@@ -40,10 +40,12 @@ class Meal(DatabaseConnection):
         return rows
 
     
-    @classmethod
-    def get_all_the_meals(cls):
+    def get_all_the_meals(self):
         '''this method returns the added meals'''
-        return DatabaseFunctions.get_all_meals()
+        # return DatabaseFunctions.get_all_meals()
+        query = "SELECT row_to_json(row) FROM (SLECT * FROM meals) row;"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
     
     @classmethod

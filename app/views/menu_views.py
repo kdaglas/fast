@@ -39,7 +39,7 @@ def add_meal():
         return response
 
 
-@app.route("/api/v2/meals", methods=['GET'])
+@app.route("/api/v2/menu", methods=['GET'])
 def get_all_meals():
     
     ''' This function routes to /api/v2/meals and uses the GET method to return all the added meals '''
