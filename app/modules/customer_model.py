@@ -1,41 +1,68 @@
+from app.database.dbmanager import DatabaseConnection
+import psycopg2
+from flask import jsonify
+from app import app
+from flask_jwt_extended import create_access_token
+import datetime
+
 '''Object classes for the customer model'''
-all_customers = []
 
-class Customer():
+class Customer(DatabaseConnection):
 
-    def __init__(self, customerId, username, emailaddress, contact, password):
-        '''Initialise all params'''
-        self.customerId = customerId
+    def __init__(self, username, contact, password):
+        '''Initialising all the parameters'''
+        DatabaseConnection.__init__(self)
         self.username = username
-        self.emailaddress = emailaddress
         self.contact = contact
         self.password = password
 
     
-    def register_customer(self):
-        '''method that returns the customer class as a dictionary'''
-        customer = {
-            'customerId' : self.customerId,
-            'username' : self.username,
-            'emailaddress' : self.emailaddress,
-            'contact' : self.contact,
-            'password' : self.password
-        }
-        all_customers.append(customer)
-        return customer
-    
+    def register_customer(self, username, contact, password):
+        '''method that registers or adds a customer to the database'''
+        cur = self.con.cursor()
+        cur.execute("""INSERT INTO customers(username, contact, password) VALUES (%s, %s, %s)""",
+                    (self.username, self.contact, self.password))
+        self.con.commit()
+        response = jsonify({"message": "registration successful"})
+        response.status_code = 200
+        return response
 
-    def get_all_customers(self):
-        '''method that gets all the customers who have registered'''
-        if all_customers:
-            return all_customers
-        return {'There is an error': 'No customers Found'}
+
+    def check_for_same(self):
+        '''method that if a customer already exists in the database'''
+        cur = self.con.cursor()
+        cur.execute("""SELECT username, contact FROM customers WHERE username = %s and contact = %s""",(self.username, self.contact,))
+        rows = cur.fetchone()
+        return rows
+
+
+    def check_for_same_stuff(self):
+        '''method that if a customer exists in the database'''
+        cur = self.con.cursor()
+        cur.execute("""SELECT username, password FROM customers WHERE username = %s and password = %s""",(self.username, self.password,))
+        rows = cur.fetchone()
+        return rows
 
     
-    @classmethod
-    def login(cls, username, password):
-        '''method that logs in the customer who is registered'''
-        for customer in all_customers:
-            if customer.get('username') == username:
-                return customer
-        return {'There is an error': 'No customers Found'}
+    def login(self, username, password):
+        """loging in a user"""
+        try:
+            response = ""
+            cur = self.con.cursor()
+            cur.execute("""SELECT * FROM  customers where username = %s AND
+                        password = %s""", (username, password))
+            self.con.commit()
+            count = cur.rowcount
+            result = cur.fetchone()
+            if count > 0:
+                expires = datetime.timedelta(days=1)
+                loggedin_customer = dict(customerId=result[0], username=result[1], password=result[2])
+                access_token = create_access_token(identity=loggedin_customer, expires_delta=expires)
+                response = jsonify({"message": "You have been logged in",
+                                    "token": access_token}), 200 
+            else:
+                response = jsonify({"message": "Invalid username or password"}), 403
+            return response
+        except:
+            return jsonify({"message": "Unable to log you in"})
+

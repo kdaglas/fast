@@ -1,8 +1,5 @@
 # fastFoodfast
 
-[![Build Status](https://travis-ci.org/kdaglas/fastFoodfast.svg?branch=ft-routes-with-database-160870594)](https://travis-ci.org/kdaglas/fastFoodfast)
-[![Coverage Status](https://coveralls.io/repos/github/kdaglas/fastFoodfast/badge.svg?branch=ft-routes-with-database-160870594)](https://coveralls.io/github/kdaglas/fastFoodfast?branch=ft-routes-with-database-160870594)
-
 This is a food delivery service app for a restaurant that allows customers to make orders of their favorite meals they like. This app is hosted on: 
 - [www.fastFoodfast.com](https://kdaglas.github.io/fastFoodfast/UI/index.html)
 
