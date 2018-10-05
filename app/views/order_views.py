@@ -1,14 +1,17 @@
+''' These are the imports for the required packages '''
 import psycopg2.extras
 from app import app
 from app.validate import Validator
 import json
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
-from app.modules.order_model import Order
 import datetime
+from app.database.dbmanager import DatabaseConnection
+from app.modules.order_model import Order
 
 
-@app.route("/api/v2/orders", methods=['POST'])
+@app.route("/api/v2/users/orders", methods=['POST'])
+@jwt_required
 def place_order():
 
     ''' This function helps the customer to create or place an order through the POST method
@@ -18,9 +21,16 @@ def place_order():
     data = request.get_json()
     today = str(date.today())
     mealId = data.get('mealId')
-    customerId = data.get('customerId')
+    # customerId = data.get('customerId')
     quantity = data.get('quantity')
     status = 'Not complete'
+
+    valid = Validator.validate_registration_inputs(reg_info['username'], reg_info['contact'], reg_info['password'])
+    '''Validating and checking for similar data'''
+    if valid == True:
+        password
+    else:
+        return valid
 
     Order.placing_order(customerId, mealId, quantity, status, today)
     placed_order = Order(
@@ -38,7 +48,8 @@ def place_order():
     #     return response
 
 
-@app.route("/api/v2/orders", methods=['GET'])
+@app.route("/api/v2/users/orders", methods=['GET'])
+@jwt_required
 def get_all_orders():
     
     ''' This function routes to /api/v1/orders and uses the GET method to return all the orders made '''
@@ -47,7 +58,8 @@ def get_all_orders():
                     'message': 'All orders have been viewed'}), 201
 
 
-@app.route("/api/v2/orders/<orderId>", methods=['GET'])
+@app.route("/api/v2/users/orders/<orderId>", methods=['GET'])
+@jwt_required
 def get_one_order(orderId):
     
     ''' This function routes to /api/v2/orders/<orderId> and uses the GET method to return a single order '''

@@ -1,15 +1,15 @@
 import re
 from flask import jsonify
-from app.modules.customer_model import Customer
+# from app.modules.customer_model import Customer
 
 
 class Validator():
 
-    def __init__(self, username, contact, password):
-        '''Initialise all params'''
-        self.username = username
-        self.contact = contact
-        self.password = password
+    # def __init__(self, username, contact, password):
+    #     '''Initialise all params'''
+    #     self.username = username
+    #     self.contact = contact
+    #     self.password = password
 
     @classmethod
     def validate_registration_inputs(cls, username, contact, password):
@@ -75,7 +75,7 @@ class Validator():
 
 
     @classmethod
-    def validate_order_input(cls, customerId, thetype, food, price, quantity):
+    def validate_order_inputs(cls, customerId, thetype, food, price, quantity):
         '''method to validate my input'''
         if customerId == '':
             return jsonify({"message": "CustomerId is missing"}), 400

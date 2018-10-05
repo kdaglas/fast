@@ -24,12 +24,27 @@ class Meal(DatabaseConnection):
         response.status_code = 201
         return response
 
-        # DatabaseFunctions.add_new_meal(
-        #     thetype = thetype,
-        #     food = food,
-        #     price = price,
-        #     description = description
-        # )
+
+    def adding_the_meal(self, thetype, food, price, description):
+
+        query = (
+            # """SELECT * from meals where mealId = '{}'""".
+            "SELECT row_to_json(row) FROM  (SELECT * from meals where mealId = '{}') row".
+            format(mealId))
+        cursor.execute(query)
+        rows = cursor.fetchone()
+        return rows
+
+
+    def fetching_all_the_meal(self, thetype, food, price, description):
+
+        query = (
+            # """SELECT * from meals where mealId = '{}'""".
+            "SELECT row_to_json(row) FROM  (SELECT * from meals where mealId = '{}') row".
+            format(mealId))
+        cursor.execute(query)
+        rows = cursor.fetchone()
+        return rows
 
 
     def check_for_same_meal(self):
@@ -61,7 +76,7 @@ class Meal(DatabaseConnection):
         # return {"message": "Meal id has to bigger than zero"}
         return DatabaseFunctions.get_meal_by_id(mealId)
 
-
+    
         
     
     # @classmethod

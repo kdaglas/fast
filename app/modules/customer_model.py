@@ -23,7 +23,7 @@ class Customer(DatabaseConnection):
         cur.execute("""INSERT INTO customers(username, contact, password) VALUES (%s, %s, %s)""",
                     (self.username, self.contact, self.password))
         self.con.commit()
-        response = jsonify({"message": "registeration successfuly"})
+        response = jsonify({"message": "registration successful"})
         response.status_code = 200
         return response
 

@@ -1,7 +1,6 @@
 from app.database.dbfuncs import DatabaseFunctions
 
 '''Object classes for the order model'''
-all_orders = []
 
 class Order():
     
@@ -13,8 +12,7 @@ class Order():
         self.status = status
         self.today = today
     
-
-    @staticmethod
+    
     def placing_order(customerId, mealId, quantity, status, today):
         '''this method returns a dictionary format of the meal class'''
         DatabaseFunctions.place_new_order(
@@ -25,7 +23,7 @@ class Order():
             today = today
         )
     
-    @classmethod
+
     def getting_all_orders(cls):
         '''this method returns the placed orders'''
         return DatabaseFunctions.get_all_orders()

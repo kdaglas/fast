@@ -1,5 +1,5 @@
 ''' These are the imports for the required packages '''
-# from app.database.dbmanager import DatabaseConnection
+from app.database.dbmanager import DatabaseConnection
 import psycopg2.extras
 from app import app
 from app.validate import Validator
@@ -34,7 +34,7 @@ def register():
             return valid
     except:
         response = jsonify({"Error": "Some fields are missing, please check"})
-        response.status_code = 403
+        response.status_code = 400
         return response
 
 

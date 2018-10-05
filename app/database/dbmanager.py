@@ -1,6 +1,6 @@
 import psycopg2
 from app import app
-import psycopg2.extras as dictionary
+import psycopg2.extras
 
 
 class DatabaseConnection:
@@ -20,7 +20,7 @@ class DatabaseConnection:
                                         port="5432"
                                         )
         self.con.autocommit = True
-        self.cursor = self.con.cursor(cursor_factory = dictionary.RealDictCursor)
+        self.cursor = self.con.cursor()
 
 
     def get_connection(self):
