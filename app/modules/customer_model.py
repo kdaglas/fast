@@ -7,14 +7,13 @@ import datetime
 
 '''Object classes for the customer model'''
 
-class Customer(DatabaseConnection):
+class Customer():
 
-    def __init__(self, username, contact, password):
+    def __init__(self):
         '''Initialising all the parameters'''
-        DatabaseConnection.__init__(self)
-        self.username = username
-        self.contact = contact
-        self.password = password
+        # self.username = username
+        # self.contact = contact
+        # self.password = password
 
     
     def register_customer(self, username, contact, password):
@@ -23,8 +22,8 @@ class Customer(DatabaseConnection):
         cur.execute("""INSERT INTO customers(username, contact, password) VALUES (%s, %s, %s)""",
                     (self.username, self.contact, self.password))
         self.con.commit()
-        response = jsonify({"message": "registeration successfuly"})
-        response.status_code = 200
+        response = jsonify({"message": "{}, your registeration is successful".format(self.username)})
+        response.status_code = 201
         return response
 
 

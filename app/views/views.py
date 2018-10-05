@@ -1,5 +1,5 @@
 ''' These are the imports for the required packages '''
-# from app.database.dbmanager import DatabaseConnection
+from app.database.dbmanager import DatabaseConnection
 import psycopg2.extras
 from app import app
 from app.validate import Validator
@@ -28,7 +28,7 @@ def register():
                 return jsonify({"message":"Username and contact already exist, use anothers"}), 400 
             '''Register the customer'''
             obj = Customer(username, contact, password)
-            result = obj.register_customer(username, contact, password)
+            result = obj.register_customer()
             return result
         else:
             return valid
@@ -40,7 +40,7 @@ def register():
 
 @app.route("/api/v2/auth/login", methods=['POST'])
 def login():
-
+    
     ''' This fuction through the POST method, logins in the customer and returns that him or her and if
         the customer doesnot exist, then it returns 404 '''
     # try:

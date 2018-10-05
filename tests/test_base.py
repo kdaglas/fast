@@ -9,14 +9,14 @@ class Testing(unittest.TestCase):
     '''checking the api endpoints or routes'''
     register_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme2"))
     same_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme2"))
-    invaliduser = json.dumps(dict(username="1234", contact="+256-755-598090", password="Callme2"))
+    invalid_customer = json.dumps(dict(username="1234", contact="+256-755-598090", password="Callme2"))
     wrong_contact = json.dumps(dict(username="Douglas", contact="+256-755598090", password="Callme2"))
     wrong_username = json.dumps(dict(username="***", contact="+256-755-598090", password="Callme2"))
     wrong_password = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Call2"))
 
-
     login_info = json.dumps(dict(username="Douglas", password="Callme2"))
     login_validation = json.dumps(dict(username="******", password="Callme2"))
+    login_with_empty = json.dumps(dict(username="******", password="Callme2"))
 
     def setUp(self):
         """Make sure that you are in the right environment variable."""
@@ -32,7 +32,7 @@ class Testing(unittest.TestCase):
         customers = ("""DROP TABLE IF EXISTS customers CASCADE;""")
         meals = ("""DROP TABLE IF EXISTS meals CASCADE;""")
         orders = ("""DROP TABLE IF EXISTS orders CASCADE;""")
-        con = DatabaseConnection.delete_tables()
+        con = DatabaseConnection.delete_tables(self)
         cursor = con.cursor()
         cursor.execute(customers)
         con.commit()

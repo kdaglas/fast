@@ -23,13 +23,12 @@ def add_meal():
         valid = Validator.validate_meal_inputs(data['thetype'], data['food'], data['price'], data['description'])
         '''Validating and checking for similar data'''
         if valid == True:
-            meal_data = Meal(None, data['food'], None, None)
-            same_data = meal_data.check_for_same_meal()
-            if same_data:
-                return jsonify({"message":"Meal already exist, place another"}), 400 
-            '''Add the meal'''
+            # same_data = Meal.check_for_same_meal(data['food'])
+            # if same_data:
+            #     return jsonify({"message":"Meal already exist, place another"}), 400 
+            # '''Add the meal'''
             obj = Meal(thetype, food, price, description)
-            result = obj.adding_meal(thetype, food, price, description)
+            result = obj.adding_meal()
             return result
         else:
             return valid
@@ -39,12 +38,13 @@ def add_meal():
         return response
 
 
-@app.route("/api/v2/meals", methods=['GET'])
+@app.route("/api/v2/menu", methods=['GET'])
 def get_all_meals():
     
-    ''' This function routes to /api/v2/meals and uses the GET method to return all the added meals '''
-    meals = Meal.get_all_the_meals()
-    return jsonify({'All meals': meals,
+    ''' This function routes to /api/v2/menu and uses the GET method to return all the added meals '''
+    #obj = Meal(thetype, food, price, description)
+    all_meals = meal_data.get_all_the_meals()
+    return jsonify({'All meals': meals.__dict__,
                     'message': 'All meals have been viewed'}), 201
 
 

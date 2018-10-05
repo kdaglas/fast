@@ -1,7 +1,6 @@
-from app.database.dbfuncs import DatabaseFunctions
+# from app.database.dbfuncs import DatabaseFunctions
 
 '''Object classes for the order model'''
-all_orders = []
 
 class Order():
     

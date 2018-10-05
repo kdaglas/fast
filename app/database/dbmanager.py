@@ -1,6 +1,6 @@
 import psycopg2
 from app import app
-import psycopg2.extras as dictionary
+import psycopg2.extras
 
 
 class DatabaseConnection:
@@ -9,18 +9,22 @@ class DatabaseConnection:
         '''This constructor creates a connection to the database depending on the configuration
             meaning if its a test data, then a test database is used where as if its a development
             data then a development database is created'''
-        if not app.config['TESTING']:
-            self.con = psycopg2.connect(database="postgres", user="postgres",
-                                        password="admin", host="localhost",
-                                        port="5432"
-                                        )
-        else:
-            self.con = psycopg2.connect(database="testdb", user="postgres",
-                                        password="admin", host="localhost",
-                                        port="5432"
-                                        )
-        self.con.autocommit = True
-        self.cursor = self.con.cursor(cursor_factory = dictionary.RealDictCursor)
+        try:
+            if not app.config['TESTING']:
+                self.con = psycopg2.connect(database="fastfoodfastdb", user="postgres",
+                                            password="admin", host="localhost",
+                                            port="5432"
+                                            )
+            else:
+                self.con = psycopg2.connect(database="testdb", user="postgres",
+                                            password="admin", host="localhost",
+                                            port="5432"
+                                            )
+            self.con.autocommit = True
+            self.cursor = self.con.cursor()
+        except Exception as e:
+            print(e)
+            print('Cannot connect to the database')
 
 
     def get_connection(self):
@@ -68,17 +72,9 @@ class DatabaseConnection:
     def delete_tables(self):
         '''This function deletes the tables after usage'''
         delete_queries = (
-            """
-            DROP TABLE IF EXISTS customers CASCADE
-            """,
-
-            """
-            DROP TABLE IF EXISTS meals CASCADE
-            """,
-
-            """
-            DROP TABLE IF EXISTS orders CASCADE
-            """
+            """DROP TABLE IF EXISTS customers CASCADE""",
+            """DROP TABLE IF EXISTS meals CASCADE""",
+            """DROP TABLE IF EXISTS orders CASCADE"""
         )
         for query in delete_queries:
             self.cursor.execute(query)        
