@@ -90,3 +90,10 @@ class DatabaseConnection:
     def closedb(self):
         """method to close db connection"""
         self.con.close()
+
+
+    def get_all_meals(self):
+        query = "SELECT row_to_json(row) FROM (SELECT * FROM meals) row;"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+

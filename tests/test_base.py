@@ -7,26 +7,37 @@ from app.database.dbmanager import DatabaseConnection
 
 class Testing(unittest.TestCase):
     '''checking the api endpoints or routes'''
+<<<<<<< HEAD
     register_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme2"))
     same_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme2"))
     invalid_customer = json.dumps(dict(username="1234", contact="+256-755-598090", password="Callme2"))
     wrong_contact = json.dumps(dict(username="Douglas", contact="+256-755598090", password="Callme2"))
     wrong_username = json.dumps(dict(username="***", contact="+256-755-598090", password="Callme2"))
+=======
+    register_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme24"))
+    same_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme24"))
+    invalidcustomer = json.dumps(dict(username="1234", contact="+256-755-598090", password="Callme24"))
+    wrong_contact = json.dumps(dict(username="Douglas", contact="+256-755598090", password="Callme24"))
+    wrong_username = json.dumps(dict(username="***", contact="+256-755-598090", password="Callme24"))
+>>>>>>> 7cb73daab2120dd51720ae5aeb2bbdda1e5209bb
     wrong_password = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Call2"))
+    empty_contact = json.dumps(dict(username="Douglas", contact="", password="Callme2"))
+    empty_username = json.dumps(dict(username="", contact="+256-755-598090", password="Callme2"))
+    empty_password = json.dumps(dict(username="Douglas", contact="+256-755-598090", password=""))
 
     login_info = json.dumps(dict(username="Douglas", password="Callme2"))
     login_validation = json.dumps(dict(username="******", password="Callme2"))
     login_with_empty = json.dumps(dict(username="******", password="Callme2"))
 
     def setUp(self):
-        """Make sure that you are in the right environment variable."""
+        """Making sure that you are in the right environment variable."""
         app.config['TESTING'] = True
         self.app = app
         with app.test_request_context():
             self.loggedin_user = dict(customerId=1, username='Douglas')
             self.access_token = create_access_token(self.loggedin_user)
             self.access_header = {'Authorization': 'Bearer {}'.format(
-                self.access_token)}
+                                    self.access_token)}
 
     def tearDown(self):
         customers = ("""DROP TABLE IF EXISTS customers CASCADE;""")
