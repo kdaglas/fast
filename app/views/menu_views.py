@@ -13,29 +13,29 @@ def add_meal():
     ''' This function helps the administrator to add a meal through the POST method
         it takes in input data from the admin and
         posts the data into the database returning the meal added '''
-    try:
-        data = request.get_json()
-        thetype = data.get('thetype')
-        food = data.get('food')
-        price = data.get('price')
-        description = data.get('description')
+    # try:
+    data = request.get_json()
+    thetype = data.get('thetype')
+    food = data.get('food')
+    price = data.get('price')
+    description = data.get('description')
 
-        valid = Validator.validate_meal_inputs(data['thetype'], data['food'], data['price'], data['description'])
-        '''Validating and checking for similar data'''
-        if valid == True:
-            # same_data = Meal.check_for_same_meal(data['food'])
-            # if same_data:
-            #     return jsonify({"message":"Meal already exist, place another"}), 400 
-            # '''Add the meal'''
-            obj = Meal(thetype, food, price, description)
-            result = obj.adding_meal()
-            return result
-        else:
-            return valid
-    except:
-        response = jsonify({"Error": "Some fields are missing, please check"})
-        response.status_code = 403
-        return response
+    valid = Validator.validate_meal_inputs(data['thetype'], data['food'], data['price'], data['description'])
+    '''Validating and checking for similar data'''
+    if valid == True:
+        same_data = Meal.check_for_same_food_name(data['food'])
+        if same_data:
+            return jsonify({"message":"Meal already exists, place another"}), 400 
+        '''Add the meal'''
+        obj = Meal(thetype, food, price, description)
+        result = obj.adding_meal()
+        return result
+    else:
+        return valid
+    # except:
+    #     response = jsonify({"Error": "Some fields are missing, please check"})
+    #     response.status_code = 403
+    #     return response
 
 
 @app.route("/api/v2/menu", methods=['GET'])

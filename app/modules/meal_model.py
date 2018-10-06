@@ -3,36 +3,41 @@ import psycopg2
 from flask import jsonify
 from app import app
 
+
+dbcon = DatabaseConnection()
+
+'''Object classes for the meal model'''
 class Meal():
     
-    def __init__(self):
+    def __init__(self, thetype, food, price, description):
         '''Initialising the order class'''
-        # self.thetype = thetype
-        # self.food = food
-        # self.price = price
-        # self.description = description
+        self.thetype = thetype
+        self.food = food
+        self.price = price
+        self.description = description
     
     
-    def adding_meal(self, thetype, food, price, description):
+    def adding_meal(self):
         '''this method returns a dictionary format of the meal class'''
-        cursor = self.con.cursor()
-        self.cursor.execute("""INSERT INTO meals(thetype, food, price, description) VALUES (%s, %s, %s, %s)""",
-                    (self.thetype, self.food, self.price, self.description))
-        self.con.commit()
-        response = jsonify({"message": "Meal has been added"})
-        response.status_code = 201
-        return response
-        
+        try:
+            dbcon.cursor.execute("""INSERT INTO meals(thetype, food, price, description) VALUES (%s, %s, %s, %s)""",
+                        (self.thetype, self.food, self.price, self.description))
+            response = jsonify({"message": "Meal has been added"})
+            response.status_code = 201
+            return response
+        except:
+            return jsonify({"message": "Unable to add a meal"})
 
-    def check_for_same_meal(self, food):
+        
+    def check_for_same_food_name(self):
         '''method that if a food already exists in the database'''
-        # cursor = self.con.cursor()
-        cursor.execute("""SELECT food FROM meals WHERE food = %s""",(food,))
-        rows = cursor.fetchone()
+        dbcon.cursor.execute("""SELECT food FROM meals WHERE food = %s""",(food,))
+        rows = dbcon.cursor.fetchone()
         return rows
 
     
-    def get_all_the_meals(self):
+    @classmethod
+    def get_all_meals(cls):
         '''this method returns the added meals'''
         # return DatabaseFunctions.get_all_meals()
         query = ("SELECT row_to_json(row) FROM  (select * from meals) row"
@@ -59,11 +64,11 @@ class Meal():
 
         
     
-    # @classmethod
-    # def update_order(cls, mealId, price):
-    #     '''this method return the edited order'''
-    #     for meal in all_meals:
-    #         if meal.get('mealId') == int(mealId):
-    #             meal['price'] = price
-    #             return meal
-    #     return {'There is an error': 'No meal Found'}
+    @classmethod
+    def update_order(cls, mealId, price):
+        '''this method return the edited order'''
+        for meal in all_meals:
+            if meal.get('mealId') == int(mealId):
+                meal['price'] = price
+                return meal
+        return {'There is an error': 'No meal Found'}

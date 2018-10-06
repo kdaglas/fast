@@ -27,14 +27,21 @@ class DatabaseConnection:
             print('Cannot connect to the database')
 
 
-    def get_connection(self):
-        '''This function creates a connection to the database'''
-        return self.con
+    # def get_connection(self):
+    #     '''This function creates a connection to the database'''
+    #     return self.con
 
     
     def create_tables(self):
         '''This function creates the tables'''
         queries = (
+            """
+            CREATE TABLE IF NOT EXISTS admin (
+                adminId SERIAL PRIMARY KEY NOT NULL,
+                username VARCHAR NOT NULL,
+                password VARCHAR NOT NULL
+            );
+            """,
             """
             CREATE TABLE IF NOT EXISTS customers (
                 customerId SERIAL PRIMARY KEY NOT NULL,
@@ -83,5 +90,3 @@ class DatabaseConnection:
     def closedb(self):
         """method to close db connection"""
         self.con.close()
-
-db = DatabaseConnection()

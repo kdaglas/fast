@@ -4,14 +4,32 @@
 
 class Order():
     
-    def __init__(self, customerId, mealId, quantity, status,today):
+    def __init__(self, customerId, orderId, thetype, food, price, quantity, status, today):
         '''Initialising the order class'''
         self.customerId = customerId
-        self.mealId = mealId
+        self.orderId = orderId
+        self.thetype = thetype
+        self.food = food
+        self.price = price
         self.quantity = quantity
         self.status = status
         self.today = today
     
+    
+    def place_order(self):
+        '''this method returns a dictionary format of the order class'''
+        order = {
+            'customerId' : self.customerId,
+            'orderId' : self.orderId,
+            'thetype' : self.thetype,
+            'food' : self.food,
+            'price' : self.price,
+            'quantity' : self.quantity,
+            'status' : 'Not covered',
+            'today' : self.today
+        }
+        all_orders.append(order)
+        return order
 
     @staticmethod
     def placing_order(customerId, mealId, quantity, status, today):
@@ -25,35 +43,31 @@ class Order():
         )
     
     @classmethod
-    def getting_all_orders(cls):
+    def get_all_orders(cls):
         '''this method returns the placed orders'''
-        return DatabaseFunctions.get_all_orders()
+        if len(all_orders) > 0:
+            return [order for order in all_orders]
+        return {'There is an error': 'No orders found'}
 
-
+    
     @classmethod
     def get_one_order(cls, orderId):
-        '''This method returns the one meal'''
-        return DatabaseFunctions.get_order_by_id(orderId)
-
-    
-    # @classmethod
-    # def get_one_order(cls, orderId):
-    #     '''This method returns the one order'''
-    #     if int(orderId) > 0:
-    #         if len(all_orders) > 0:
-    #             for order in all_orders:
-    #                 if order.get('orderId') == int(orderId):
-    #                     return order
-    #             return {"message": "order doesnot exist"}
-    #         return {"message": "No order has been registered yet"}
-    #     return {"message": "Order id has to bigger than zero"}
+        '''This method returns the one order'''
+        if int(orderId) > 0:
+            if len(all_orders) > 0:
+                for order in all_orders:
+                    if order.get('orderId') == int(orderId):
+                        return order
+                return {"message": "order doesnot exist"}
+            return {"message": "No order has been registered yet"}
+        return {"message": "Order id has to bigger than zero"}
         
     
-    # @classmethod
-    # def update_order(cls, orderId, status):
-    #     '''this method return the edited order'''
-    #     for order in all_orders:
-    #         if order.get('orderId') == int(orderId):
-    #             order['status'] = status
-    #             return order
-    #     return {'There is an error': 'No order Found'}
+    @classmethod
+    def update_order(cls, orderId, status):
+        '''this method return the edited order'''
+        for order in all_orders:
+            if order.get('orderId') == int(orderId):
+                order['status'] = status
+                return order
+        return {'There is an error': 'No order Found'}
