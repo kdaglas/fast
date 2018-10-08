@@ -5,12 +5,6 @@ from flask import jsonify
 
 class Validator():
 
-    # def __init__(self, username, contact, password):
-    #     '''Initialise all params'''
-    #     self.username = username
-    #     self.contact = contact
-    #     self.password = password
-
     @classmethod
     def validate_registration_inputs(cls, username, contact, password):
         '''method to validate customer input'''
@@ -58,7 +52,9 @@ class Validator():
             return jsonify({"message": "The type of food should be in characters"}), 400
         elif food == '':
             return jsonify({"message": "Food is missing"}), 400
-        elif not re.search(r"^([a-zA-Z]+\s)*[a-zA-Z]+$", food):
+        elif ' ' in food:
+            return jsonify({"message": "The food should have no spaces"}), 400
+        elif not re.search(r"\b[a-zA-Z]+\b", food):
             return jsonify({"message": "The food should be in characters"}), 400
         elif price == '':
             return jsonify({"message": "Price is missing"}), 400
@@ -68,7 +64,7 @@ class Validator():
             return jsonify({"message": "The price should be in numbers"}), 400
         elif description == '':
             return jsonify({"message": "Description is missing"}), 400
-        elif not re.search(r"^([a-zA-Z]+\s)*[a-zA-Z]+$", food):
+        elif not re.search(r"^([a-zA-Z]+\s)*[a-zA-Z]+$", description):
             return jsonify({"message": "The description should be in characters"}), 400
         else:
             return True

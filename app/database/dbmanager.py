@@ -51,7 +51,7 @@ class DatabaseConnection:
             );
             """,
             """
-            CREATE TABLE IF NOT EXISTS meals (
+            CREATE TABLE IF NOT EXISTS menu (
                 mealId SERIAL PRIMARY KEY NOT NULL,
                 thetype VARCHAR NOT NULL,
                 food VARCHAR NOT NULL,
@@ -68,7 +68,7 @@ class DatabaseConnection:
                 status VARCHAR NOT NULL,
                 today VARCHAR NOT NULL,
                 FOREIGN KEY (customerId) REFERENCES customers(customerId) ON DELETE CASCADE ON UPDATE CASCADE,
-                FOREIGN KEY (mealId) REFERENCES meals(mealId) ON DELETE CASCADE ON UPDATE CASCADE
+                FOREIGN KEY (mealId) REFERENCES menu(mealId) ON DELETE CASCADE ON UPDATE CASCADE
             )
             """
         )
@@ -80,7 +80,7 @@ class DatabaseConnection:
         '''This function deletes the tables after usage'''
         delete_queries = (
             """DROP TABLE IF EXISTS customers CASCADE""",
-            """DROP TABLE IF EXISTS meals CASCADE""",
+            """DROP TABLE IF EXISTS menu CASCADE""",
             """DROP TABLE IF EXISTS orders CASCADE"""
         )
         for query in delete_queries:
@@ -92,8 +92,8 @@ class DatabaseConnection:
         self.con.close()
 
 
-    def get_all_meals(self):
-        query = "SELECT row_to_json(row) FROM (SELECT * FROM meals) row;"
-        self.cursor.execute(query)
-        return self.cursor.fetchall()
+    # def get_all_meals(self):
+    #     query = "SELECT row_to_json(row) FROM (SELECT * FROM meals) row;"
+    #     self.cursor.execute(query)
+    #     return self.cursor.fetchall()
 

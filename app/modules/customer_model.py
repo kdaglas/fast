@@ -54,9 +54,10 @@ class Customer():
                 expires = datetime.timedelta(days=1)
                 loggedin_customer = dict(customerId=result[0], username=result[1], password=result[2])
                 access_token = create_access_token(identity=loggedin_customer, expires_delta=expires)
-                return jsonify({"message": "You have been logged in",
-                                "token": access_token}), 200 
+                return jsonify({"message": "{}, you have been logged in".format(self.username),
+                                "space": "-------------------------------------------------------------------------------------------------------------------------",
+                                "token": access_token}), 200
             else:
-                return jsonify({"message": "Invalid username or password"}), 403
+                return jsonify({"message": "Invalid username or password"}), 401
         except:
             return jsonify({"message": "Unable to log you in"})
