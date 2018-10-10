@@ -55,7 +55,7 @@ def place_order():
     # return jsonify({'Placed order': placed_order,
     #                 'message': 'Your order placed'}), 201
 
-    return valid
+    # return valid
     except:
         response = jsonify({"message": "The key or value fields are invalid or missing"})
         response.status_code = 403
