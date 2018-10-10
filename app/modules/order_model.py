@@ -80,7 +80,7 @@ class Order():
             all_orders = dbcon.cursor.fetchall()
             return all_orders
         except:
-            return jsonify({"message": "Unable to get all orders"})
+            return "Unable to get all orders"
 
 
     @staticmethod

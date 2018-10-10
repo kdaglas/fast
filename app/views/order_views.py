@@ -17,26 +17,26 @@ def place_order():
     ''' This function helps the customer to create or place an order through the POST method
         it takes in input data from the customer preferably the order to be made and
         posts the data returning the order made by the customer '''
-    # try:
-    customer = get_jwt_identity()
-    data = request.get_json()
-    mealId = data.get('mealId')
-    quantity = data.get('quantity')
-    status = 'Not complete'
+    try:
+        customer = get_jwt_identity()
+        data = request.get_json()
+        mealId = data.get('mealId')
+        quantity = data.get('quantity')
+        status = 'Not complete'
 
-    ordered_food = Order.check_and_return_mealId(mealId)
-    print(ordered_food)
-    if ordered_food:
-        '''Do some validation from the database'''
-        print(customer)
-        order = Order(customer, mealId, quantity, status)
-        placed_order = order.get_food_by_id(mealId)  
-        if placed_order:
-            return jsonify({"message":"Order has already been placed, place another"}), 403 
-        '''Place an order'''
-        result = order.place_order()
-        return result
-    return jsonify({"message":"Meal id does not exist, choose another"}), 403 
+        ordered_food = Order.check_and_return_mealId(mealId)
+        print(ordered_food)
+        if ordered_food:
+            '''Do some validation from the database'''
+            print(customer)
+            order = Order(customer, mealId, quantity, status)
+            placed_order = order.get_food_by_id(mealId)  
+            if placed_order:
+                return jsonify({"message":"Order has already been placed, place another"}), 403 
+            '''Place an order'''
+            result = order.place_order()
+            return jsonify({"message": result}), 200
+        return jsonify({"message":"Meal id does not exist, choose another"}), 403 
 
     # valid = Validator.validate_order_inputs(data['food'], data['quantity'])
     # '''Validating and checking for similar data'''
@@ -55,11 +55,11 @@ def place_order():
     # return jsonify({'Placed order': placed_order,
     #                 'message': 'Your order placed'}), 201
 
-    # return valid
-    # except:
-    #     response = jsonify({"message": "The key or value fields are invalid or missing"})
-    #     response.status_code = 403
-    #     return response
+    return valid
+    except:
+        response = jsonify({"message": "The key or value fields are invalid or missing"})
+        response.status_code = 403
+        return response
 
 
 @app.route("/api/v2/orders", methods=['GET'])
