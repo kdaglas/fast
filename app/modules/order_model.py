@@ -60,14 +60,23 @@ class Order():
         orders = dbcon.cursor.fetchone()
         return orders
 
+
+    @staticmethod
+    def get_order_by_id(orderId):
+        '''method that checks if order already exists in the database'''
+        dbcon.cursor.execute("""SELECT * FROM orders WHERE orderId = %s""", (orderId,))
+        order = dbcon.cursor.fetchone()
+        return order
+
+
     @staticmethod
     def get_all_orders():
         '''this method returns the placed orders'''
         try:
-            # dbcon.cursor.execute("""SELECT * FROM orders""")
-            dbcon.cursor.execute("""SELECT  order.orderId, order.quantity, order.status, order.today,
-                        meal.thetype, meal.food, meal.price, meal.description, customer.username from orders as order JOIN menu 
-                        as meal ON order.mealId = meal.mealId JOIN customers as customer ON order.customerId = customer.customerId""")
+            dbcon.cursor.execute("""SELECT * FROM orders""")
+            # dbcon.cursor.execute("""SELECT  order.orderId, order.quantity, order.status, order.today,
+            #             meal.thetype, meal.food, meal.price, meal.description, customer.username from orders as order JOIN menu 
+            #             as meal ON order.mealId = meal.mealId JOIN customers as customer ON order.customerId = customer.customerId""")
             all_orders = dbcon.cursor.fetchall()
             return all_orders
         except:
@@ -75,9 +84,9 @@ class Order():
 
 
     @staticmethod
-    def update_status(status, order_id):
+    def update_status(status, orderId):
         '''this method returns the updated status'''
-        dbcon.cursor.execute("""UPDATE orders SET status = %s WHERE order_id = %s""", (orderId, status))
+        dbcon.cursor.execute("""UPDATE orders SET status = %s WHERE orderId = %s""", (orderId, status))
         orders = dbcon.cursor.fetchone()
         updated_order = dbcon.cursor.rowcount
         print(updated_order)

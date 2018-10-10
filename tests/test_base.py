@@ -25,9 +25,14 @@ class Testing(unittest.TestCase):
     login_validation = json.dumps(dict(username="******", password="Callme2"))
     login_with_empty = json.dumps(dict(username="******", password="Callme2"))
 
+    wrong_menu_fields = json.dumps(dict(thet="Breakfast", food="bans", price="2000", description="with milk"))
+    same_food = json.dumps(dict(thetype="Breakfast", food="bans", price="2000", description="with milk"))
+    add_meal = json.dumps(dict(thetype="Breakfast", food="bans", price="2000", description="with milk"))
+
     def setUp(self):
         """Making sure that you are in the right environment variable."""
         app.config['TESTING'] = True
+        dbcon.create_tables()
         self.app = app
         with app.test_request_context():
             self.loggedin_user = dict(customerId=1, username='Douglas')
