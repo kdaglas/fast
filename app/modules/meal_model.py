@@ -23,11 +23,9 @@ class Meal():
         try:
             dbcon.cursor.execute("""INSERT INTO menu(thetype, food, price, description) VALUES (%s, %s, %s, %s)""",
                         (self.thetype, self.food, self.price, self.description))
-            response = jsonify({"message": "The meal with {} has been added".format(self.food)})
-            response.status_code = 201
-            return response
+            return "The meal with {} has been added".format(self.food)
         except:
-            return jsonify({"message": "Unable to add a meal"})
+            return "Unable to add a meal"
 
         
     def check_for_same_food_name(self):

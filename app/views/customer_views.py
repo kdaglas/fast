@@ -59,7 +59,7 @@ def register():
             '''Register the customer'''
             obj = Customer(username, contact, password)
             result = obj.register_customer()
-            return jsonify({"message": result})
+            return jsonify({"message": result}), 200
         return valid
     except Exception as excp:
         print(excp)

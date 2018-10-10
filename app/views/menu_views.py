@@ -38,7 +38,7 @@ def add_meal():
                 '''Add the meal'''
                 obj = Meal(thetype, food, price, description)
                 result = obj.adding_meal()
-                return result
+                return jsonify({"message": result}), 200
             else:
                 return jsonify({'message': 'Unauthorized access'}), 401
         else:

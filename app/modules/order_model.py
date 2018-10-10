@@ -27,7 +27,7 @@ class Order():
             response.status_code = 201
             return response
         except:
-            return jsonify({"message": "Unable to place order"})
+            return "Unable to place order"
 
 
     @staticmethod
