@@ -23,15 +23,15 @@ Note: Python needs to be installed globally (not in the virtual environment)
 
 - Register a customer
 - Login a customer who already has an account
+- Enable a customer view the available meals
 - Enable a customer to make an order
 - Enable a customer to view contents of their order
-- Enable a customer to view all orders made
 - Enable a customer to view a history of the ordered meals
-- Enable a customer to update, modify or change an order
 
 - Login an admin who is the super user
-- Enable an admin to get and view the menu of the meals
-- Enable an admin to a food option to the menu
+- Enable an admin to update, modify or change an order
+- Enable an admin to get and view all orders made
+- Enable an admin to a add a food option to the menu
 
 ### Getting Started
 
@@ -75,22 +75,31 @@ You can use Postman to checkout the functionality of the api endpoints, you can 
 
 Use this data as dummy data for you to check for the functionality of the APIs you:
  ```
- For placing an order
+ For signing in a customer
     {
-        'customerId' : "12345",
-        'thetype' : "breakfast",
-        'food' : "milk and bread",
-        'price' : "2000",
-        'quantity' : "2"
+        'username' : "Daniel",
+        'contact' : "+256-755-678900",
+        'password' : "******"
     }
 
-For updating the staus of an order 
+ For adding a meal
     {
-        'customerId' : "12345",
         'thetype' : "breakfast",
         'food' : "milk and bread",
         'price' : "2000",
-        'quantity' : "2",
+        'description' : "with honey"
+    }
+
+ For placing an order
+    {
+        'mealId' : "1",
+        'quantity' : "7",
+    }
+
+ For updating the staus of an order 
+    {
+        'mealId' : "1",
+        'quantity' : "7",
         'status' : "completed"
     }
 ```
@@ -113,13 +122,13 @@ Then run these commands to begin testing the API
 
  HTTP Method | End point | Action
 -------|-------|-------
- POST | /api/v2/register | Register a customer
- POST | /api/v2/login | Login a customer
- POST | /api/v2/meals | Add a food option to the menu
- GET | /api/v2/meals | Get the menu for all the meals
- POST | /api/v2/orders | Place an order
+ POST | /api/v2/auth/signup | Register a customer
+ POST | /api/v2/auth/login | Login a customer
+ POST | /api/v2/menu | Add a food option to the menu
+ GET | /api/v2/menu | Get the menu for all the meals
+ POST | /api/v2/users/orders | Place an order
+ GET | /api/v2/users/orders | View order history for a particular customer
  GET | /api/v2/orders | Get all orders
- GET | /api/v2/orders | View order history for a particular customer
  GET | /api/v2/orders/<orderId> | Fetch a specific order
  PUT | /api/v2/orders/<orderId> | Update the status of an order
 
