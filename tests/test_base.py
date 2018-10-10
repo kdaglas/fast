@@ -5,21 +5,17 @@ from app import app
 from app.database.dbmanager import DatabaseConnection
 
 
+dbcon = DatabaseConnection()
+
 class Testing(unittest.TestCase):
     '''checking the api endpoints or routes'''
-<<<<<<< HEAD
+    wrong_fields = json.dumps(dict(user="Douglas", contact="+256-755-598090", password="Callme2"))
+    same_contact = json.dumps(dict(user="Mike", contact="+256-755-598090", password="Mikee25"))
     register_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme2"))
     same_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme2"))
     invalid_customer = json.dumps(dict(username="1234", contact="+256-755-598090", password="Callme2"))
     wrong_contact = json.dumps(dict(username="Douglas", contact="+256-755598090", password="Callme2"))
     wrong_username = json.dumps(dict(username="***", contact="+256-755-598090", password="Callme2"))
-=======
-    register_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme24"))
-    same_customer = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Callme24"))
-    invalidcustomer = json.dumps(dict(username="1234", contact="+256-755-598090", password="Callme24"))
-    wrong_contact = json.dumps(dict(username="Douglas", contact="+256-755598090", password="Callme24"))
-    wrong_username = json.dumps(dict(username="***", contact="+256-755-598090", password="Callme24"))
->>>>>>> 7cb73daab2120dd51720ae5aeb2bbdda1e5209bb
     wrong_password = json.dumps(dict(username="Douglas", contact="+256-755-598090", password="Call2"))
     empty_contact = json.dumps(dict(username="Douglas", contact="", password="Callme2"))
     empty_username = json.dumps(dict(username="", contact="+256-755-598090", password="Callme2"))
@@ -40,17 +36,18 @@ class Testing(unittest.TestCase):
                                     self.access_token)}
 
     def tearDown(self):
-        customers = ("""DROP TABLE IF EXISTS customers CASCADE;""")
-        meals = ("""DROP TABLE IF EXISTS meals CASCADE;""")
-        orders = ("""DROP TABLE IF EXISTS orders CASCADE;""")
-        con = DatabaseConnection.delete_tables(self)
-        cursor = con.cursor()
-        cursor.execute(customers)
-        con.commit()
-        cursor.execute(orders)
-        con.commit()
-        cursor.execute(meals)
-        con.commit()
+        # customers = ("""DROP TABLE IF EXISTS customers CASCADE;""")
+        # meals = ("""DROP TABLE IF EXISTS meals CASCADE;""")
+        # orders = ("""DROP TABLE IF EXISTS orders CASCADE;""")
+        # con = DatabaseConnection.delete_tables(self)
+        # cursor = con.cursor()
+        # cursor.execute(customers)
+        # con.commit()
+        # cursor.execute(orders)
+        # con.commit()
+        # cursor.execute(meals)
+        # con.commit()
+        dbcon.delete_tables()
 
 if __name__ == '__main__':
     unittest.main()
