@@ -30,7 +30,7 @@ def adminsignup():
             '''Add an administrator'''
             obj = Customer(username, None, password)
             result = obj.add_admin()
-            return result
+            return jsonify({"message": result})
         return valid
     except:
         response = jsonify({"Error": "Some fields are missing, please check"})
@@ -59,7 +59,7 @@ def register():
             '''Register the customer'''
             obj = Customer(username, contact, password)
             result = obj.register_customer()
-            return result
+            return jsonify({"message": result})
         return valid
     except:
         response = jsonify({"Error": "Some fields are missing, please check"})

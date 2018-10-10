@@ -1,7 +1,6 @@
 from app.database.dbmanager import DatabaseConnection
 import psycopg2
 import psycopg2.extras as dictionary
-from flask import jsonify
 from app import app
 from flask_jwt_extended import create_access_token
 import datetime
@@ -24,11 +23,9 @@ class Customer():
         try:
             dbcon.cursor.execute("""INSERT INTO customers(username, contact, password) VALUES (%s, %s, %s)""",
                         (self.username, self.contact, self.password))
-            response = jsonify({"message": "{}, your registeration is successful".format(self.username)})
-            response.status_code = 201
-            return response
+            return  "{}, your registeration is successful".format(self.username)
         except:
-            return jsonify({"message": "Unable to sign you up"})
+            return "Unable to sign you up"
 
 
     def add_admin(self):
@@ -36,11 +33,9 @@ class Customer():
         try:
             dbcon.cursor.execute("""INSERT INTO admin(username, password) VALUES (%s, %s)""",
                         (self.username, self.password))
-            response = jsonify({"message": "Admin has been created"})
-            response.status_code = 201
-            return response
+            return "Admin has been created"
         except:
-            return jsonify({"message": "Unable to sign you up"})
+            return "Unable to sign you up"
 
 
     def check_for_same_contact(self):
@@ -70,7 +65,7 @@ class Customer():
             customer = dbcon.cursor.fetchone()
             return customer
         except:
-            return jsonify({"message": "Unable to get customer"})
+            return "Unable to get customer"
 
 
     def get_admin_by_username(self):
@@ -79,7 +74,7 @@ class Customer():
             admin = dbcon.cursor.fetchone()
             return admin
         except:
-            return jsonify({"message": "Unable to get admin"})
+            return "Unable to get admin"
 
 
     @staticmethod
@@ -89,4 +84,4 @@ class Customer():
             admin = dbcon.cursor.fetchone()
             return admin
         except:
-            return jsonify({"message": "Unable to get admin"})
+            return "Unable to get admin"
