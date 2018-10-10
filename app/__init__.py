@@ -5,7 +5,7 @@ from flask import jsonify
 
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'my-secret'
-app.config['JWT_ACCESS_TOKEN EXPIRES'] = datetime.timedelta(days=2)
+app.config['JWT_ACCESS_TOKEN EXPIRES'] = datetime.timedelta(days=1)
 jwt = JWTManager(app)
 
 @app.errorhandler(404)
@@ -15,4 +15,4 @@ def page_not_found(e):
     response.status_code = 404
     return response
 
-from app.views import views, order_views, menu_views
+from app.views import home_views, customer_views, order_views, menu_views
