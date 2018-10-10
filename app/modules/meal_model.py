@@ -1,5 +1,6 @@
 from app.database.dbmanager import DatabaseConnection
 import psycopg2
+import psycopg2.extras as dictionary
 from flask import jsonify
 from app import app
 
@@ -36,23 +37,10 @@ class Meal():
         return rows
 
     
-    def get_all_meals(self):
+    @staticmethod
+    def get_all_meals():
         '''this method returns the added meals'''
-        dbcon.cursor.execute("""SELECT row_to_json(row) FROM (select * from menu) row""")
+        dbcon.cursor.execute("""SELECT * FROM menu""")
         all_meals = dbcon.cursor.fetchall()
         return all_meals
-
-    
-    def get_one_meal(self, mealId):
-        '''This method returns the one meal'''
-        pass
-
-    
-    def update_order(self, mealId, price):
-        '''this method return the edited order'''
-        # for meal in all_meals:
-        #     if meal.get('mealId') == int(mealId):
-        #         meal['price'] = price
-        #         return meal
-        # return {'There is an error': 'No meal Found'}
-        pass
+        

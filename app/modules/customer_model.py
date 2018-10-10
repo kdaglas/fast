@@ -1,5 +1,6 @@
 from app.database.dbmanager import DatabaseConnection
 import psycopg2
+import psycopg2.extras as dictionary
 from flask import jsonify
 from app import app
 from flask_jwt_extended import create_access_token
@@ -30,11 +31,23 @@ class Customer():
             return jsonify({"message": "Unable to sign you up"})
 
 
+    def add_admin(self):
+        '''method that adds a admin to the database'''
+        try:
+            dbcon.cursor.execute("""INSERT INTO admin(username, password) VALUES (%s, %s)""",
+                        (self.username, self.password))
+            response = jsonify({"message": "Admin has been created"})
+            response.status_code = 201
+            return response
+        except:
+            return jsonify({"message": "Unable to sign you up"})
+
+
     def check_for_same_contact(self):
         '''method that if a customer already exists in the database'''
-        dbcon.cursor.execute("""SELECT contact FROM customers WHERE contact = %s""",(self.contact,))
-        rows = dbcon.cursor.fetchone()
-        return rows
+        dbcon.cursor.execute("""SELECT * FROM customers WHERE contact = %s""",(self.contact,))
+        customer = dbcon.cursor.fetchone()
+        return customer
 
 
     def check_for_same_credentials(self):
@@ -43,21 +56,37 @@ class Customer():
         rows = dbcon.cursor.fetchone()
         return rows
 
-    
-    def login(self, username, password):
-        """loging in a user"""
+
+    def check_for_admin_credentials(self):
+        '''method that if a admin exists in the database'''
+        dbcon.cursor.execute("""SELECT username, password FROM admin WHERE username = %s and password = %s""",(self.username, self.password,))
+        admin = dbcon.cursor.fetchone()
+        return admin
+
+
+    def get_customer_by_username(self):
         try:
-            dbcon.cursor.execute("""SELECT * FROM  customers where username = %s AND password = %s""", (username, password))
-            count = dbcon.cursor.rowcount
-            result = dbcon.cursor.fetchone()
-            if count > 0:
-                expires = datetime.timedelta(days=1)
-                loggedin_customer = dict(customerId=result[0], username=result[1], password=result[2])
-                access_token = create_access_token(identity=loggedin_customer, expires_delta=expires)
-                return jsonify({"message": "{}, you have been logged in".format(self.username),
-                                "space": "-------------------------------------------------------------------------------------------------------------------------",
-                                "token": access_token}), 200
-            else:
-                return jsonify({"message": "Invalid username or password"}), 401
+            dbcon.cursor.execute("""SELECT * FROM customers WHERE username = %s""",(self.username,))
+            customer = dbcon.cursor.fetchone()
+            return customer
         except:
-            return jsonify({"message": "Unable to log you in"})
+            return jsonify({"message": "Unable to get customer"})
+
+
+    def get_admin_by_username(self):
+        try:
+            dbcon.cursor.execute("""SELECT * FROM admin WHERE username = %s""",(self.username,))
+            admin = dbcon.cursor.fetchone()
+            return admin
+        except:
+            return jsonify({"message": "Unable to get admin"})
+
+
+    @staticmethod
+    def get_admin_credentials_by_username(username):
+        try:
+            dbcon.cursor.execute("""SELECT * FROM admin WHERE username = %s""",(username,))
+            admin = dbcon.cursor.fetchone()
+            return admin
+        except:
+            return jsonify({"message": "Unable to get admin"})
