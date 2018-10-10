@@ -58,7 +58,7 @@ def place_order():
     # return valid
     except:
         response = jsonify({"message": "The key or value fields are invalid or missing"})
-        response.status_code = 403
+        response.status_code = 400
         return response
 
 
@@ -71,7 +71,7 @@ def get_all_the_orders():
     if not orders:
         return jsonify({"message": "No orders made yet"}), 404 
     return jsonify({'All meals': orders,
-                    'message': 'All orders have been viewed'}), 201
+                    'message': 'All orders have been viewed'}), 200
 
 
 @app.route("/api/v2/orders/<orderId>", methods=['GET'])
@@ -81,7 +81,7 @@ def get_one_order(orderId):
     ''' This function routes to /api/v2/orders/<orderId> and uses the GET method to return a single order '''
     order = Order.get_order_by_id(orderId)
     return jsonify({'All meals': order,
-                    'message': 'The order have been viewed'}), 201
+                    'message': 'The order have been viewed'}), 200
 
 
 @app.route("/api/v1/orders/<orderId>", methods=["PUT"])
@@ -95,4 +95,4 @@ def edit_order(orderId):
 
     updated_order = Order.update_status(orderId, status)
     return jsonify({"Updated order": updated_order,
-                'message': 'Order status has been updated'}), 201
+                'message': 'Order status has been updated'}), 200

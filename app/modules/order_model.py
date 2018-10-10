@@ -23,9 +23,7 @@ class Order():
         try:
             dbcon.cursor.execute("""INSERT INTO orders(customerId, mealId, quantity, status) VALUES (%s, %s, %s, %s)""",
                         (self.customerId, self.mealId, self.quantity, self.status))
-            response = jsonify({"message": "The order has been added"})
-            response.status_code = 201
-            return response
+            return "The order has been added"
         except:
             return "Unable to place order"
 
