@@ -1,13 +1,13 @@
 ''' These are the imports for the required packages '''
+from app.database.dbmanager import DatabaseConnection
 import psycopg2.extras
 from app import app
 from app.validate import Validator
 import json
+from datetime import date
 from flask import request, jsonify
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
-import datetime
-from app.database.dbmanager import DatabaseConnection
 from app.modules.order_model import Order
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 @app.route("/api/v2/users/orders", methods=['POST'])
@@ -18,42 +18,58 @@ def place_order():
         it takes in input data from the customer preferably the order to be made and
         posts the data returning the order made by the customer '''
     # try:
+    customer = get_jwt_identity()
     data = request.get_json()
-    today = str(date.today())
     mealId = data.get('mealId')
-    # customerId = data.get('customerId')
     quantity = data.get('quantity')
     status = 'Not complete'
 
-    valid = Validator.validate_registration_inputs(reg_info['username'], reg_info['contact'], reg_info['password'])
-    '''Validating and checking for similar data'''
-    if valid == True:
-        password
-    else:
-        return valid
+    ordered_food = Order.check_and_return_mealId(mealId)
+    print(ordered_food)
+    if ordered_food:
+        '''Do some validation from the database'''
+        print(customer)
+        order = Order(customer, mealId, quantity, status)
+        placed_order = order.get_food_by_id(mealId)  
+        if placed_order:
+            return jsonify({"message":"Order has already been placed, place another"}), 403 
+        '''Place an order'''
+        result = order.place_order()
+        return result
+    return jsonify({"message":"Meal id does not exist, choose another"}), 403 
 
-    Order.placing_order(customerId, mealId, quantity, status, today)
-    placed_order = Order(
-        customerId = customerId,
-        mealId = mealId,
-        quantity = quantity,
-        status = status,
-        today = today
-    )
-    return jsonify({'Your order': placed_order.__dict__,
-                    'message': 'Order has been placed'}), 200
+    # valid = Validator.validate_order_inputs(data['food'], data['quantity'])
+    # '''Validating and checking for similar data'''
+    # if valid == True:
+    # order_data = Order(data['food'], None, None, None)
+    # same_data = order_data.check_and_return_food()
+    # if same_data:
+    #     return jsonify({"message":"Order already exists, place another"}), 400 
+    
+    # obj = Order(customerId, food, quantity, status, today)
+    # result = obj.place_order()
+    # return result
+
+    # new_order = Order(food, quantity, status, today)
+    # placed_order = Order.place_order(new_order)
+    # return jsonify({'Placed order': placed_order,
+    #                 'message': 'Your order placed'}), 201
+
+    # return valid
     # except:
     #     response = jsonify({"message": "The key or value fields are invalid or missing"})
     #     response.status_code = 403
     #     return response
 
 
-@app.route("/api/v2/users/orders", methods=['GET'])
-@jwt_required
-def get_all_orders():
+@app.route("/api/v2/orders", methods=['GET'])
+# @jwt_required
+def get_all_the_orders():
     
-    ''' This function routes to /api/v1/orders and uses the GET method to return all the orders made '''
-    orders = Order.getting_all_orders()
+    ''' This function routes to /api/v2/users/orders and uses the GET method to return all the orders made '''
+    orders = Order.get_all_orders()
+    if not orders:
+        return jsonify({"message": "No orders made yet"}), 404 
     return jsonify({'All meals': orders,
                     'message': 'All orders have been viewed'}), 201
 
@@ -66,3 +82,26 @@ def get_one_order(orderId):
     order = Order.get_one_order(orderId)
     return jsonify({'All meals': order,
                     'message': 'All meals have been viewed'}), 201
+
+
+@app.route("/api/v1/orders/<orderId>", methods=["GET"])
+def get_single_order(orderId):
+    
+    ''' This function routes to /api/v1/orders/<ordersId> and uses the GET method to return a particular order made
+         it takes in the order id as its key search value so to return that particular order '''
+    order = Order.get_one_order(orderId)
+    return jsonify({"Your order": order,
+                    'message': 'One order has been viewed'}), 302
+
+
+@app.route("/api/v1/orders/<orderId>", methods=["PUT"])
+def edit_order(orderId):
+    
+    ''' This function uses the PUT method to update the order status of the order with that given orderId.
+    it takes in an order id and searches for that order with that id and then returns an updated order '''
+    data = request.get_json()
+    status = data.get('status')
+
+    updated_order = Order.update_order(orderId, status)
+    return jsonify({"Updated order": updated_order,
+                'message': 'Order status has been updated'}), 201
