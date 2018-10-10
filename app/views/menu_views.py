@@ -45,7 +45,7 @@ def add_meal():
             return valid
     except:
         response = jsonify({"Error": "Some fields are missing, please check"})
-        response.status_code = 403
+        response.status_code = 400
         return response
 
 

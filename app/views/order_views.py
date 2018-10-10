@@ -74,27 +74,18 @@ def get_all_the_orders():
                     'message': 'All orders have been viewed'}), 201
 
 
-@app.route("/api/v2/users/orders/<orderId>", methods=['GET'])
+@app.route("/api/v2/orders/<orderId>", methods=['GET'])
 @jwt_required
 def get_one_order(orderId):
     
     ''' This function routes to /api/v2/orders/<orderId> and uses the GET method to return a single order '''
-    order = Order.get_one_order(orderId)
+    order = Order.get_order_by_id(orderId)
     return jsonify({'All meals': order,
-                    'message': 'All meals have been viewed'}), 201
-
-
-@app.route("/api/v1/orders/<orderId>", methods=["GET"])
-def get_single_order(orderId):
-    
-    ''' This function routes to /api/v1/orders/<ordersId> and uses the GET method to return a particular order made
-         it takes in the order id as its key search value so to return that particular order '''
-    order = Order.get_one_order(orderId)
-    return jsonify({"Your order": order,
-                    'message': 'One order has been viewed'}), 302
+                    'message': 'The order have been viewed'}), 201
 
 
 @app.route("/api/v1/orders/<orderId>", methods=["PUT"])
+@jwt_required
 def edit_order(orderId):
     
     ''' This function uses the PUT method to update the order status of the order with that given orderId.
@@ -102,6 +93,6 @@ def edit_order(orderId):
     data = request.get_json()
     status = data.get('status')
 
-    updated_order = Order.update_order(orderId, status)
+    updated_order = Order.update_status(orderId, status)
     return jsonify({"Updated order": updated_order,
                 'message': 'Order status has been updated'}), 201

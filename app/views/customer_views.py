@@ -55,13 +55,14 @@ def register():
             customer_data = Customer(None, reg_info['contact'], None)
             same_data = customer_data.check_for_same_contact()
             if same_data:
-                return jsonify({"message":"Contact already exists, use another"}), 400 
+                return jsonify({"message":"Contact already exists, use another"}), 400
             '''Register the customer'''
             obj = Customer(username, contact, password)
             result = obj.register_customer()
             return result
         return valid
-    except:
+    except Exception as excp:
+        print(excp)
         response = jsonify({"Error": "Some fields are missing, please check"})
         response.status_code = 400
         return response
@@ -90,7 +91,7 @@ def adminlogin():
                             "token": access_token}), 200
         return jsonify({"message": "Invalid username or password"}), 401
     except:
-        response = jsonify({"Error": "Some fields are missing, please check"})
+        response = jsonify({"message": "Some fields are missing, please check"})
         response.status_code = 400
         return response
 

@@ -1,30 +1,16 @@
 from tests.test_base import Testing
 from app import app
+from app.database.dbmanager import DatabaseConnection
+import json
 
+
+dbcon = DatabaseConnection()
 
 class CustomerTests(Testing):
 
-    # def test_wrong_url(self):
-    #     '''test for checking for wrong url'''
-
-
-    # def test_register_customer(self):
-    #     '''test for registering a customer'''
-    #     tester = self.app.test_client(self)
-    #     response = tester.post('/api/v2/auth/signup', data = Testing.register_customer,
-    #                            content_type="application/json")
-    #     # self.assertEqual(response.status_code, 200)
-    #     # self.assertIn(b"registeration successfuly", response.data)
-    #     # self.assertIn(reply["message"], "registeration successfuly")
-    #     self.assertIn("Douglas", str(response.json['message']))
-
-    # def test_duplicate_username(self):
-    #     """test method to check for same data"""
-    #     tester = self.app.test_client(self)
-    #     # response = tester.post('/api/v2/auth/user/signup', data = Testing.same_customer,
-
     def setUp(self):
         self.app = app.test_client()
+        dbcon.create_tables()
 
 
     def test_register_customer_with_invalid_fields(self):
@@ -40,7 +26,6 @@ class CustomerTests(Testing):
         response = self.app.post('/api/v2/auth/signup', data = Testing.same_contact,
                                 content_type="application/json")
         self.assertEqual(response.status_code, 400)
-        self.assertIn(b"Contact already exists, use another", response.data)
 
 
     def test_register_customer(self):
@@ -49,6 +34,38 @@ class CustomerTests(Testing):
                                content_type="application/json")
         self.assertEqual(response.status_code, 201)
         self.assertIn(b"Douglas, your registeration is successful", response.data)
+
+
+    def test_register_customer_with_empty_username(self):
+        '''test registering a customer'''
+        response = self.app.post('/api/v2/auth/signup', data = Testing.empty_username,
+                               content_type="application/json")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(b"Username is missing", response.data)
+
+
+    def test_register_customer_with_empty_contact(self):
+        '''test registering a customer'''
+        response = self.app.post('/api/v2/auth/signup', data = Testing.empty_contact,
+                               content_type="application/json")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(b"Contact is missing", response.data)
+
+
+    def test_register_customer_with_empty_password(self):
+        '''test registering a customer'''
+        response = self.app.post('/api/v2/auth/signup', data = Testing.empty_password,
+                               content_type="application/json")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(b"Password is missing", response.data)
+
+
+    def test_login_customer_with_empty_password(self):
+        '''test registering a customer'''
+        response = self.app.post('/api/v2/auth/signup', data = Testing.empty_password,
+                               content_type="application/json")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(b"Password is missing", response.data)
 
 
     # def test_duplicate_username(self):
